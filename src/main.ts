@@ -8,6 +8,7 @@ import { initCoaches } from './scripts/coaches';
 import { initPrograms } from './scripts/programs';
 import { initGraduates } from './scripts/graduates';
 import { initCamps } from './scripts/camps';
+import { initFaq } from './scripts/faq';
 
 initHeader();
 initHero();
@@ -16,5 +17,6 @@ initVideo();
 initCoaches();
 initGraduates();
 initCamps();
+initFaq();
 initForm();
 initAnimations();

@@ -1,0 +1,157 @@
+/* 14 Часті питання: верстка за скриншотом макета (project/sections/14-faq/Zrzut ekranu 2026-10-14 154234.png).
+   Скриншот 1016 px → 1440 px, коефіцієнт ≈ 1,417; усі значення ≈, виміряні зі скриншота (Figma ще не дала).
+   Одиниця «u» = 1/1440 ширини контейнера .page-wrap. */
+.faq {
+  --u: calc(100cqw / 1440);
+  padding: calc(var(--u) * 190) calc(var(--u) * 250) calc(var(--u) * 160);
+}
+
+.faq__title {
+  margin: 0 0 calc(var(--u) * 9);
+  font-size: calc(var(--u) * 48);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 66);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.faq__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--color-muted);
+}
+
+/* Ефект як у прикладі accordion-05: у закритому стані текст питання «опущений» і обрізаний лінією знизу (як у макеті), блідий;
+   при відкритті текст піднімається повністю в кадр і темніє, відповідь розкривається по висоті (0,2 с ease-out). */
+.faq__q {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: calc(var(--u) * 93);
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  color: var(--color-muted);
+  font-size: calc(var(--u) * 34);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 44);
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.faq__qt {
+  display: block;
+  transform: translateY(calc(var(--u) * 10));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq__num {
+  margin-right: calc(var(--u) * 4);
+  font-size: calc(var(--u) * 16);
+  line-height: 0;
+  letter-spacing: 0;
+  vertical-align: top;
+  position: relative;
+  top: calc(var(--u) * 6);
+}
+
+.faq__item.is-open .faq__q {
+  color: var(--color-primary);
+}
+
+.faq__q:hover,
+.faq__item.is-open .faq__q:hover {
+  color: var(--color-accent);
+}
+
+.faq__item.is-open .faq__qt {
+  transform: translateY(calc(var(--u) * -12));
+}
+
+/* відповідь: висота 0 → авто через grid-template-rows */
+.faq__a {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.2s ease-out, visibility 0s 0.2s;
+}
+
+.faq__item.is-open .faq__a {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition: grid-template-rows 0.2s ease-out, visibility 0s;
+}
+
+.faq__a-in {
+  min-height: 0;
+  overflow: hidden;
+  padding-left: calc(var(--u) * 22);
+}
+
+.faq__a p {
+  max-width: calc(var(--u) * 760);
+  margin: 0;
+  padding-bottom: calc(var(--u) * 28);
+  color: var(--color-primary);
+  font-size: calc(var(--u) * 22);
+  line-height: calc(var(--u) * 34);
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__q,
+  .faq__qt,
+  .faq__a {
+    transition: none;
+  }
+}
+
+/* Mobile: макета немає, стандартна адаптація */
+@media (max-width: 767px) {
+  .faq {
+    padding: 64px var(--gutter) 80px;
+  }
+
+  .faq__title {
+    margin-bottom: 24px;
+    font-size: clamp(28px, 8vw, 40px);
+    line-height: 1.25;
+  }
+
+  .faq__q {
+    height: 64px;
+    font-size: 16px;
+    line-height: 1.35;
+  }
+
+  .faq__qt {
+    transform: translateY(5px);
+  }
+
+  .faq__item.is-open .faq__qt {
+    transform: translateY(-8px);
+  }
+
+  .faq__num {
+    top: 2px;
+    font-size: 11px;
+  }
+
+  .faq__a-in {
+    padding-left: 14px;
+  }
+
+  .faq__a p {
+    padding-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
