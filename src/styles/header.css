@@ -1,0 +1,144 @@
+/* 01 Шапка: фіксована, ховається при скролі вниз, повертається при скролі вгору */
+body {
+  padding-top: var(--header-height);
+}
+
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--header-height);
+  background: var(--color-bg);
+  transition: transform 0.3s ease;
+}
+
+.header--hidden {
+  transform: translateY(-100%);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  /* від краю hero: логотип +70 px, кнопка +63 px (95 і 88 px від краю екрана в макеті 1440) */
+  padding-left: calc(var(--page-gutter) + 70px);
+  padding-right: calc(var(--page-gutter) + 63px);
+}
+
+.header__logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.header__list {
+  display: flex;
+  align-items: center;
+  gap: var(--header-nav-gap);
+}
+
+.header__link {
+  font-size: var(--header-nav-fs);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--header-nav-ls);
+  line-height: 1;
+  color: var(--color-text);
+  transition: color 0.2s ease;
+}
+
+.header__link:hover {
+  color: var(--color-accent);
+}
+
+.header__link.is-active {
+  color: var(--color-primary);
+}
+
+/* Button primary (components.md): зелена «таблетка», hover рожевий */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--btn-height);
+  padding-inline: var(--btn-padding-x);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-button);
+  font-weight: var(--fw-regular);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+/* hover: рожева заливка піднімається знизу зі скошеним краєм */
+.btn--primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn--primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-accent);
+  clip-path: polygon(0 100%, 100% 150%, 100% 250%, 0 250%);
+  transition: clip-path 0.45s ease;
+}
+
+/* фон кнопки плавно стає рожевим разом із заливкою, зелений не просвічує по краях */
+.btn--primary {
+  transition: background-color 0.45s ease, color 0.2s ease;
+}
+
+.btn--primary:hover {
+  background: var(--color-accent);
+}
+
+.btn--primary:hover::before {
+  clip-path: polygon(0 -60%, 100% -10%, 100% 250%, 0 250%);
+}
+
+.btn__icon {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1279px) {
+  .header__inner {
+    padding-inline: var(--gutter);
+  }
+
+  .header__list {
+    gap: var(--space-6);
+  }
+
+  .header__link {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .header__list {
+    gap: var(--space-5);
+  }
+
+  .header__link {
+    font-size: 18px;
+  }
+}
+
+/* мобільне меню (бургер) поки не робимо: ховаємо пункти */
+@media (max-width: 767px) {
+  .header__nav {
+    display: none;
+  }
+}

@@ -1,0 +1,82 @@
+/* GIRLS XI Football Academy: дизайн-токени
+   Джерела: Design/colors.png (кольори), ваше повідомлення (шрифти).
+   Значення, позначені «≈», виміряні зі скриншота Design-desctop-figma.png (1440 px)
+   і НЕ підтверджені Figma. Перевірити в Dev Mode перед використанням. */
+
+:root {
+  /* ── Кольори (colors.png) ── */
+  --color-bg:            #FFFFFF; /* ТЛО GŁÓWNE: фон сторінки */
+  --color-text-light:    #FFFFFF; /* KOLOR TEKSTU: текст на темних блоках */
+  --color-text:          #000000; /* KOLOR TEKSTU1: у гайді «#0000», див. moodboard.md */
+  --color-primary:       #334A38; /* KOLOR TEKSTU2 AND AKCENT: темно-зелений */
+  --color-accent:        #F6C2D0; /* AKCENT AND HOVER: рожевий */
+  --color-muted:         #CAC4BF; /* FORM TEKST AND СТРІЛКИ: неактивний текст, стрілки */
+  --color-field:         #F6F6F6; /* FORM: фон полів форми */
+
+  /* ── Шрифти ── */
+  --font-main:    "Manrope", system-ui, sans-serif;
+  --font-script:  "Carattere", cursive; /* лише напис «Academy» у логотипі перед футером */
+
+  /* ── Розміри тексту (≈, виміряно зі скриншота) ── */
+  --fs-h1:        54px;  /* ≈ hero */
+  --fs-h2:        64px;  /* ≈ великі заголовки секцій */
+  --fs-h3:        42px;  /* ≈ менші заголовки секцій, «Навіщо ми існуємо» */
+  --fs-h4:        32px;  /* [ПИТАННЯ] не підтверджено */
+  --fs-h5:        24px;  /* [ПИТАННЯ] не підтверджено */
+  --fs-h6:        20px;  /* [ПИТАННЯ] не підтверджено */
+  --fs-display:   96px;  /* ≈ «ГОТОВА?», «ГРАЙ ІЗ ХАРАКТЕРОМ» */
+  --fs-banner:    64px;  /* підтверджено користувачкою: «№1 ЖІНОЧА ФУТБОЛЬНА АКАДЕМІЯ В УКРАЇНІ», extra bold */
+  --fs-stat:      42px;  /* ≈ великі числа в статистиці */
+  --fs-body:      22px;  /* ≈ основний абзац */
+  --fs-body-sm:   18px;  /* ≈ підписи, описи */
+  --fs-caption:   14px;  /* ≈ дрібні підписи, плашки */
+  --fs-button:    18px;  /* ≈ текст кнопок (ВЕЛИКІ літери) */
+
+  /* ── Вага (≈, на макеті заголовки світлі/звичайні, банер жирний) ── */
+  --fw-light:     300;
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-bold:      700;
+  --fw-extrabold: 800;  /* підтверджено: банер 03 */
+
+  /* ── Міжрядковий інтервал (≈) ── */
+  --lh-heading:   1.2;
+  --lh-body:      1.6;  /* ≈ 38px на 24px тексту */
+  --lh-tight:     1.1;
+
+  /* ── Відступи (≈) ── */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   24px;
+  --space-6:   32px;
+  --space-7:   48px;
+  --space-8:   64px;
+  --space-9:   96px;
+  --space-10:  160px;
+  --container-width: 1440px;
+  --page-max:        1920px; /* hero і шапка: понад це центруються */
+  --page-gutter:     clamp(16px, 1.7vw, 32px); /* бічний відступ hero і шапки (≈ 25 px на 1440) */
+  --gutter:          40px;   /* бічні відступи контейнера (підтверджено користувачкою); 32px на ≤767px, див. breakpoints.css */
+
+  /* ── Радіуси (≈) ── */
+  --radius-sm:    12px;   /* поля форми, плашки */
+  --radius-md:    24px;   /* картки, фото */
+  --radius-lg:    32px;   /* великі картки */
+  --radius-hero:  64px;   /* hero-блок */
+  --radius-pill:  999px;  /* кнопки, фільтр */
+
+  /* ── Шапка (01) ── */
+  --header-height:       88px;  /* ≈ md-файл секції; на скриншоті ~81px, уточнити */
+  --header-pad-left:     95px;  /* ≈ відступ логотипа зліва */
+  --header-pad-right:    88px;  /* ≈ кнопка закінчується на ~1352px */
+  --header-nav-gap:      44px;  /* між пунктами меню (збільшено за проханням, у макеті ≈ 28) */
+  --header-nav-fs:       20px;  /* підтверджено: Manrope 20px, regular */
+  --header-nav-ls:       0.04em;/* підтверджено: letter-spacing 4% */
+  --btn-height:          43px;  /* ≈ кнопка в шапці */
+  --btn-padding-x:       24px;  /* ≈ */
+
+  /* ── Тіні ── */
+  --shadow-ball:  0 4px 8px rgba(0, 0, 0, 0.25); /* ≈ тумблер-м'яч; інших тіней на макеті не видно */
+}

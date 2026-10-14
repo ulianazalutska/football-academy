@@ -1,0 +1,226 @@
+/* 11 Три кроки: верстка за скриншотом макета (project/sections/11-three-steps/Zrzut ekranu 2026-10-14 123353.png).
+   Скриншот 704 px → 1440 px, коефіцієнт 2,0455; усі значення ≈, виміряні зі скриншота (Figma ще не дала).
+   Одиниця «u» = 1/1440 ширини контейнера .page-wrap. Координати кроків: від верху секції (рамки скриншота). */
+.steps {
+  --u: calc(100cqw / 1440);
+  position: relative;
+  height: calc(var(--u) * 1835);
+}
+
+.steps__title {
+  position: absolute;
+  top: calc(var(--u) * 182);
+  left: calc(var(--u) * 55);
+  font-size: calc(var(--u) * 56);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 76);
+  letter-spacing: 0.04em;
+}
+
+.steps__line {
+  display: block;
+}
+
+.steps__accent {
+  color: var(--color-primary);
+}
+
+.steps__list {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step__photo {
+  position: absolute;
+  width: calc(var(--u) * 515);
+  height: calc(var(--u) * 290);
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.step__text {
+  position: absolute;
+  width: calc(var(--u) * 515);
+}
+
+.step__num {
+  display: block;
+  font-size: calc(var(--u) * 98);
+  font-weight: var(--fw-light);
+  line-height: 1;
+  color: var(--color-muted);
+}
+
+.step__desc {
+  margin-top: calc(var(--u) * 16);
+  font-size: calc(var(--u) * 32);
+  line-height: calc(var(--u) * 45);
+  letter-spacing: 0.04em;
+}
+
+.steps__free {
+  display: block;
+}
+
+/* текст зліва по правому краю, фото справа (кроки 1 і 3) */
+.step--1 .step__text,
+.step--3 .step__text {
+  left: calc(var(--u) * 109);
+  text-align: right;
+}
+
+.step--1 .step__photo,
+.step--3 .step__photo {
+  left: calc(var(--u) * 847);
+}
+
+/* фото зліва, текст справа по лівому краю (крок 2) */
+.step--2 .step__photo {
+  left: calc(var(--u) * 108);
+}
+
+.step--2 .step__text {
+  left: calc(var(--u) * 849);
+}
+
+.step--1 .step__photo { top: calc(var(--u) * 425); }
+.step--2 .step__photo { top: calc(var(--u) * 771); }
+.step--3 .step__photo { top: calc(var(--u) * 1125); }
+
+.step--1 .step__text { top: calc(var(--u) * 458); }
+.step--2 .step__text { top: calc(var(--u) * 769); }
+.step--3 .step__text { top: calc(var(--u) * 1123); }
+
+/* вертикальна лінія: зелена до рожевого вузла, далі сіра */
+.steps__timeline {
+  position: absolute;
+  left: calc(var(--u) * 719);
+  top: calc(var(--u) * 427);
+  width: calc(var(--u) * 2);
+  height: calc(var(--u) * 988);
+  --p: 0.2; /* позиція вузла (0–1): без анімації як у макеті (≈197/988), далі її веде steps-скрипт при скролі */
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary) calc(var(--p) * 100%),
+    var(--color-muted) calc(var(--p) * 100%)
+  );
+}
+
+.steps__timeline::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--p) * 100%);
+  left: 50%;
+  width: calc(var(--u) * 12);
+  height: calc(var(--u) * 12);
+  border-radius: 50%;
+  background: var(--color-accent);
+  transform: translate(-50%, -50%);
+}
+
+.steps__cta {
+  position: absolute;
+  top: calc(var(--u) * 1524);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--u) * 290);
+  height: calc(var(--u) * 52);
+  gap: calc(var(--u) * 14);
+  font-size: calc(var(--u) * 20);
+}
+
+.steps__cta .btn__icon {
+  width: calc(var(--u) * 20);
+  height: calc(var(--u) * 20);
+}
+
+/* ширина тексту задає перенесення рядків як у макеті */
+.step--1 .step__text {
+  left: calc(var(--u) * 289);
+  width: calc(var(--u) * 335);
+}
+
+.step--3 .step__text {
+  left: calc(var(--u) * 252);
+  width: calc(var(--u) * 372);
+}
+
+/* Mobile: макета немає, стандартна адаптація: кроки в колонку, фото під текстом, без таймлайна */
+@media (max-width: 767px) {
+  .steps {
+    height: auto;
+    padding: 64px var(--gutter) 80px;
+  }
+
+  .steps__title,
+  .steps__list,
+  .step__text,
+  .step__photo,
+  .steps__cta {
+    position: static;
+    transform: none;
+  }
+
+  .steps__title {
+    font-size: clamp(28px, 8vw, 40px);
+    line-height: 1.25;
+  }
+
+  .steps__list {
+    display: grid;
+    gap: 48px;
+    margin-top: 40px;
+  }
+
+  .step {
+    display: grid;
+    gap: 24px;
+  }
+
+  .step .step__text,
+  .step .step__photo {
+    width: 100%;
+    height: auto;
+    text-align: left;
+  }
+
+  .step .step__photo {
+    aspect-ratio: 515 / 290;
+    order: 2;
+  }
+
+  .step .step__text {
+    order: 1;
+  }
+
+  .step__num {
+    font-size: 64px;
+  }
+
+  .step__desc {
+    margin-top: 8px;
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  .steps__timeline {
+    display: none;
+  }
+
+  .steps__cta {
+    display: flex;
+    width: fit-content;
+    height: 56px;
+    margin: 48px auto 0;
+    padding-inline: 28px;
+    font-size: 18px;
+  }
+
+  .steps__cta .btn__icon {
+    width: 20px;
+    height: 20px;
+  }
+}

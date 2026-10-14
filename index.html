@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIRLS XI Football Academy</title>
+    <script>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('has-intro');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Carattere&family=Manrope:wght@200..800&display=swap&subset=cyrillic,latin"
+      rel="stylesheet"
+    />
+  </head>
+  <body id="top">
+    <!-- 01 header -->
+    <header class="header" id="header">
+      <div class="header__inner">
+        <a class="header__logo" href="#top" aria-label="GIRLS XI Football Academy: на початок сторінки">
+          <img src="/images/logo-header.svg" width="171" height="39" alt="GIRLS XI Football Academy" />
+        </a>
+        <nav class="header__nav" aria-label="Головне меню">
+          <ul class="header__list">
+            <li><a class="header__link" href="#programs">Програми</a></li>
+            <li><a class="header__link" href="#coaches">Тренерки</a></li>
+            <li><a class="header__link" href="#safety">Батькам</a></li>
+            <li><a class="header__link" href="#camps">Кемпи</a></li>
+          </ul>
+        </nav>
+        <a class="btn btn--primary header__cta" href="#contact-form">
+          <span>ЗВ'ЯЗАТИСЯ</span>
+          <svg class="btn__icon" width="16.19" height="16.19" viewBox="0 0 16.19 16.19" fill="none" aria-hidden="true">
+            <path d="M1 15.19L15.19 1M5.5 1H15.19V10.69" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </header>
+    <main>
+    <!-- 02 hero -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="hero__frame">
+        <img
+          class="hero__bg"
+          src="/images/hero-bg.webp"
+          width="2880"
+          height="1607"
+          alt="Футболістка академії GIRLS XI у зеленій формі з рожевими смугами ковзає по мокрій траві під час тренування"
+          fetchpriority="high"
+        />
+
+        <div class="hero__content">
+          <h1 class="hero__title" id="hero-title">
+            <span class="hero__line-break">Жіноча футбольна академія в</span>
+            <span class="hero__line-break">Києві GIRLS XI Football Academy</span>
+          </h1>
+          <p class="hero__text">
+            <span class="hero__line-break">Тренерки — ексгравці збірної, малі групи</span>
+            <span class="hero__line-break">тренувань, створені для жіночого тіла. Для дівчат</span>
+            <span class="hero__line-break">10-23 років, які хочуть грати по-справжньому.</span>
+            <span class="hero__line-break">Спробуй своє перше тренування безкоштовно!</span>
+          </p>
+        </div>
+
+        <figure class="hero__thumb hero__thumb--1">
+          <img src="/images/hero-thumb-1.webp" width="900" height="506" alt="Гравчині академії святкують гол на полі на тлі пальм і гір" />
+          <svg class="hero__line" viewBox="0 0 260 143" fill="none" aria-hidden="true"><polyline points="-16,86 -136.4,86 -183.6,111.7" /></svg>
+        </figure>
+
+        <figure class="hero__thumb hero__thumb--2">
+          <img src="/images/hero-thumb-2.webp" width="900" height="506" alt="Команда дівчат святкує на футбольному полі з українським прапором і видом на Київ" />
+          <svg class="hero__line" viewBox="0 0 260 143" fill="none" aria-hidden="true"><polyline points="276.3,85.6 400.5,85.6 448.3,61.8" /></svg>
+        </figure>
+
+        <figure class="hero__thumb hero__thumb--3 hero__video" role="button" tabindex="0" aria-label="Відео: дівчата-футболістки радіють на полі біля міста на березі моря. Натисніть, щоб поставити на паузу або відтворити">
+          <video class="hero__video-el" src="/video/hero-video.mp4" poster="/images/hero-thumb-3.webp" width="1920" height="1080" muted loop playsinline preload="none"></video>
+          <span class="hero__play" aria-hidden="true"><svg viewBox="0 0 12 15" fill="currentColor"><polygon points="2,2 2,13 10,7.5" stroke="currentColor" stroke-width="4" stroke-linejoin="round" /></svg></span>
+          <svg class="hero__line" viewBox="0 0 260 143" fill="none" aria-hidden="true"><polyline points="-25.2,85.8 -136.3,85.8 -177.6,67.7" /></svg>
+        </figure>
+
+        <div class="hero__tab">
+          <div class="lang-switch" role="group" aria-label="Мова сайту">
+            <button class="lang-switch__btn" type="button" lang="uk">UA</button><span class="lang-switch__sep" aria-hidden="true">/</span><button class="lang-switch__btn lang-switch__btn--green" type="button" lang="en">EN</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 03 number-one -->
+    <section class="banner" id="number-one" aria-labelledby="banner-title">
+      <h2 class="banner__title" id="banner-title">
+        <span class="banner__line banner__line--1"><span class="banner__mask"><span class="banner__text">№1 жіноча</span></span></span>
+        <span class="banner__line banner__line--2"><span class="banner__rule" aria-hidden="true"></span><span class="banner__mask"><span class="banner__text">футбольна академія</span></span></span>
+        <span class="banner__line banner__line--3"><span class="banner__rule" aria-hidden="true"></span><span class="banner__mask"><span class="banner__text">в Україні</span></span></span>
+      </h2>
+    </section>
+    <div class="page-wrap">
+    <!-- 04 about -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about__inner">
+        <div class="about__content">
+          <h2 class="about__title" id="about-title">Навіщо ми існуємо</h2>
+          <p class="about__text">
+            У 15-16 років більшість дівчат іде зі спорту. Не через втрату інтересу, а через слабких тренерів, відсутність підтримки й перспективи. <img class="about__toggle" src="/images/ball-toggle.svg" width="106" height="67" alt="" aria-hidden="true" /><br />
+            Ми створили GIRLS XI як академію, якої колись бракувало нам: тільки для дівчат, з планом розвитку і серйозним ставленням до того, куди вона піде далі
+          </p>
+          <dl class="about__stats">
+            <div class="about__stat">
+              <dt class="about__num" data-count="100">100%</dt>
+              <dd class="about__label">гравчинь — дівчата, жодних змішаних груп</dd>
+            </div>
+            <div class="about__stat">
+              <dt class="about__num" data-count="8400">8 400+</dt>
+              <dd class="about__label">тренувань проведено з 2021 року</dd>
+            </div>
+            <div class="about__stat">
+              <dt class="about__num" data-count="30">30+</dt>
+              <dd class="about__label">університетів США у партнерстві</dd>
+            </div>
+            <div class="about__stat">
+              <dt class="about__num" data-count="70">70%</dt>
+              <dd class="about__label">тренерок — жінки</dd>
+            </div>
+          </dl>
+        </div>
+        <figure class="about__photo">
+          <img class="about__img about__img--archive" src="/images/about-archive.webp" width="1132" height="1415" alt="Чорно-біле архівне фото: засновниця академії у 13 років у команді хлопців на футбольному полі" loading="lazy" />
+          <img class="about__img about__img--coach" src="/images/about-coach.webp" width="1132" height="1405" alt="Тренерка академії GIRLS XI у темно-зеленій куртці з логотипом XI розмовляє з гравчинею та тримає планшет під час тренування на полі з конусами" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+    <!-- 05 programs -->
+    <section class="programs" id="programs" aria-labelledby="programs-title">
+      <div class="programs__head">
+        <div class="programs__intro">
+          <h2 class="programs__title" id="programs-title">Один шлях. П'ять етапів</h2>
+          <p class="programs__sub">Кожна гравчиня починає там, де вона є, і рухається далі, коли готова</p>
+        </div>
+        <div class="age-filter">
+          <p class="age-filter__label" id="age-filter-label">скільки їй років?</p>
+          <div class="age-filter__list" role="radiogroup" aria-labelledby="age-filter-label">
+            <button class="age-filter__btn is-active" type="button" role="radio" aria-checked="true" data-age="10-12">10-12</button>
+            <button class="age-filter__btn" type="button" role="radio" aria-checked="false" data-age="12-14">12-14</button>
+            <button class="age-filter__btn" type="button" role="radio" aria-checked="false" data-age="14-16">14-16</button>
+            <button class="age-filter__btn" type="button" role="radio" aria-checked="false" data-age="16-18">16-18</button>
+            <button class="age-filter__btn" type="button" role="radio" aria-checked="false" data-age="18-23">18-23</button>
+          </div>
+        </div>
+      </div>
+      <div class="programs__grid">
+        <article class="program program--start">
+          <img class="program__xi" src="/images/xi-watermark.svg" width="378" height="275" alt="" aria-hidden="true" />
+          <p class="program__kicker">Перший крок</p>
+          <p class="program__zero">0 грн</p>
+          <p class="program__first">ПЕРШЕ ТРЕНУВАННЯ</p>
+          <a class="program__cta" href="#contact-form">
+            <span>Записатися на пробне</span>
+            <span class="program__cta-icon"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11L11 3M4.5 3H11V9.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+          </a>
+          <ul class="program__perks">
+            <li class="program__perk"><strong>-10%</strong><span>за семестр</span></li>
+            <li class="program__perk"><strong>-10%</strong><span>сестрам</span></li>
+            <li class="program__perk"><strong>-20%</strong><span>місць - стипендій</span></li>
+          </ul>
+        </article>
+          <article class="program program--osnova is-match" data-age="10-12">
+            <span class="program__shine" aria-hidden="true"></span>
+            <img class="program__img" src="/images/program-osnova.webp" width="1324" height="1060" alt="Тренерка пояснює тактику на планшеті групі гравчинь академії GIRLS XI у зеленій формі з рожевими смугами" loading="lazy" />
+            <h3 class="program__name">Основа</h3>
+            <div class="program__panel" id="panel-Основа" role="region" aria-label="Програма «Основа»" hidden>
+              <p class="program__lead">Закохайся в м'яч. Техніка й перші звички футболістки</p>
+              <p class="program__meta"><span>Тренувань на тиждень</span><strong>2</strong></p>
+              <a class="program__join" href="#contact-form">Записатися на пробне</a>
+            </div>
+            <div class="program__bar">
+              <span class="program__age">10-12</span>
+              <span class="program__price">3 200 грн/міс</span>
+              <button class="program__more" type="button" aria-expanded="false" aria-controls="panel-Основа" aria-label="Детальніше про програму «Основа»"><svg class="program__info" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.2" /><circle cx="8" cy="5.2" r=".9" fill="currentColor" /><path d="M8 7.4v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" /></svg></button>
+            </div>
+          </article>
+          <article class="program program--rezultat" data-age="14-16">
+            <span class="program__shine" aria-hidden="true"></span>
+            <img class="program__img" src="/images/program-rezultat.webp" width="834" height="1042" alt="Футболістка у зеленій формі долає опір гумової стрічки під час спринтерського тренування" loading="lazy" />
+            <h3 class="program__name">Результат</h3>
+            <div class="program__panel" id="panel-Результат" role="region" aria-label="Програма «Результат»" hidden>
+              <p class="program__lead">Тренуйся так, ніби це важливо. Сила, швидкість, відбори</p>
+              <p class="program__meta"><span>Тренувань на тиждень</span><strong>3 + силове</strong></p>
+              <a class="program__join" href="#contact-form">Записатися на пробне</a>
+            </div>
+            <div class="program__bar">
+              <span class="program__age">14-16</span>
+              <span class="program__price">5 400 грн/міс</span>
+              <button class="program__more" type="button" aria-expanded="false" aria-controls="panel-Результат" aria-label="Детальніше про програму «Результат»"><svg class="program__info" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.2" /><circle cx="8" cy="5.2" r=".9" fill="currentColor" /><path d="M8 7.4v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" /></svg></button>
+            </div>
+          </article>
+          <article class="program program--profi" data-age="18-23">
+            <span class="program__shine" aria-hidden="true"></span>
+            <img class="program__img" src="/images/program-profi.webp" width="834" height="1042" alt="Футболістка з номером 11 на спині виходить із тунелю на футбольне поле" loading="lazy" />
+            <h3 class="program__name">Профі</h3>
+            <div class="program__panel" id="panel-Профі" role="region" aria-label="Програма «Профі»" hidden>
+              <p class="program__lead">Твій перший контракт починається тут. За відбором</p>
+              <p class="program__meta"><span>Тренувань на тиждень</span><strong>3 + менторство</strong></p>
+              <a class="program__join" href="#contact-form">Записатися на пробне</a>
+            </div>
+            <div class="program__bar">
+              <span class="program__age">18-23</span>
+              <span class="program__price">4 900 грн/міс</span>
+              <button class="program__more" type="button" aria-expanded="false" aria-controls="panel-Профі" aria-label="Детальніше про програму «Профі»"><svg class="program__info" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.2" /><circle cx="8" cy="5.2" r=".9" fill="currentColor" /><path d="M8 7.4v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" /></svg></button>
+            </div>
+          </article>
+          <article class="program program--elit" data-age="16-18">
+            <span class="program__shine" aria-hidden="true"></span>
+            <img class="program__img" src="/images/program-elit.webp" width="800" height="800" alt="Зосереджена футболістка академії з довгими косичками під час матчу" loading="lazy" />
+            <h3 class="program__name">Еліт</h3>
+            <div class="program__panel" id="panel-Еліт" role="region" aria-label="Програма «Еліт»" hidden>
+              <p class="program__lead">Стань незаперечною. За відбором</p>
+              <p class="program__meta"><span>Тренувань на тиждень</span><strong>6 + відеоаналіз</strong></p>
+              <a class="program__join" href="#contact-form">Записатися</a>
+            </div>
+            <div class="program__bar">
+              <span class="program__age">16-18</span>
+              <span class="program__price">6 900 грн/міс</span>
+              <button class="program__more" type="button" aria-expanded="false" aria-controls="panel-Еліт" aria-label="Детальніше про програму «Еліт»"><svg class="program__info" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.2" /><circle cx="8" cy="5.2" r=".9" fill="currentColor" /><path d="M8 7.4v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" /></svg></button>
+            </div>
+          </article>
+          <article class="program program--rozvytok" data-age="12-14">
+            <span class="program__shine" aria-hidden="true"></span>
+            <img class="program__img" src="/images/program-rozvytok.webp" width="800" height="800" alt="Три усміхнені юні футболістки в зеленій формі грають у м'яч на полі між конусами" loading="lazy" />
+            <h3 class="program__name">Розвиток</h3>
+            <div class="program__panel" id="panel-Розвиток" role="region" aria-label="Програма «Розвиток»" hidden>
+              <p class="program__lead">Вчися гри, а не вправ. Позиції, тактика, перші турніри</p>
+              <p class="program__meta"><span>Тренувань на тиждень</span><strong>3</strong></p>
+              <a class="program__join" href="#contact-form">Записатися</a>
+            </div>
+            <div class="program__bar">
+              <span class="program__age">12-14</span>
+              <span class="program__price">4 200 грн/міс</span>
+              <button class="program__more" type="button" aria-expanded="false" aria-controls="panel-Розвиток" aria-label="Детальніше про програму «Розвиток»"><svg class="program__info" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.2" /><circle cx="8" cy="5.2" r=".9" fill="currentColor" /><path d="M8 7.4v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" /></svg></button>
+            </div>
+          </article>
+      </div>
+      <div class="programs__notes">
+        <p>Річне членство 1 800 грн (форма + страхування)</p>
+        <p>Також: індивідуальні тренування від 1 200 грн</p>
+      </div>
+    </section>
+    <!-- 06 method -->
+    <section class="method" id="method" aria-labelledby="method-title">
+      <div class="method__inner">
+        <div class="method__left">
+          <figure class="method__photo">
+            <img class="method__img" src="/images/method.webp" width="800" height="800" alt="Три усміхнені юні футболістки в зеленій формі з рожевими смугами грають у м'яч на полі між конусами" loading="lazy" />
+          </figure>
+          <h2 class="method__title" id="method-title">
+            <span class="method__line">Як ми тренуємо:</span>
+            <span class="method__line">метод <span class="method__accent">GIRLS XI</span></span>
+          </h2>
+          <p class="method__sub">
+            Шість напрямів. <img class="method__toggle" src="/images/ball-toggle.svg" width="106" height="67" alt="" aria-hidden="true" /><br />
+            Одна цілісна гравчиня
+          </p>
+        </div>
+        <ol class="method__list">
+          <li class="method__item"><span class="method__num">01.</span><h3 class="method__name"><span class="method__roll"><span>ТЕХНІКА</span><span class="method__roll-alt" aria-hidden="true">ТЕХНІКА</span></span></h3><p class="method__desc">перший дотик, обидві ноги, гра 1×1</p><img class="method__hover-img" src="/images/method-tehnika.webp" width="800" height="640" alt="Крупний план: ноги футболістки в зеленій формі ведуть м'яч по мокрій траві повз суперницю" loading="lazy" /></li>
+          <li class="method__item"><span class="method__num">02.</span><h3 class="method__name"><span class="method__roll"><span>ТАКТИКА</span><span class="method__roll-alt" aria-hidden="true">ТАКТИКА</span></span></h3><p class="method__desc">позиційна гра й рішення на полі</p><img class="method__hover-img" src="/images/method-taktyka.webp" width="800" height="450" alt="Футболістка з номером 11 вказує рукою напрямок гри на полі, довкола стоять партнерки й суперниці" loading="lazy" /></li>
+          <li class="method__item"><span class="method__num">03.</span><h3 class="method__name"><span class="method__roll"><span>ФІЗИКА</span><span class="method__roll-alt" aria-hidden="true">ФІЗИКА</span></span></h3><p class="method__desc">сила й швидкість з урахуванням росту</p><img class="method__hover-img" src="/images/method-fizyka.webp" width="800" height="450" alt="Тренерка допомагає гравчині тримати рівновагу на балансувальній подушці в спортзалі" loading="lazy" /></li>
+          <li class="method__item"><span class="method__num">04.</span><h3 class="method__name"><span class="method__roll"><span>ПСИХОЛОГІЯ</span><span class="method__roll-alt" aria-hidden="true">ПСИХОЛОГІЯ</span></span></h3><p class="method__desc">впевненість, фокус, гра під тиском</p><img class="method__hover-img" src="/images/method-psyhologiya.webp" width="800" height="450" alt="Зосереджена футболістка у зеленій формі стоїть на полі перед воротами перед початком матчу" loading="lazy" /></li>
+          <li class="method__item"><span class="method__num">05.</span><h3 class="method__name"><span class="method__roll"><span>КОМАНДА</span><span class="method__roll-alt" aria-hidden="true">КОМАНДА</span></span></h3><p class="method__desc">комунікація, лідерство, капітанство</p><img class="method__hover-img" src="/images/method-komanda.webp" width="800" height="450" alt="Гравчині академії обговорюють гру, зібравшись у коло на полі" loading="lazy" /></li>
+          <li class="method__item"><span class="method__num">06.</span><h3 class="method__name"><span class="method__roll"><span>ДАНІ</span><span class="method__roll-alt" aria-hidden="true">ДАНІ</span></span></h3><p class="method__desc">відеоаналіз і звіт про прогрес щосеместру</p><img class="method__hover-img" src="/images/method-dani.webp" width="800" height="450" alt="Тренерка й гравчиня розбирають відеоаналіз матчу на ноутбуці біля поля" loading="lazy" /></li>
+        </ol>
+      </div>
+    </section>
+    </div>
+    <!-- 07 video -->
+    <section class="video" id="video" aria-label="Відео про академію GIRLS XI">
+      <div class="video__box" role="button" tabindex="0" aria-label="Відео про академію GIRLS XI. Натисніть, щоб відтворити або поставити на паузу">
+        <video class="video__el" src="/video/section-video.mp4" poster="/images/video-poster.webp" width="1920" height="1080" muted loop playsinline preload="none"></video>
+        <span class="video__play" aria-hidden="true"><svg viewBox="0 0 12 15" fill="currentColor"><polygon points="2,2 2,13 10,7.5" stroke="currentColor" stroke-width="4" stroke-linejoin="round" /></svg><svg class="video__pause" viewBox="0 0 12 15" fill="currentColor"><rect x="1" y="1" width="3.5" height="13" rx="1.2" /><rect x="7.5" y="1" width="3.5" height="13" rx="1.2" /></svg></span>
+      </div>
+    </section>
+    <div class="page-wrap">
+    <!-- 08 results -->
+    <section class="results" id="results" aria-labelledby="results-title">
+      <h2 class="results__title" id="results-title">
+        <span class="results__line">Докази — на полі</span>
+        <span class="results__line results__accent">Результати</span>
+      </h2>
+      <ul class="results__grid">
+        <li class="results__card results__card--dark results__card--280"><strong class="results__num">280</strong><span class="results__label">гравчинь пройшли академію</span></li>
+        <li class="results__card results__card--pink results__card--7"><strong class="results__num">7</strong><span class="results__label">спортивних стипендій у США</span></li>
+        <li class="results__card results__card--pink results__card--150"><strong class="results__num">150</strong><span class="results__label">тренуються зараз</span></li>
+        <li class="results__card results__card--dark results__card--17"><strong class="results__num">17</strong><span class="results__label">перейшли в професійні клуби</span></li>
+        <li class="results__card results__card--dark results__card--9"><strong class="results__num">9</strong><span class="results__label">викликів у юнацькі збірні</span></li>
+      </ul>
+    </section>
+    <!-- 09 coaches -->
+    <section class="coaches" id="coaches" aria-labelledby="coaches-title">
+      <h2 class="coaches__title" id="coaches-title">Тренерки академії</h2>
+      <div class="coaches__stage" role="group" aria-roledescription="слайдер" aria-label="Тренерки академії">
+        <img class="coaches__photo" src="/images/coach-1.webp" width="1122" height="1402" alt="Олена Коваль, засновниця й головна тренерка GIRLS XI, з планшетом під час тренування" />
+        <img class="coaches__quote-mark" src="/images/quote.svg" width="38" height="39" alt="" aria-hidden="true" />
+        <div class="coaches__text">
+          <blockquote class="coaches__quote" aria-live="polite">У тринадцять я була єдиною дівчиною в команді хлопців. Тепер я хочу, щоб жодна дівчина не мусила доводити все сама</blockquote>
+          <p class="coaches__name">Олена Коваль / засновниця, головна тренерка</p>
+        </div>
+        <div class="coaches__nav">
+          <button class="coaches__arrow coaches__arrow--prev" type="button" aria-label="Попередня тренерка" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button>
+          <button class="coaches__arrow coaches__arrow--next" type="button" aria-label="Наступна тренерка"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button>
+        </div>
+        <img class="coaches__thumb" src="/images/coach-2-thumb.webp" width="400" height="500" alt="Ганна Мельник, керівниця спортивної науки" />
+        <p class="coaches__count" aria-live="polite"><span class="coaches__cur">1</span>/5</p>
+        <p class="coaches__motto">
+          <span class="coaches__motto-line">Тренують ті,хто грав на</span>
+          <span class="coaches__motto-line"><img class="coaches__toggle" src="/images/ball-toggle.svg" width="106" height="67" alt="" aria-hidden="true" />найвищому рівні</span>
+        </p>
+      </div>
+    </section>
+    <!-- 10 graduates -->
+    <section class="graduates" id="graduates" aria-labelledby="graduates-title">
+      <h2 class="graduates__title" id="graduates-title">Наші випускниці <span class="graduates__accent">грають в</span></h2>
+      <div class="graduates__marquee">
+        <ul class="graduates__track">
+          <li class="graduates__item"><img src="/images/graduate-atletyk-podil.webp" width="143" height="181" alt="Логотип клубу «Атлетик Поділ»" /></li>
+          <li class="graduates__item"><img src="/images/graduate-stalevi-lastivky.webp" width="143" height="181" alt="Логотип клубу «Сталеві Ластівки»" /></li>
+          <li class="graduates__item"><img src="/images/graduate-kyiv-city-women.webp" width="143" height="181" alt="Логотип жіночого клубу «Київ Сіті Women»" /></li>
+          <li class="graduates__item"><img src="/images/graduate-sunrise-university.webp" width="143" height="181" alt="Логотип університету Sunrise University" /></li>
+          <li class="graduates__item"><img src="/images/graduate-lakewood-college.webp" width="143" height="181" alt="Логотип коледжу Lakewood College" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-atletyk-podil.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-stalevi-lastivky.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-kyiv-city-women.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-sunrise-university.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-lakewood-college.webp" width="143" height="181" alt="" /></li>
+                  <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-atletyk-podil.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-stalevi-lastivky.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-kyiv-city-women.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-sunrise-university.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-lakewood-college.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-atletyk-podil.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-stalevi-lastivky.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-kyiv-city-women.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-sunrise-university.webp" width="143" height="181" alt="" /></li>
+          <li class="graduates__item" aria-hidden="true"><img src="/images/graduate-lakewood-college.webp" width="143" height="181" alt="" /></li>
+        </ul>
+        <div class="graduates__blur graduates__blur--left" aria-hidden="true"><span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span></div>
+        <div class="graduates__blur graduates__blur--right" aria-hidden="true"><span style="--i:0"></span><span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span><span style="--i:6"></span><span style="--i:7"></span></div>
+      </div>
+    </section>
+    <!-- 11 three-steps -->
+    <section class="steps" id="three-steps" aria-labelledby="steps-title">
+      <h2 class="steps__title" id="steps-title">
+        <span class="steps__line">Три кроки до першого</span>
+        <span class="steps__line steps__accent">тренування</span>
+      </h2>
+      <ol class="steps__list">
+        <li class="step step--1">
+          <div class="step__text">
+            <span class="step__num" aria-hidden="true">01</span>
+            <p class="step__desc">Залиште заявку. Це займе хвилину</p>
+          </div>
+          <img class="step__photo" src="/images/step-1.webp" width="1030" height="580" loading="lazy" alt="Мама з донькою-футболісткою сидять на дивані й разом дивляться на смартфон у затишному вечірньому світлі" />
+        </li>
+        <li class="step step--2">
+          <img class="step__photo" src="/images/step-2.webp" width="1030" height="580" loading="lazy" alt="Адміністраторка футбольного клубу розмовляє телефоном і робить нотатки в офісі з видом на поле" />
+          <div class="step__text">
+            <span class="step__num" aria-hidden="true">02</span>
+            <p class="step__desc">Ми зателефонуємо. Протягом робочого дня, щоб підібрати групу й зручну суботу</p>
+          </div>
+        </li>
+        <li class="step step--3">
+          <div class="step__text">
+            <span class="step__num" aria-hidden="true">03</span>
+            <p class="step__desc">Приходьте на пробне. 90 хвилин із групою і розмова з тренеркою. <span class="steps__accent steps__free">Безкоштовно</span></p>
+          </div>
+          <img class="step__photo" src="/images/step-3.webp" width="1030" height="580" loading="lazy" alt="Тренерка присідає й тисне руку дівчинці з футбольним м'ячем на полі під час пробного тренування" />
+        </li>
+        <li class="steps__timeline" aria-hidden="true"></li>
+      </ol>
+      <a class="btn btn--primary steps__cta" href="#contact-form">
+        <span>ЗАЛИШИТИ ЗАЯВКУ</span>
+        <svg class="btn__icon" width="16.19" height="16.19" viewBox="0 0 16.19 16.19" fill="none" aria-hidden="true">
+          <path d="M1 15.19L15.19 1M5.5 1H15.19V10.69" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </section>
+    <!-- 12 safety -->
+    <section class="safety" id="safety" aria-labelledby="safety-title">
+      <h2 class="safety__title" id="safety-title">
+        <span class="safety__line">Серйозно про футбол.</span>
+        <span class="safety__line">Ще серйозніше — про неї</span>
+      </h2>
+      <ul class="safety__list">
+        <li class="safety__row safety__row--1">
+          <h3 class="safety__name"><span class="safety__name-line">БЕЗПЕКА <img class="safety__toggle" src="/images/ball-toggle.svg" width="106" height="67" alt="" aria-hidden="true" /></span><span class="safety__name-line">ПОНАД УСЕ</span></h3>
+          <p class="safety__desc"><span class="safety__desc-line">власне укриття за 40 метрів</span><span class="safety__desc-line">від поля. Під час тривоги</span><span class="safety__desc-line">тренування</span></p>
+          <div class="safety__photos"><img src="/images/safety-1.webp" width="393" height="570" loading="lazy" alt="Дівчата-футболістки розтягуються на матах у приміщенні академії під час тренування" /></div>
+        </li>
+        <li class="safety__row safety__row--2">
+          <h3 class="safety__name"><span class="safety__name-line">ЗАХИСТ</span><span class="safety__name-line">ДІТЕЙ</span></h3>
+          <p class="safety__desc"><span class="safety__desc-line">перевірені тренерки, на кожному</span><span class="safety__desc-line">тренуванні — відповідальна за</span><span class="safety__desc-line">благополуччя дітей</span></p>
+          <div class="safety__photos">
+            <img src="/images/safety-2a.webp" width="393" height="570" loading="lazy" alt="Тренерка з планшетом зустрічає юних футболісток із рюкзаками біля поля" />
+            <img src="/images/safety-2b.webp" width="393" height="570" loading="lazy" alt="Тренерка з бейджем присідає й робить нотатки поруч із групою дівчат у зеленій формі" />
+          </div>
+        </li>
+        <li class="safety__row safety__row--3">
+          <h3 class="safety__name"><span class="safety__name-line">ПРОФІЛАКТИКА</span><span class="safety__name-line">ТРАВМ <img class="safety__toggle" src="/images/ball-toggle.svg" width="106" height="67" alt="" aria-hidden="true" /></span></h3>
+          <p class="safety__desc"><span class="safety__desc-line">програма захисту колін з</span><span class="safety__desc-line">12 років, фізіотерапевтка</span><span class="safety__desc-line">в центрі</span></p>
+          <div class="safety__photos"><img src="/images/safety-3.webp" width="393" height="570" loading="lazy" alt="Фізіотерапевтка допомагає футболістці виконувати вправу на баланс у реабілітаційному залі" /></div>
+        </li>
+        <li class="safety__row safety__row--4">
+          <h3 class="safety__name"><span class="safety__name-line">ВИ ЗАВЖДИ</span><span class="safety__name-line">В КУРСІ</span></h3>
+          <p class="safety__desc"><span class="safety__desc-line">звіт про прогрес</span><span class="safety__desc-line">щосеместру і</span><span class="safety__desc-line">зустрічі з батьками</span></p>
+          <div class="safety__photos"><img src="/images/safety-4.webp" width="393" height="570" loading="lazy" alt="Тренерка з планшетом розмовляє з мамою та дівчинкою-футболісткою за столом" /></div>
+        </li>
+      </ul>
+    </section>
+    <!-- 13 camps -->
+    <section class="camps" id="camps" aria-labelledby="camps-title">
+      <div class="camps__head">
+        <h2 class="camps__title" id="camps-title">Кемпи</h2>
+        <p class="camps__sub"><span class="camps__sub-line">від осіннього києва до карпат</span><span class="camps__sub-line">канікули, які вона запам'ятає</span></p>
+      </div>
+      <ul class="camps__list">
+        <li class="camp camp--autumn">
+          <div class="camp__photo">
+            <img src="/images/camp-autumn.webp" width="767" height="1024" loading="lazy" alt="Дівчата-футболістки академії грають у м'яч на осінньому полі серед жовтого листя, поруч тренерка" />
+            <span class="camp__tag">26-30 жовтня</span>
+          </div>
+          <div class="camp__spot">
+            <button class="camp__plus" type="button" aria-expanded="false" aria-controls="camp-tip-autumn" aria-label="Деталі кемпу «Осінній інтенсив»"><span class="camp__ring"></span><span class="camp__ring"></span><span class="camp__ring"></span><span class="camp__plus-core"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1" stroke-linecap="round" /></svg></span></button>
+            <div class="camp__tip" id="camp-tip-autumn" role="region" aria-label="Осінній інтенсив">
+              <p class="camp__tip-title">Осінній інтенсив</p>
+              <ul class="camp__pills">
+                <li>10-16 років</li>
+                <li>6 500 грн</li>
+                <li>Залишилося 9 місць</li>
+              </ul>
+              <a class="camp__tip-btn" href="#contact-form" data-camp="Осінній інтенсив">ЗАБРОНЮВАТИ МІСЦЕ</a>
+            </div>
+          </div>
+          <h3 class="camp__name">Осінній інтенсив</h3>
+        </li>
+        <li class="camp camp--summer">
+          <div class="camp__photo">
+            <img src="/images/camp-summer.webp" width="767" height="1024" loading="lazy" alt="Футболістки у зеленій формі відпочивають і сміються на траві на тлі Карпатських гір і хвойного лісу" />
+            <span class="camp__tag">4-10 липня</span>
+          </div>
+          <div class="camp__spot">
+            <button class="camp__plus" type="button" aria-expanded="false" aria-controls="camp-tip-summer" aria-label="Деталі кемпу «Літній виїзд у Карпати»"><span class="camp__ring"></span><span class="camp__ring"></span><span class="camp__ring"></span><span class="camp__plus-core"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1" stroke-linecap="round" /></svg></span></button>
+            <div class="camp__tip" id="camp-tip-summer" role="region" aria-label="Літній виїзд у Карпати">
+              <p class="camp__tip-title">Літній виїзд у Карпати</p>
+              <ul class="camp__pills">
+                <li>10-16 років</li>
+                <li>6 500 грн</li>
+                <li>Залишилося 9 місць</li>
+              </ul>
+              <a class="camp__tip-btn" href="#contact-form" data-camp="Літній виїзд у Карпати">ЗАБРОНЮВАТИ МІСЦЕ</a>
+            </div>
+          </div>
+          <h3 class="camp__name">Літній виїзд у Карпати</h3>
+        </li>
+        <li class="camp camp--winter">
+          <div class="camp__photo">
+            <img src="/images/camp-winter.webp" width="767" height="1024" loading="lazy" alt="Три усміхнені футболістки в чорних куртках роблять селфі на святково прикрашеній вулиці старого міста взимку" />
+            <span class="camp__tag">3-7 січня 2027</span>
+          </div>
+          <div class="camp__spot">
+            <button class="camp__plus" type="button" aria-expanded="false" aria-controls="camp-tip-winter" aria-label="Деталі кемпу «Зимовий тур до Варшави»"><span class="camp__ring"></span><span class="camp__ring"></span><span class="camp__ring"></span><span class="camp__plus-core"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="1" stroke-linecap="round" /></svg></span></button>
+            <div class="camp__tip" id="camp-tip-winter" role="region" aria-label="Зимовий тур до Варшави">
+              <p class="camp__tip-title">Зимовий тур до Варшави</p>
+              <ul class="camp__pills">
+                <li>14-18 років</li>
+                <li>38 000 грн</li>
+                <li>Залишилося 3 місця</li>
+              </ul>
+              <a class="camp__tip-btn" href="#contact-form" data-camp="Зимовий тур до Варшави">ЗАБРОНЮВАТИ МІСЦЕ</a>
+            </div>
+          </div>
+          <h3 class="camp__name">Зимовий тур до Варшави</h3>
+        </li>
+      </ul>
+    </section>
+    <!-- 14 faq -->
+    <section id="faq"></section>
+    <!-- 15 contact-form -->
+    <section id="contact-form"></section>
+    <!-- 16 ready -->
+    <section id="ready"></section>
+    </div>
+    </main>
+    <!-- 17 footer -->
+    <footer id="footer"></footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

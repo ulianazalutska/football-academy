@@ -1,0 +1,182 @@
+/* 12 Серйозно про футбол: верстка за скриншотом макета (project/sections/12-safety/Zrzut ekranu 2026-10-14 135755.png).
+   Скриншот 570 px → 1440 px, коефіцієнт ≈ 2,523; усі значення ≈, виміряні зі скриншота (Figma ще не дала).
+   Одиниця «u» = 1/1440 ширини контейнера .page-wrap. */
+.safety {
+  --u: calc(100cqw / 1440);
+  padding: calc(var(--u) * 200) calc(var(--u) * 30) calc(var(--u) * 160);
+}
+
+.safety__title {
+  margin: 0 0 calc(var(--u) * 20);
+  font-size: calc(var(--u) * 56);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 76);
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+.safety__line {
+  display: block;
+}
+
+.safety__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.safety__row {
+  --line: 1; /* 0–1: довжина ліній (її веде анімація появи) */
+  position: relative;
+}
+
+.safety__row::before,
+.safety__row:last-child::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-muted);
+  transform: scaleX(var(--line));
+  transform-origin: 0 50%;
+}
+
+.safety__row::before { top: 0; }
+.safety__row:last-child::after { bottom: 0; }
+
+.safety__row--1 { height: calc(var(--u) * 210); }
+.safety__row--2 { height: calc(var(--u) * 212); }
+.safety__row--3 { height: calc(var(--u) * 225); }
+.safety__row--4 { height: calc(var(--u) * 220); }
+
+.safety__name {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  font-size: calc(var(--u) * 49);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 64);
+  letter-spacing: 0.04em;
+}
+
+.safety__name-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.safety__desc-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.safety__toggle {
+  display: inline-block;
+  width: calc(var(--u) * 88);
+  height: auto;
+  margin-left: calc(var(--u) * 8);
+  vertical-align: middle;
+}
+
+.safety__desc {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  font-size: calc(var(--u) * 19);
+  line-height: calc(var(--u) * 25);
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+/* колонка опису: права межа і ширина різні в кожному рядку (≈) */
+.safety__row--1 .safety__desc { right: calc(var(--u) * 341); width: calc(var(--u) * 285); }
+.safety__row--2 .safety__desc { right: calc(var(--u) * 456); width: calc(var(--u) * 338); }
+.safety__row--3 .safety__desc { right: calc(var(--u) * 346); width: calc(var(--u) * 255); }
+.safety__row--4 .safety__desc { right: calc(var(--u) * 585); width: calc(var(--u) * 190); }
+
+.safety__photos {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: calc(var(--u) * 15);
+}
+
+.safety__photos img {
+  width: calc(var(--u) * 131);
+  height: calc(var(--u) * 190);
+  object-fit: cover;
+}
+
+/* у рядку 3 фото стоїть у лівому слоті (x≈1130), як у макеті */
+.safety__row--3 .safety__photos {
+  right: calc(var(--u) * 146);
+}
+
+/* Mobile: макета немає, стандартна адаптація: назва, опис і фото в колонку */
+@media (max-width: 767px) {
+  .safety {
+    padding: 64px var(--gutter) 80px;
+  }
+
+  .safety__title {
+    margin-bottom: 32px;
+    font-size: clamp(28px, 8vw, 40px);
+    line-height: 1.25;
+  }
+
+  .safety__row,
+  .safety__row--1,
+  .safety__row--2,
+  .safety__row--3,
+  .safety__row--4 {
+    display: grid;
+    gap: 16px;
+    height: auto;
+    padding: 24px 0;
+  }
+
+  .safety__name,
+  .safety__desc,
+  .safety__photos,
+  .safety__row .safety__desc,
+  .safety__row--3 .safety__photos {
+    position: static;
+    transform: none;
+    width: auto;
+  }
+
+  .safety__name {
+    font-size: 32px;
+    line-height: 1.25;
+  }
+
+  .safety__toggle {
+    width: 64px;
+    margin-left: 8px;
+  }
+
+  .safety__desc-line {
+    display: inline;
+    white-space: normal;
+  }
+
+  .safety__desc-line::after {
+    content: " ";
+  }
+
+  .safety__desc {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  .safety__photos img {
+    width: 131px;
+    height: 190px;
+  }
+}

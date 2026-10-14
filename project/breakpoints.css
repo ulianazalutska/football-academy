@@ -1,0 +1,27 @@
+/* GIRLS XI Football Academy: брейкпоінти
+   Підхід: desktop-first (базові стилі для десктопа 1440 px, далі max-width).
+   Макета для менших екранів у дизайні немає, тому правила нижче порожні:
+   їх заповнюємо після появи мобільного/планшетного макета або вашого рішення.
+   CSS-змінні в @media не працюють, тому значення брейкпоінтів записані числами. */
+
+/* базові стилі */
+/* Desktop: ≥ 1280px. Сюди йдуть стилі секцій за Design-desctop-figma.png */
+
+/* Laptop */
+@media (max-width: 1279px) {
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 479px) {
+}

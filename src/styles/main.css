@@ -1,0 +1,17 @@
+/* Джерела правди лежать у project/: токени й брейкпоінти редагуємо там */
+@import "../../project/tokens.css";
+@import "./base.css";
+@import "../../project/breakpoints.css";
+@import "./header.css";
+@import "./hero.css";
+@import "./banner.css";
+@import "./about.css";
+@import "./programs.css";
+@import "./method.css";
+@import "./video.css";
+@import "./results.css";
+@import "./coaches.css";
+@import "./graduates.css";
+@import "./steps.css";
+@import "./safety.css";
+@import "./camps.css";

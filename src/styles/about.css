@@ -1,0 +1,85 @@
+/* 04 Навіщо ми існуємо
+   Макет 1440: фото x 849–1415 (566 × 701), текст зліва від x 40.
+   Розміри тексту, рядків і відступів виміряно зі скриншота макета (≈), радіус фото 30px (needed.md). */
+.about {
+  padding-top: 27px; /* фото на 1510 px макета, банер закінчується на 1483 */
+  padding-bottom: 0;
+}
+
+.about__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 39.31cqw; /* 566 з 1440 */
+  padding-left: 38px; /* зі скриншота макета (глобальний --gutter 40px тут не підходить) */
+  padding-right: 25px; /* фото закінчується на x 1415 макета */
+  align-items: start;
+}
+
+.about__content {
+  max-width: 640px;
+}
+
+.about__title {
+  font-size: 42px;
+  font-weight: var(--fw-regular);
+  line-height: 57px;
+  margin-top: 14px;
+  margin-bottom: 10px;
+}
+
+.about__text {
+  font-size: 24px;
+  letter-spacing: 0.04em;
+  line-height: 38px;
+  margin-top: 6px;
+}
+
+.about__toggle {
+  display: inline-block;
+  margin-block: -12px;
+  width: 93px;
+  height: 59px;
+  vertical-align: middle;
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: 367px 1fr;
+  row-gap: 36px;
+  margin: 32px 0 0;
+}
+
+.about__stat {
+  margin: 0;
+}
+
+.about__num {
+  font-size: var(--fs-stat);
+  font-weight: var(--fw-regular);
+  line-height: 1.2;
+  color: var(--color-primary);
+}
+
+.about__label {
+  margin: 9px 0 0;
+  font-size: 24px;
+  line-height: 38px;
+}
+
+.about__photo {
+  margin: 0;
+  aspect-ratio: 566 / 701;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.about__photo {
+  position: relative;
+}
+
+.about__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

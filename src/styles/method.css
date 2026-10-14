@@ -1,0 +1,212 @@
+/* 06 Як ми тренуємо: метод GIRLS XI
+   Макет 1440: фото x 73–603 (530 × 365), список x 666–1377, крок рядків 126.5.
+   Розміри виміряно по пікселях скриншота макета (≈). Одиниця «u» = 1/1440 ширини контейнера. */
+.method {
+  --u: calc(100cqw / 1440);
+  padding-top: calc(var(--u) * 26);
+  padding-bottom: calc(var(--u) * 136);
+}
+
+.method__inner {
+  display: grid;
+  grid-template-columns: calc(var(--u) * 593) minmax(0, 1fr);
+  padding-left: calc(var(--u) * 73);
+  padding-right: calc(var(--u) * 63);
+}
+
+.method__photo {
+  margin: 0;
+  width: calc(var(--u) * 530);
+  height: calc(var(--u) * 365);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.method__img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% 85%;
+}
+
+.method__title {
+  margin-top: 30px;
+  padding-left: 6px;
+  font-size: 64px;
+  font-weight: var(--fw-regular);
+  line-height: 87px;
+  letter-spacing: 0.04em;
+}
+
+.method__line {
+  display: block;
+}
+
+.method__accent {
+  color: var(--color-primary);
+}
+
+.method__sub {
+  margin-top: 21px;
+  padding-left: 6px;
+  font-size: 32px;
+  font-weight: var(--fw-regular);
+  line-height: 45px;
+  letter-spacing: 0.04em;
+}
+
+.method__toggle {
+  display: inline-block;
+  margin-block: -12px;
+  width: 106px;
+  height: 67px;
+  vertical-align: middle;
+}
+
+/* ── Список ── */
+.method__list {
+  display: flex;
+  flex-direction: column;
+  margin: -1px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.method__item {
+  display: grid;
+  grid-template-columns: 51px auto 1fr;
+  align-items: baseline;
+  height: calc(var(--u) * 126.5);
+}
+
+.method__num {
+  position: relative;
+  top: -5px; /* номер по центру висоти назви, а не на її базовій лінії */
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.method__name {
+  font-size: 40px;
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+/* Ефект «рулону»: назва виїжджає вгору, знизу з'являється курсивна рожева копія.
+   clip-path замість overflow, щоб не зсувати базову лінію в рядку. */
+.method__name {
+  height: 1lh;
+  clip-path: inset(0 -20px);
+}
+
+.method__roll {
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.method__roll > span {
+  display: block;
+}
+
+.method__roll-alt {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+@media (hover: hover) {
+  .method__item:hover .method__roll {
+    transform: translateY(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .method__roll {
+    transition: none;
+  }
+}
+
+.method__desc {
+  justify-self: end;
+  font-size: 20px;
+  line-height: 1.2;
+  position: relative;
+  top: -2px;
+  letter-spacing: 0.01em;
+  color: var(--color-muted);
+}
+
+/* ── Фото при hover: виїжджає справа з легким поворотом, закриваючи опис ── */
+.method__item {
+  position: relative;
+}
+
+.method__hover-img {
+  position: absolute;
+  top: 19px; /* центр фото на висоті тексту рядка */
+  right: 0;
+  width: 190px;
+  height: 120px;
+  max-width: none;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  opacity: 0;
+  transform: translateY(-50%) translateX(1rem) scale(0.95) rotate(3deg);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease; /* швидке м'яке зникнення */
+}
+
+@media (hover: hover) {
+  .method__item:hover .method__hover-img {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1) rotate(0);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .method__item:hover .method__desc {
+    opacity: 0;
+  }
+}
+
+.method__desc {
+  transition: opacity 0.3s ease;
+}
+
+@media (hover: none) {
+  .method__hover-img {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .method__inner {
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+    padding-inline: var(--gutter);
+  }
+
+  .method__photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 530 / 365;
+  }
+
+  .method__item {
+    height: auto;
+    padding-block: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .method__title { font-size: 40px; line-height: 1.25; }
+  .method__sub { font-size: 24px; line-height: 1.4; }
+  .method__item {
+    grid-template-columns: 44px 1fr;
+    row-gap: 6px;
+  }
+  .method__name { font-size: 28px; }
+  .method__desc { grid-column: 2; justify-self: start; }
+}

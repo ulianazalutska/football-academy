@@ -1,0 +1,293 @@
+/* 02 Hero: розміри виміряно зі скриншота hero (1 макетний px = var(--u)).
+   Макет: 1440 px, блок 1390 × 970, відступ з боків 25 px. */
+.hero {
+  --tab-w: 166;
+  --tab-h: 80;
+  --hero-r: 60;
+  --corner-r: 30;
+  --tab-r: 36;
+  /* текучий блок: бічний відступ ≈ 25 px на 1440, зростає/спадає з екраном; понад 1920 px центрується */
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+  container-type: inline-size;
+}
+
+.hero__frame {
+  /* 1 макетний px: масштаб за меншою з двох величин (ширина 1390 / висота 970), щоб текст і фото росли разом */
+  --u: min(calc(100cqw / 1390), calc((100svh - var(--header-height)) / 970));
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  height: calc(100svh - var(--header-height));
+  border-radius: calc(var(--hero-r) * var(--u));
+  border-bottom-right-radius: 0; /* кут закритий білим «вирізом» */
+  overflow: hidden;
+  background: var(--color-primary);
+  isolation: isolate;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 61% 50%;
+}
+
+/* текст */
+.hero__content {
+  position: absolute;
+  top: calc(68 * var(--u));
+  left: calc(70 * var(--u));
+  color: var(--color-text-light);
+}
+
+.hero__title {
+  max-width: calc(900 * var(--u));
+  font-size: calc(54 * var(--u));
+  font-weight: var(--fw-light);
+  letter-spacing: 0.045em;
+  line-height: calc(74 / 54);
+}
+
+.hero__text {
+  max-width: calc(600 * var(--u));
+  margin-top: calc(28 * var(--u));
+  font-size: calc(21.5 * var(--u));
+  font-weight: var(--fw-regular);
+  letter-spacing: 0.05em;
+  line-height: calc(31.5 / 21.5);
+}
+
+/* рядки як у макеті (на ≤1023 текст тече природно) */
+.hero__line-break { display: block; }
+
+/* малі фото: пропорція 224 × 123, рамка 1,5 px рожева, радіус 24 px */
+.hero__thumb {
+  position: absolute;
+  margin: 0;
+  width: calc(260 * var(--u));
+  height: calc(143 * var(--u));
+  border: calc(1.5 * var(--u)) solid var(--color-accent);
+  border-radius: calc(24 * var(--u));
+  box-sizing: border-box;
+}
+
+.hero__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.hero__thumb--1 { right: calc(170 * var(--u)); top: calc(235 * var(--u)); }
+.hero__thumb--2 { left: calc(290 * var(--u)); bottom: calc(185 * var(--u)); }
+.hero__thumb--3 { right: calc(320 * var(--u)); bottom: calc(105.5 * var(--u)); }
+
+/* кнопка ▶ на відео: коло 30 × 30, заливка #334A38 на 46%, рожевий заокруглений трикутник */
+.hero__video {
+  cursor: pointer;
+}
+
+.hero__video-el {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.hero__video.is-playing .hero__play {
+  opacity: 0;
+}
+
+.hero__play {
+  transition: opacity 0.2s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(30 * var(--u));
+  height: calc(30 * var(--u));
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-primary) 46%, transparent);
+  color: var(--color-accent);
+}
+
+.hero__play svg {
+  width: calc(12 * var(--u));
+  height: calc(15 * var(--u));
+  margin-left: calc(1 * var(--u));
+}
+
+/* виноски: svg 224 × 123 (як фото), координати в макетних px від лівого верхнього кута фото */
+.hero__line {
+  position: absolute;
+  top: calc(-1.5 * var(--u));
+  left: calc(-1.5 * var(--u));
+  width: calc(260 * var(--u));
+  height: calc(143 * var(--u));
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hero__line polyline {
+  stroke: var(--color-muted);
+  stroke-width: 1.5;
+}
+
+/* білий «виріз» під перемикач мови: правий нижній кут */
+.hero__tab {
+  position: absolute;
+  /* виходить за край блока на 1 px, щоб не просвічував фон */
+  right: -1px;
+  bottom: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1px 1px 0;
+  box-sizing: border-box;
+  width: calc(var(--tab-w) * var(--u) + 1px);
+  height: calc(var(--tab-h) * var(--u) + 1px);
+  background: var(--color-bg);
+  border-top-left-radius: calc(var(--tab-r) * var(--u));
+}
+
+/* випуклі кути фото біля «вирізу» */
+.hero__tab::before,
+.hero__tab::after {
+  content: "";
+  position: absolute;
+  /* +1 px перекриття з білим «вирізом» без швів */
+  width: calc(var(--corner-r) * var(--u) + 1px);
+  height: calc(var(--corner-r) * var(--u) + 1px);
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 0 0,
+    transparent calc(var(--corner-r) * var(--u) - 0.5px),
+    var(--color-bg) calc(var(--corner-r) * var(--u))
+  );
+}
+
+.hero__tab::before {
+  right: 0;
+  bottom: calc(100% - 1px);
+}
+
+.hero__tab::after {
+  right: calc(100% - 1px);
+  bottom: 0;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  font-size: calc(32 * var(--u));
+  font-weight: var(--fw-regular);
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.lang-switch__btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--color-muted);
+}
+
+.lang-switch__btn--green {
+  color: var(--color-primary);
+  transition: color 0.2s ease;
+}
+
+.lang-switch__sep {
+  transition: color 0.2s ease;
+}
+
+.lang-switch__btn--green:hover,
+.lang-switch:has(.lang-switch__btn--green:hover) .lang-switch__sep {
+  color: var(--color-accent);
+}
+
+/* Tablet і нижче: макет не масштабуємо, малі фото й виноски ховаємо */
+@media (max-width: 1023px) {
+  .hero__frame {
+    --u: 1px;
+    height: auto;
+    min-height: max(640px, calc(100svh - var(--header-height)));
+    border-radius: 40px;
+  }
+
+  .hero__content {
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: 56px 40px 0;
+  }
+
+  .hero__title {
+    max-width: none;
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.25;
+  }
+
+  .hero__text {
+    max-width: 560px;
+    margin-top: 24px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .hero__line-break { display: inline; }
+
+  .hero__thumb {
+    display: none;
+  }
+
+  .hero__tab {
+    --tab-w: 140;
+    --tab-h: 64;
+    --tab-r: 28;
+    --corner-r: 24;
+  }
+
+  .lang-switch { font-size: 26px; }
+}
+
+@media (max-width: 767px) {
+  .hero__frame {
+    min-height: 560px;
+    border-radius: 28px;
+  }
+
+  .hero__content { padding: 40px 24px 0; }
+  .hero__title { font-size: clamp(26px, 7vw, 34px); }
+  .hero__text { font-size: 16px; }
+}
+
+/* Інтро-анімація: до старту GSAP ховаємо елементи (клас has-intro ставить скрипт у <head>).
+   Страховка: якщо скрипт не спрацював, через 3 с усе показується. */
+.has-intro .header,
+.has-intro .hero__frame,
+.has-intro .hero__line-break,
+.has-intro .hero__thumb,
+.has-intro .hero__tab {
+  opacity: 0;
+  animation: intro-failsafe 0s 3s forwards;
+}
+
+@keyframes intro-failsafe {
+  to { opacity: 1; }
+}
+
+.hero__title .hero__line-break,
+.hero__text .hero__line-break {
+  will-change: transform, opacity;
+}

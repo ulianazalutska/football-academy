@@ -1,0 +1,53 @@
+/* 03 Банер «№1 ЖІНОЧА ФУТБОЛЬНА АКАДЕМІЯ В УКРАЇНІ»
+   Розмір і вага, колір ліній, колір рожевого рядка: від користувачки (needed.md).
+   Зсуви рядків виміряно зі скриншота (макет 1440 px), записані у відсотках ширини. */
+.banner {
+  --banner-row-h: 127px;
+  --banner-line: var(--color-muted);
+  padding-block: 45px; /* підтверджено користувачкою */
+}
+
+.banner__title {
+  margin: 0;
+  font-size: clamp(28px, 4.444vw, var(--fs-banner)); /* 64px на 1440, плавно менший */
+  font-weight: var(--fw-extrabold);
+  line-height: var(--lh-tight);
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.banner__line {
+  display: flex;
+  align-items: center;
+  min-height: clamp(72px, 8.8vw, var(--banner-row-h)); /* 127px на 1440 */
+  white-space: nowrap;
+}
+
+.banner__line {
+  position: relative;
+}
+
+.banner__rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--banner-line);
+  transform-origin: left center;
+}
+
+/* маска для виїзду тексту знизу; запас під діакритику (Й, Ї) */
+.banner__mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.15em;
+}
+
+.banner__text {
+  display: block;
+}
+
+.banner__line--1 { padding-left: 36%; }   /* ≈ 519 px з 1440 */
+.banner__line--2 { padding-left: 24.79%; color: var(--color-accent); } /* ≈ 357 px; було 16.7% (241 px) зі скриншота, зсунуто за проханням */
+.banner__line--3 { padding-left: 52.6%; } /* ≈ 757 px */

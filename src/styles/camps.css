@@ -1,0 +1,352 @@
+/* 13 Кемпи: верстка за скриншотом макета (project/sections/13-camps/Zrzut ekranu 2026-10-14 151125.png).
+   Скриншот 804 px → 1440 px, коефіцієнт ≈ 1,79; усі значення ≈, виміряні зі скриншота (Figma ще не дала).
+   Одиниця «u» = 1/1440 ширини контейнера .page-wrap. */
+.camps {
+  --u: calc(100cqw / 1440);
+  padding: calc(var(--u) * 200) calc(var(--u) * 19) calc(var(--u) * 160);
+}
+
+.camps__head {
+  position: relative;
+  height: calc(var(--u) * 135);
+  padding-left: calc(var(--u) * 15);
+}
+
+.camps__title {
+  margin: 0;
+  font-size: calc(var(--u) * 64);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 87);
+  letter-spacing: 0.04em;
+}
+
+.camps__sub {
+  position: absolute;
+  top: calc(var(--u) * 18);
+  left: calc(var(--u) * 803);
+  width: calc(var(--u) * 340);
+  margin: 0;
+  font-size: calc(var(--u) * 20);
+  line-height: calc(var(--u) * 28);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.camps__sub-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.camps__list {
+  display: grid;
+  grid-template-columns: repeat(3, calc(var(--u) * 457));
+  gap: calc(var(--u) * 15);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.camp {
+  position: relative;
+}
+
+.camp__photo {
+  position: relative;
+  width: 100%;
+  height: calc(var(--u) * 610);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.camp__photo img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+.camp__tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: calc(var(--u) * 50);
+  padding: 0 calc(var(--u) * 14);
+  border-radius: 0 0 0 16px;
+  background: var(--color-primary);
+  color: var(--color-text-light);
+  font-size: calc(var(--u) * 16);
+  letter-spacing: 0.04em;
+}
+
+.camp__name {
+  margin: calc(var(--u) * 20) 0 0;
+  font-size: calc(var(--u) * 22);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 30);
+  letter-spacing: 0.04em;
+}
+
+/* «+»: точка відліку в центрі кружечка; положення на фото своє в кожній картці (≈) */
+.camp__spot {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 2;
+}
+
+.camp--autumn .camp__spot { left: calc(var(--u) * 374); top: calc(var(--u) * 523); }
+.camp--summer .camp__spot { left: calc(var(--u) * 113); top: calc(var(--u) * 134); }
+.camp--winter .camp__spot { left: calc(var(--u) * 378); top: calc(var(--u) * 396); }
+
+/* «+» як у проєкті marafon (секція «Три серії»): кружечок 33 px з хрестиком, три кільця пульсують (4,5 с, зсув 1,5 с),
+   на hover кружечок стискається до крапки 10 px, хрестик зникає, поруч з'являється біла картка зі стрілкою */
+.camp__plus {
+  position: absolute;
+  left: calc(var(--u) * -22);
+  top: calc(var(--u) * -22);
+  width: calc(var(--u) * 44);
+  height: calc(var(--u) * 44);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.camp__plus-core {
+  position: absolute;
+  inset: calc(var(--u) * 5.5); /* 44 − 33 = 11 → кружечок 33 px по центру кнопки без translate */
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-primary);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15), 0 2px 4px -2px rgba(0, 0, 0, 0.15);
+  will-change: transform;
+  transition: transform 0.3s ease;
+}
+
+.camp__plus-core svg {
+  flex: none;
+  width: calc(var(--u) * 15);
+  height: calc(var(--u) * 15);
+  max-width: none; /* base.css ставить svg max-width:100%: при стисканні кружечка хрестик сам зменшувався */
+  transition: opacity 0.15s ease;
+}
+
+.camp__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  animation: camp-pulse 3.6s linear infinite backwards; /* backwards: під час зсуву (delay) кільце має стартовий кадр, а не стоїть видимою лінією */
+  pointer-events: none;
+}
+
+.camp__ring:nth-child(2) { animation-delay: 1.2s; }
+.camp__ring:nth-child(3) { animation-delay: 2.4s; }
+
+/* кільце виходить з-під кружечка (33 px), з'являється на лету і рівномірно розходиться, гаснучи. Лінійний хід:
+   швидкий ease-out тримав яскраве кільце впритул до кружечка майже півтори секунди, і воно виглядало постійною лінією */
+@keyframes camp-pulse {
+  0%   { transform: scale(0.75); opacity: 0; }
+  15%  { transform: scale(0.95); opacity: 0.55; }
+  100% { transform: scale(2.4);  opacity: 0; }
+}
+
+/* кружечок стиснувся в крапку: кільця зникають, щоб не висіли лінії навколо крапки */
+.camp__spot:hover .camp__ring,
+.camp__spot.is-open .camp__ring {
+  animation: none;
+  opacity: 0;
+}
+
+.camp__spot:hover .camp__plus-core,
+.camp__spot.is-open .camp__plus-core,
+.camp__plus:focus-visible .camp__plus-core {
+  transform: scale(0.3); /* 33 px → ≈10 px */
+}
+
+.camp__spot:hover .camp__plus-core svg,
+.camp__spot.is-open .camp__plus-core svg {
+  opacity: 0;
+}
+
+/* картка: збоку від крапки, по центру по вертикалі, зі стрілкою */
+.camp__tip {
+  position: absolute;
+  left: calc(var(--u) * 34);
+  top: 0;
+  width: calc(var(--u) * 188);
+  padding: calc(var(--u) * 12);
+  border: 1px solid var(--color-accent);
+  border-radius: 10px;
+  background: var(--color-bg);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transform: translateY(-50%);
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0s 0.2s;
+}
+
+.camp__tip::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%) rotate(45deg);
+  border-left: 1px solid var(--color-accent);
+  border-bottom: 1px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+/* зона між крапкою і карткою, щоб hover не губився */
+.camp__tip::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--u) * -34);
+  top: 0;
+  bottom: 0;
+  width: calc(var(--u) * 34);
+}
+
+.camp__spot:hover .camp__tip,
+.camp__spot.is-open .camp__tip {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease, visibility 0s;
+}
+
+/* картки крайніх карток відкриваються вліво від крапки, щоб не виходити за межі сторінки */
+.camp--autumn .camp__tip,
+.camp--winter .camp__tip {
+  left: auto;
+  right: calc(var(--u) * 34);
+}
+
+.camp--autumn .camp__tip::before,
+.camp--winter .camp__tip::before {
+  left: auto;
+  right: -7px;
+  border: 0;
+  border-top: 1px solid var(--color-accent);
+  border-right: 1px solid var(--color-accent);
+}
+
+.camp--autumn .camp__tip::after,
+.camp--winter .camp__tip::after {
+  left: auto;
+  right: calc(var(--u) * -34);
+}
+
+.camp__tip-text {
+  margin: 6px 0 0;
+  font-size: max(10px, calc(var(--u) * 10));
+  line-height: 1.4;
+}
+
+.camp__tip-title {
+  margin: 0;
+  font-size: max(12px, calc(var(--u) * 12));
+  line-height: 1.3;
+  color: var(--color-primary);
+}
+
+.camp__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.camp__pills li {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--color-accent);
+  font-size: max(10px, calc(var(--u) * 10));
+  line-height: 1.4;
+}
+
+.camp__tip-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-text-light);
+  font-size: max(10px, calc(var(--u) * 9));
+  letter-spacing: 0.04em;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.camp__tip-btn:hover {
+  background: var(--color-accent);
+  color: var(--color-text);
+}
+
+/* Mobile: макета немає, стандартна адаптація: картки в колонку, підзаголовок під заголовком */
+@media (max-width: 767px) {
+  .camps {
+    padding: 64px var(--gutter) 80px;
+  }
+
+  .camps__head {
+    height: auto;
+    padding-left: 0;
+  }
+
+  .camps__title {
+    font-size: clamp(36px, 10vw, 48px);
+    line-height: 1.2;
+  }
+
+  .camps__sub {
+    position: static;
+    width: auto;
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  .camps__sub-line {
+    white-space: normal;
+  }
+
+  .camps__list {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .camp__photo {
+    height: auto;
+    aspect-ratio: 457 / 610;
+  }
+
+  .camp__tag { height: 40px; padding: 0 12px; font-size: 14px; }
+  .camp__name { margin-top: 12px; font-size: 20px; line-height: 1.3; }
+
+  /* позиції «+» у відсотках від фото (ширина 457, висота 610) */
+  .camp--autumn .camp__spot { left: 82%; top: 85.7%; }
+  .camp--summer .camp__spot { left: 25%; top: 22%; }
+  .camp--winter .camp__spot { left: 83%; top: 65%; }
+
+  .camp__plus { left: -22px; top: -22px; width: 44px; height: 44px; }
+  .camp__plus-core { inset: 5.5px; }
+  .camp__plus-core svg { width: 15px; height: 15px; }
+  .camp__tip { left: 34px; width: 200px; }
+  .camp__tip::after { left: -34px; width: 34px; }
+
+  .camp--autumn .camp__tip,
+  .camp--winter .camp__tip { left: auto; right: 34px; }
+
+  .camp--autumn .camp__tip::after,
+  .camp--winter .camp__tip::after { left: auto; right: -34px; width: 34px; }
+}

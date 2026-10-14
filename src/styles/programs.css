@@ -1,0 +1,510 @@
+/* 05 Один шлях. П'ять етапів
+   Макет 1440: сітка x 66–1379, виміряно по пікселях скриншота макета.
+   Розміри в «u» = 1/1440 ширини контейнера (на 1440 px 1u = 1px). Радіус карток 30px (needed.md). */
+.programs {
+  --u: calc(100cqw / 1440);
+  padding-top: calc(var(--u) * 288);
+  padding-bottom: calc(var(--u) * 100);
+}
+
+.programs__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-left: calc(var(--u) * 66);
+  padding-right: calc(var(--u) * 78); /* фільтр закінчується на x 1362 */
+  margin-bottom: calc(var(--u) * 26);
+}
+
+.programs__title {
+  font-size: 42px;
+  font-weight: var(--fw-regular);
+  line-height: 57px;
+}
+
+.programs__sub {
+  max-width: 520px;
+  margin-top: -4px;
+  padding-left: 4px;
+  font-size: 24px;
+  line-height: 39px;
+}
+
+/* ── Фільтр за віком ── */
+.age-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 13px;
+  margin-bottom: 12px;
+}
+
+.age-filter__label {
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--color-primary);
+}
+
+.age-filter__list {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 41px;
+  padding-inline: 13px;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+}
+
+.age-filter__btn {
+  height: 32px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  line-height: 32px;
+  color: var(--color-text-light);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.age-filter__btn.is-active {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.age-filter__btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Сітка карток ── */
+.programs__grid {
+  display: grid;
+  grid-template-columns:
+    calc(var(--u) * 300) calc(var(--u) * 32) calc(var(--u) * 302) calc(var(--u) * 26)
+    calc(var(--u) * 311) calc(var(--u) * 31) calc(var(--u) * 311);
+  grid-template-rows:
+    calc(var(--u) * 321) calc(var(--u) * 21) calc(var(--u) * 188)
+    calc(var(--u) * 22) calc(var(--u) * 311);
+  padding-left: calc(var(--u) * 66);
+}
+
+.program {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  color: var(--color-text-light);
+  transition: filter 0.6s ease, box-shadow 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.program--start { grid-column: 1 / 4; grid-row: 1; background: var(--color-primary); }
+.program--osnova { grid-column: 5 / 8; grid-row: 1 / 4; width: calc(var(--u) * 637); }
+.program--rezultat { grid-column: 1; grid-row: 3 / 6; }
+.program--profi { grid-column: 3; grid-row: 3 / 6; }
+.program--elit { grid-column: 5; grid-row: 5; }
+.program--rozvytok { grid-column: 7; grid-row: 5; }
+
+.program__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.program--rezultat .program__img { object-position: 62% 50%; }
+
+/* затемнення з Figma: лінійний градієнт від лівого верхнього до правого нижнього кута, чорний 59% на 8% → 0% на 27% */
+.program[data-age]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(var(--shade-angle, 135deg), rgba(0, 0, 0, 0.59) 8%, rgba(0, 0, 0, 0) 27%);
+  pointer-events: none;
+}
+
+.program--osnova { --shade-angle: 130deg; }
+.program--rezultat,
+.program--profi { --shade-angle: 150deg; }
+
+.program__name {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  font-size: 22px;
+  font-weight: var(--fw-medium);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+}
+
+.program__bar {
+  position: absolute;
+  z-index: 4;
+  inset: auto 0 0;
+  display: flex;
+  align-items: center;
+  height: 58px;
+  padding-inline: 19px 15px;
+  background: rgba(51, 74, 56, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.program__price {
+  margin-left: auto;
+  margin-right: 12px;
+  font-weight: var(--fw-medium);
+}
+
+.program__more {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.program__more:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Зелена картка «Перший крок» ── */
+.program__xi {
+  position: absolute;
+  top: 0;
+  left: 241px;
+  width: 378px;
+  max-width: none;
+  height: 275px;
+}
+
+.program__kicker {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+}
+
+.program__zero {
+  position: absolute;
+  top: 54px;
+  left: 22px;
+  font-size: 64px;
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+}
+
+.program__first {
+  position: absolute;
+  top: 141px;
+  left: 22px;
+  font-size: 22px;
+  font-weight: var(--fw-medium);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+}
+
+.program__cta {
+  position: absolute;
+  top: 181px;
+  left: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 213px;
+  height: 42px;
+  padding: 0 5px 0 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+}
+
+.program__cta-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+.program__cta-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.program__perks {
+  position: absolute;
+  top: 239px;
+  left: 32px;
+  display: flex;
+  gap: 25px;
+}
+
+.program__perk {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  width: 119px;
+  height: 70px;
+  padding-left: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.program__perk:last-child {
+  padding-left: 6px;
+  font-size: 12px;
+}
+
+.program__perk strong {
+  font-size: 16px;
+  font-weight: var(--fw-bold);
+  color: var(--color-accent);
+}
+
+/* ── Підписи під сіткою ── */
+.programs__notes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: calc(var(--u) * 27);
+  padding-left: calc(var(--u) * 70);
+  padding-right: calc(var(--u) * 61);
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+/* ── Hover, фільтр, розкриття деталей ── */
+.program__img {
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.program[data-age]:hover .program__img {
+  transform: scale(1.05);
+}
+
+.program__more {
+  position: relative;
+  z-index: 1;
+  transition: background-color 0.35s ease, transform 0.35s ease;
+}
+
+.program__more:hover {
+  background: var(--color-accent);
+}
+
+.program__info {
+  width: 16px;
+  height: 16px;
+}
+
+.program.is-open .program__more {
+  background: var(--color-accent);
+}
+
+.program__panel {
+  position: absolute;
+  z-index: 3;
+  inset: 0 0 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 60px 22px 18px;
+  background: rgba(51, 74, 56, 0.9);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  transform: translateY(60px);
+  visibility: hidden;
+  transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), visibility 0s 0.6s;
+}
+
+.program__panel[hidden] {
+  display: flex;
+}
+
+.program--elit .program__panel[hidden],
+.program--rozvytok .program__panel[hidden] {
+  display: grid;
+}
+
+.program.is-open .program__panel {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.program__name {
+  z-index: 5;
+}
+
+.program__lead {
+  font-size: 20px;
+  font-weight: var(--fw-medium);
+  line-height: 1.3;
+}
+
+.program__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.program__meta strong {
+  font-size: 18px;
+  font-weight: var(--fw-bold);
+  color: var(--color-accent);
+}
+
+.program__join {
+  align-self: flex-start;
+  height: 38px;
+  padding: 0 20px;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg);
+  font-size: 14px;
+  line-height: 38px;
+  color: var(--color-primary);
+}
+
+/* кнопка в зеленій картці: рожевий hover, ↗ злітає */
+/* hover як у кнопки шапки: рожева заливка піднімається знизу зі скошеним краєм, 0,45 с */
+.program__cta,
+.program__join {
+  overflow: hidden;
+  isolation: isolate;
+  transition: background-color 0.45s ease;
+}
+
+.program__join {
+  position: relative;
+}
+
+.program__cta::before,
+.program__join::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-accent);
+  clip-path: polygon(0 100%, 100% 150%, 100% 250%, 0 250%);
+  transition: clip-path 0.45s ease;
+}
+
+.program__cta:hover,
+.program__join:hover {
+  background: var(--color-accent);
+}
+
+.program__cta:hover::before,
+.program__join:hover::before {
+  clip-path: polygon(0 -60%, 100% -10%, 100% 250%, 0 250%);
+}
+
+.program__cta-icon svg {
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.program__cta:hover .program__cta-icon svg {
+  transform: translate(2px, -2px);
+}
+
+/* фільтр: вибрана картка легенько піднімається вперед */
+.programs__grid.is-filtered .program[data-age].is-match {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 0 28px rgba(246, 194, 208, 0.55);
+  z-index: 2;
+}
+
+/* малі картки 311×311 (Еліт, Розвиток): компактна панель, слоган зверху, підпис і коротка кнопка в один рядок */
+.program--elit .program__panel,
+.program--rozvytok .program__panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-content: end;
+  align-items: end;
+  gap: 10px;
+  padding: 56px 20px 16px;
+}
+
+.program--elit .program__lead,
+.program--rozvytok .program__lead {
+  grid-column: 1 / -1;
+  font-size: 16px;
+}
+
+.program--elit .program__meta,
+.program--rozvytok .program__meta {
+  font-size: 13px;
+}
+
+.program--elit .program__meta strong,
+.program--rozvytok .program__meta strong {
+  font-size: 16px;
+}
+
+.program--elit .program__join,
+.program--rozvytok .program__join {
+  height: 34px;
+  padding: 0 18px;
+  font-size: 13px;
+  line-height: 34px;
+  white-space: nowrap;
+}
+
+/* блиск: м'який світлий відблиск у верхньому лівому куті вибраної картки, повільно дихає */
+.program__shine {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(120% 70% at 0% 0%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 60%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.programs__grid.is-filtered .program.is-match .program__shine {
+  opacity: 1;
+  animation: program-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes program-glow {
+  50% { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .program,
+  .program__img,
+  .program__panel,
+  .age-filter__btn {
+    transition: none;
+  }
+
+  .program__shine {
+    display: none;
+  }
+}

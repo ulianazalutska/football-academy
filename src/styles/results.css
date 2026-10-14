@@ -1,0 +1,107 @@
+/* 08 Результати: бенто-сітка з 5 карток.
+   Розміри виміряно по скриншоту макета (≈, скриншот 1044 px → 1440 px, коефіцієнт 1,379).
+   Одиниця «u» = 1/1440 ширини контейнера .page-wrap. Чекаю підтвердження значень із Figma. */
+.results {
+  --u: calc(100cqw / 1440);
+  --results-line: color-mix(in srgb, var(--color-primary) 13%, transparent); /* сітка: #334A38, 13% (рішення користувачки) */
+  padding-top: calc(var(--u) * 14);
+  padding-bottom: calc(var(--u) * 136);
+}
+
+.results__title {
+  padding-left: calc(var(--u) * 652);
+  font-size: calc(var(--u) * 64);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 87);
+  letter-spacing: 0.04em;
+}
+
+.results__line {
+  display: block;
+}
+
+.results__accent {
+  color: var(--color-primary);
+}
+
+.results__grid {
+  display: grid;
+  grid-template-columns: 499fr 436fr 417fr;
+  gap: calc(var(--u) * 10);
+  margin: calc(var(--u) * 86) calc(var(--u) * 30) 0 calc(var(--u) * 40);
+  padding: 0;
+  list-style: none;
+}
+
+.results__card {
+  position: relative;
+  min-height: calc(var(--u) * 222);
+  padding: calc(var(--u) * 13) calc(var(--u) * 45);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* ширини з макета: ряд 1 = 499 + 863, ряд 2 = 499 + 436 + 417 */
+.results__card--7 { grid-column: span 2; }
+
+.results__card--dark {
+  background: var(--color-primary);
+  color: var(--color-accent);
+}
+
+.results__card--pink {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+/* тонка сітка на рожевих картках: клітинка ≈ 64 px, лінії праворуч і зверху клітинки, відлік знизу */
+.results__card--pink::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, transparent calc(100% - 1px), var(--results-line) 0),
+    linear-gradient(to bottom, transparent calc(var(--u) * 27), var(--results-line) calc(var(--u) * 27), var(--results-line) calc(var(--u) * 27 + 1px), transparent calc(var(--u) * 27 + 1px));
+  background-size: calc(var(--u) * 63.5) calc(var(--u) * 63.5);
+  background-position: 0 100%;
+  pointer-events: none;
+}
+
+.results__card--7::before {
+  background-size: calc(100% / 12) calc(var(--u) * 63.5);
+}
+
+.results__num,
+.results__label {
+  position: relative; /* над сіткою */
+  display: block;
+}
+
+.results__num {
+  font-size: calc(var(--u) * 64);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 87);
+  letter-spacing: 0.04em;
+}
+
+.results__label {
+  max-width: calc(var(--u) * 340);
+  font-size: calc(var(--u) * 32);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 45);
+  letter-spacing: 0.04em;
+}
+
+/* перенос рядків як у макеті: «викликів у / юнацькі збірні» */
+.results__card--9 .results__label { max-width: calc(var(--u) * 290); }
+
+@media (max-width: 767px) {
+  .results { --u: 1px; padding-top: 24px; padding-bottom: 72px; }
+  .results__title { padding-left: 0; margin-inline: var(--gutter); font-size: 36px; line-height: 1.25; }
+  .results__grid { display: flex; flex-direction: column; gap: 10px; margin: 32px var(--gutter) 0; }
+  .results__card { min-height: 0; padding: 16px 24px 20px; }
+  .results__num { font-size: 48px; line-height: 1.2; }
+  .results__label,
+  .results__card--9 .results__label { max-width: none; font-size: 22px; line-height: 1.4; }
+  .results__card--pink::before { background-size: 48px 48px; }
+}

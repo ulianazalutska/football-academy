@@ -1,0 +1,20 @@
+import './styles/main.css';
+import { initAnimations } from './scripts/animations';
+import { initHeader } from './scripts/header';
+import { initForm } from './scripts/form';
+import { initHero } from './scripts/hero';
+import { initVideo } from './scripts/video';
+import { initCoaches } from './scripts/coaches';
+import { initPrograms } from './scripts/programs';
+import { initGraduates } from './scripts/graduates';
+import { initCamps } from './scripts/camps';
+
+initHeader();
+initHero();
+initPrograms();
+initVideo();
+initCoaches();
+initGraduates();
+initCamps();
+initForm();
+initAnimations();

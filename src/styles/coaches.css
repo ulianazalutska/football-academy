@@ -1,0 +1,171 @@
+/* 09 Тренерки: розміри виміряно по скриншоту макета (≈, скриншот 955 px → 1440 px, коефіцієнт 1,507).
+   Одиниця «u» = 1/1440 ширини контейнера .page-wrap. Чекаю підтвердження значень із Figma. */
+.coaches {
+  --u: calc(100cqw / 1440);
+  padding-top: calc(var(--u) * 100);
+  padding-bottom: calc(var(--u) * 136);
+}
+
+.coaches__title {
+  margin-left: calc(var(--u) * 38);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+  line-height: 57px;
+}
+
+.coaches__stage {
+  position: relative;
+  height: calc(var(--u) * 475);
+  margin-top: calc(var(--u) * 50);
+}
+
+.coaches__photo,
+.coaches__thumb {
+  position: absolute;
+  object-fit: cover;
+  border-radius: calc(var(--u) * 30);
+}
+
+.coaches__photo {
+  left: calc(var(--u) * 38);
+  top: 0;
+  width: calc(var(--u) * 455);
+  height: calc(var(--u) * 475);
+  object-position: 50% 30%;
+}
+
+.coaches__quote-mark {
+  position: absolute;
+  left: calc(var(--u) * 573);
+  top: calc(var(--u) * 32);
+  width: calc(var(--u) * 38);
+  height: auto;
+}
+
+/* цитата й ім'я в одному потоці: ім'я зсувається вниз, якщо цитата займає 4 рядки */
+.coaches__text {
+  position: absolute;
+  left: calc(var(--u) * 576);
+  top: calc(var(--u) * 111);
+  width: calc(var(--u) * 540);
+}
+
+.coaches__quote {
+  margin: 0;
+  font-size: calc(var(--u) * 24);
+  line-height: calc(var(--u) * 39);
+  letter-spacing: 0.02em;
+}
+
+.coaches__name {
+  margin-top: calc(var(--u) * 14);
+  font-size: calc(var(--u) * 20);
+  line-height: calc(var(--u) * 27);
+  color: var(--color-primary);
+}
+
+.coaches__nav {
+  position: absolute;
+  left: calc(var(--u) * 576);
+  top: calc(var(--u) * 426);
+  display: flex;
+  gap: calc(var(--u) * 31);
+}
+
+.coaches__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--u) * 50);
+  height: calc(var(--u) * 50);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-text-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.coaches__arrow:not(:disabled):hover {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.coaches__arrow svg {
+  width: 50%;
+  height: 50%;
+}
+
+.coaches__arrow:disabled {
+  background: var(--color-muted);
+  cursor: default;
+}
+
+.coaches__thumb {
+  left: calc(var(--u) * 1221);
+  top: calc(var(--u) * 2);
+  width: calc(var(--u) * 180);
+  height: calc(var(--u) * 188);
+  object-position: 50% 20%;
+}
+
+.coaches__count {
+  position: absolute;
+  left: calc(var(--u) * 1221);
+  top: calc(var(--u) * 214);
+  width: calc(var(--u) * 180);
+  font-size: calc(var(--u) * 20);
+  line-height: calc(var(--u) * 27);
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.coaches__cur {
+  color: var(--color-text);
+}
+
+.coaches__motto {
+  position: absolute;
+  right: calc(var(--u) * 39);
+  top: calc(var(--u) * 382);
+  font-size: calc(var(--u) * 36);
+  font-weight: var(--fw-light);
+  line-height: calc(var(--u) * 54);
+  text-align: right;
+}
+
+.coaches__motto-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.coaches__toggle {
+  display: inline-block;
+  width: calc(var(--u) * 80);
+  height: auto;
+  margin-block: calc(var(--u) * -8);
+  position: relative;
+  top: calc(var(--u) * 5);
+  margin-right: calc(var(--u) * 4);
+  vertical-align: middle;
+}
+
+/* ≤1023: вертикальна адаптація (макета немає, адаптую стандартно) */
+@media (max-width: 1023px) {
+  .coaches { --u: 1px; padding: 64px var(--gutter); }
+  .coaches__title { margin-left: 0; font-size: 32px; line-height: 1.2; }
+  .coaches__stage { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 24px; height: auto; margin-top: 32px; }
+  .coaches__photo, .coaches__thumb, .coaches__quote-mark, .coaches__text,
+  .coaches__nav, .coaches__count, .coaches__motto { position: static; width: auto; }
+  .coaches__photo { grid-column: 1 / -1; width: 100%; height: auto; aspect-ratio: 455 / 475; border-radius: 24px; }
+  .coaches__thumb { width: 120px; height: 126px; border-radius: 20px; }
+  .coaches__quote-mark { grid-column: 1 / -1; width: 32px; margin-bottom: -12px; }
+  .coaches__text { grid-column: 1 / -1; }
+  .coaches__quote { font-size: 20px; line-height: 1.6; }
+  .coaches__name { margin-top: 12px; font-size: 16px; }
+  .coaches__nav { gap: 16px; }
+  .coaches__arrow { width: 44px; height: 44px; }
+  .coaches__count { font-size: 18px; text-align: left; }
+  .coaches__motto { grid-column: 1 / -1; font-size: 28px; line-height: 1.5; text-align: left; }
+  .coaches__toggle { width: 64px; margin-block: -6px; }
+}

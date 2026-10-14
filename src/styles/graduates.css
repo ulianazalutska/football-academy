@@ -1,0 +1,97 @@
+/* 10 Випускниці: значення від користувачки (заголовок 40 px (було 48, потім 36), відступ 200 px; логотипи спершу 143 px, потім просила менші: 100 px, моє рішення).
+   Решта (відступи секції, швидкість) ≈. Одиниця «u» = 1/1440 ширини контейнера .page-wrap. */
+.graduates {
+  --u: calc(100cqw / 1440);
+  --graduates-step: 7s; /* час проходу одного кроку (343 px), вибір Claude; було 4s, користувачка попросила повільніше */
+  padding-top: calc(var(--u) * 14);
+  padding-bottom: calc(var(--u) * 136);
+}
+
+.graduates__title {
+  font-size: calc(var(--u) * 40);
+  font-weight: var(--fw-regular);
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.graduates__accent {
+  color: var(--color-primary);
+}
+
+.graduates__marquee {
+  position: relative;
+  /* на всю ширину екрана, навіть коли .page-wrap вужчий за вікно */
+  width: var(--vw, 100vw); /* ширина вікна без смуги прокрутки (задає graduates.ts) */
+  margin-top: calc(var(--u) * 100);
+  margin-left: calc(50% - var(--vw, 100vw) / 2);
+  overflow: hidden;
+}
+
+/* Прогресивне розмиття по боках (як ProgressiveBlur із прикладу): 8 шарів один на одному.
+   Шар --i розмиває на i px і видно лише в своїй смузі (градієнтна маска), тому розмиття
+   плавно росте від 0 біля центру до 7 px біля краю екрана. Ширина смуги 200 px (≈). */
+.graduates__blur {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: max(calc(var(--u) * 200), 10vw);
+  pointer-events: none;
+}
+
+.graduates__blur--left { left: 0; --angle: 270deg; }
+.graduates__blur--right { right: 0; --angle: 90deg; }
+
+.graduates__blur span {
+  --seg: calc(100% / 9);
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: linear-gradient(var(--angle),
+    transparent calc(var(--i) * var(--seg)),
+    #000 calc((var(--i) + 1) * var(--seg)),
+    #000 calc((var(--i) + 2) * var(--seg)),
+    transparent calc((var(--i) + 3) * var(--seg)));
+  mask-image: linear-gradient(var(--angle),
+    transparent calc(var(--i) * var(--seg)),
+    #000 calc((var(--i) + 1) * var(--seg)),
+    #000 calc((var(--i) + 2) * var(--seg)),
+    transparent calc((var(--i) + 3) * var(--seg)));
+  -webkit-backdrop-filter: blur(calc(var(--i) * 1px));
+  backdrop-filter: blur(calc(var(--i) * 1px));
+}
+
+.graduates__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: graduates-scroll calc(var(--graduates-step) * 10) linear infinite;
+}
+
+.graduates__item {
+  flex: none;
+  width: calc(var(--u) * 100);
+  margin-right: calc(var(--u) * 200);
+}
+
+.graduates__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* чотири однакові набори по 5 логотипів: половина треку (2 набори, ≈3000 px) ширша за екран, тому справа не буває порожнечі; зсув на половину дає безшовний цикл */
+@keyframes graduates-scroll {
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 1023px) {
+  .graduates { --u: 1px; padding: 64px 0; }
+  .graduates__title { padding-inline: var(--gutter); font-size: 32px; }
+  .graduates__marquee { margin-top: 40px; }
+  .graduates__item { width: 80px; margin-right: 80px; }
+}
