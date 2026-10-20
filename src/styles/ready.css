@@ -1,0 +1,45 @@
+/* 16 «ГОТОВА?» + логотип. Розміри ≈ зі скриншота 1440, не підтверджені. */
+.ready {
+  background: var(--color-bg);
+  padding: 140px var(--gutter, 24px);
+}
+
+.ready__inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.ready__title {
+  margin: 0;
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 96px;
+  line-height: 1;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.ready__logo {
+  display: block;
+  width: 755px;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1023px) {
+  .ready { padding: 96px var(--gutter, 24px); }
+  .ready__title { font-size: 72px; }
+}
+
+@media (max-width: 767px) {
+  .ready { padding: 72px var(--gutter, 24px); }
+  .ready__title { font-size: 48px; }
+}
+
+@media (max-width: 479px) {
+  .ready__title { font-size: 40px; }
+}

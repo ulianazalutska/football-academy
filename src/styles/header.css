@@ -52,10 +52,6 @@ body {
   color: var(--color-accent);
 }
 
-.header__link.is-active {
-  color: var(--color-primary);
-}
-
 /* Button primary (components.md): зелена «таблетка», hover рожевий */
 .btn {
   display: inline-flex;

@@ -3,8 +3,8 @@
    Розміри в «u» = 1/1440 ширини контейнера (на 1440 px 1u = 1px). Радіус карток 30px (needed.md). */
 .programs {
   --u: calc(100cqw / 1440);
-  padding-top: calc(var(--u) * 288);
-  padding-bottom: calc(var(--u) * 100);
+  padding-top: calc(var(--u) * 200);
+  padding-bottom: 0;
 }
 
 .programs__head {

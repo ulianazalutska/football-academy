@@ -3,8 +3,8 @@
    Розміри виміряно по пікселях скриншота макета (≈). Одиниця «u» = 1/1440 ширини контейнера. */
 .method {
   --u: calc(100cqw / 1440);
-  padding-top: calc(var(--u) * 26);
-  padding-bottom: calc(var(--u) * 136);
+  padding-top: calc(var(--u) * 244);
+  padding-bottom: 0;
 }
 
 .method__inner {

@@ -2,8 +2,8 @@
    Одиниця «u» = 1/1440 ширини контейнера .page-wrap. Чекаю підтвердження значень із Figma. */
 .coaches {
   --u: calc(100cqw / 1440);
-  padding-top: calc(var(--u) * 100);
-  padding-bottom: calc(var(--u) * 136);
+  padding-top: calc(var(--u) * 200);
+  padding-bottom: 0;
 }
 
 .coaches__title {

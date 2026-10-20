@@ -22,23 +22,28 @@ export function initAnimations(): void {
   initGraduatesReveal();
   initStepsReveal();
   initSafetyReveal();
+  initCampsReveal();
+  initFaqReveal();
+  initContactReveal();
+  initReadyReveal();
+  initFooterReveal();
   window.addEventListener('load', () => ScrollTrigger.refresh());
 }
 
-/* 03 Банер: лінії розтягуються зліва, рядки по черзі виїжджають із маски знизу з легким нахилом */
+/* 03 Банер: увесь заголовок (рядки й лінії) м'яко проявляється одним блоком, лінії без окремої анімації */
 function initBannerAnimation(): void {
   const title = document.querySelector<HTMLElement>('.banner__title');
   if (!title) return;
-  const texts = title.querySelectorAll('.banner__text');
-  const rules = title.querySelectorAll('.banner__rule');
 
-  gsap.set(texts, { yPercent: 115, skewY: 6, opacity: 0 });
-  gsap.set(rules, { scaleX: 0 });
-
-  gsap
-    .timeline({ scrollTrigger: { trigger: title, start: 'top 80%', once: true } })
-    .to(rules, { scaleX: 1, duration: 1.1, ease: 'expo.out', stagger: 0.25 }, 0)
-    .to(texts, { yPercent: 0, skewY: 0, opacity: 1, duration: 1.2, ease: 'expo.out', stagger: 0.18 }, 0.1);
+  gsap.set(title, { y: 24, opacity: 0 });
+  gsap.to(title, {
+    y: 0,
+    opacity: 1,
+    duration: 1.2,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: title, start: 'top 80%', once: true },
+    onComplete: () => gsap.set(title, { clearProps: 'transform,opacity' }),
+  });
 }
 
 /* 04 Фото: безкінечний цикл ч/б архівне → кольорове фото тренерки → ч/б.
@@ -94,33 +99,33 @@ function initStatsCounter(): void {
   });
 }
 
-/* 04 Поява секції: заголовок виїжджає з легким нахилом, абзац проявляється з розмиття,
-   м'яч-тумблер стоїть в абзаці й з'являється разом із текстом, статистика піднімається по черзі, фото відкривається знизу з м'яким зумом.
-   Час і порядок: моє припущення, чекаю уточнень. */
+/* 04 Поява секції: усе м'яко проявляється з легким підйомом (фото, заголовок, абзац, блок статистики);
+   м'яч-тумблер стоїть в абзаці й з'являється разом із текстом. */
 function initAboutReveal(): void {
   const root = document.querySelector<HTMLElement>('.about__inner');
   if (!root) return;
   const q = (s: string) => root.querySelectorAll(s);
   const photo = root.querySelector('.about__photo');
 
-  gsap.set(q('.about__title'), { y: 50, skewY: 4, opacity: 0 });
-  gsap.set(q('.about__text'), { y: 30, opacity: 0, filter: 'blur(10px)' });
-  gsap.set(q('.about__stat'), { y: 40, opacity: 0 });
-  gsap.set(photo, { clipPath: 'inset(100% 0% 0% 0% round 30px)' });
-  gsap.set(q('.about__img'), { scale: 1.25 });
+  gsap.set(q('.about__title'), { y: 24, opacity: 0 });
+  gsap.set(q('.about__text'), { y: 24, opacity: 0 });
+  gsap.set(q('.about__stats'), { y: 30, opacity: 0 });
+  gsap.set(photo, { y: 40, opacity: 0 });
 
   gsap
-    .timeline({ defaults: { ease: 'expo.out' }, scrollTrigger: { trigger: root, start: 'top 75%', once: true } })
-    .to(photo, { clipPath: 'inset(0% 0% 0% 0% round 30px)', duration: 1.6 }, 0)
-    .to(q('.about__img'), { scale: 1, duration: 2.2 }, 0)
-    .to(q('.about__title'), { y: 0, skewY: 0, opacity: 1, duration: 1.2 }, 0.15)
-    .to(q('.about__text'), { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.3 }, 0.35)
-    .to(q('.about__stat'), { y: 0, opacity: 1, duration: 1.1, stagger: 0.14 }, 0.6);
+    .timeline({
+      defaults: { ease: 'power2.out' },
+      scrollTrigger: { trigger: root, start: 'top 75%', once: true },
+      onComplete: () => gsap.set([...q('.about__title'), ...q('.about__text'), ...q('.about__stats'), photo], { clearProps: 'transform,opacity' }),
+    })
+    .to(photo, { y: 0, opacity: 1, duration: 1.3 }, 0)
+    .to(q('.about__title'), { y: 0, opacity: 1, duration: 1.1 }, 0.15)
+    .to(q('.about__text'), { y: 0, opacity: 1, duration: 1.2 }, 0.35)
+    .to(q('.about__stats'), { y: 0, opacity: 1, duration: 1.2 }, 0.6);
 }
 
-/* 05 Поява секції: заголовок виїжджає з нахилом, підзаголовок і вік-фільтр проявляються,
-   картки плавно проявляються й піднімаються по черзі.
-   Час і порядок: моє припущення, чекаю уточнень. */
+/* 05 Поява секції: заголовок, підзаголовок і вік-фільтр м'яко проявляються,
+   картки плавно проявляються й піднімаються по черзі. */
 function initProgramsReveal(): void {
   const root = document.querySelector<HTMLElement>('.programs');
   const grid = root?.querySelector<HTMLElement>('.programs__grid');
@@ -128,15 +133,15 @@ function initProgramsReveal(): void {
   const cards = grid.querySelectorAll<HTMLElement>('.program');
   const head = root.querySelector('.programs__head');
 
-  gsap.set(root.querySelector('.programs__title'), { y: 50, skewY: 4, opacity: 0 });
-  gsap.set(root.querySelector('.programs__sub'), { y: 24, opacity: 0, filter: 'blur(10px)' });
+  gsap.set(root.querySelector('.programs__title'), { y: 24, opacity: 0 });
+  gsap.set(root.querySelector('.programs__sub'), { y: 24, opacity: 0 });
   gsap.set(root.querySelector('.age-filter'), { y: 24, opacity: 0 });
   gsap.set(root.querySelectorAll('.programs__notes p'), { y: 20, opacity: 0 });
 
   gsap
-    .timeline({ defaults: { ease: 'expo.out' }, scrollTrigger: { trigger: head, start: 'top 85%', once: true } })
-    .to(root.querySelector('.programs__title'), { y: 0, skewY: 0, opacity: 1, duration: 1.2 }, 0)
-    .to(root.querySelector('.programs__sub'), { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.3 }, 0.2)
+    .timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: head, start: 'top 85%', once: true } })
+    .to(root.querySelector('.programs__title'), { y: 0, opacity: 1, duration: 1.1, clearProps: 'transform,opacity' }, 0)
+    .to(root.querySelector('.programs__sub'), { y: 0, opacity: 1, duration: 1.2, clearProps: 'transform,opacity' }, 0.2)
     .to(root.querySelector('.age-filter'), { y: 0, opacity: 1, duration: 1, onComplete: () => { gsap.set('.age-filter', { clearProps: 'transform,opacity' }); } }, 0.4);
 
   /* картки: плавно проявляються й трохи піднімаються по черзі (без зуму й відкриття).
@@ -145,7 +150,7 @@ function initProgramsReveal(): void {
 
   gsap
     .timeline({
-      defaults: { ease: 'power3.out' },
+      defaults: { ease: 'power2.out' },
       scrollTrigger: { trigger: grid, start: 'top 85%', once: true },
       onComplete: () => {
         gsap.set(cards, { clearProps: 'transform,opacity,transition' });
@@ -155,36 +160,32 @@ function initProgramsReveal(): void {
     .to(root.querySelectorAll('.programs__notes p'), { y: 0, opacity: 1, duration: 1, stagger: 0.12 }, 0.9);
 }
 
-/* 06 Поява секції: фото відкривається зліва з м'яким зумом, заголовок виїжджає рядками,
-   м'яч-тумблер з'являється разом з підзаголовком, шість напрямів піднімаються по черзі.
-   Час і порядок: моє припущення, чекаю уточнень. */
+/* 06 Поява секції: фото і заголовок м'яко проявляються, м'яч-тумблер з'являється разом з підзаголовком,
+   список із шести напрямів проявляється одним блоком. */
 function initMethodReveal(): void {
   const root = document.querySelector<HTMLElement>('.method__inner');
   if (!root) return;
   const photo = root.querySelector('.method__photo');
-  const img = root.querySelector('.method__img');
   const lines = root.querySelectorAll('.method__line');
-  const items = root.querySelectorAll('.method__item');
+  const items = root.querySelectorAll('.method__list');
 
-  gsap.set(photo, { clipPath: 'inset(0% 100% 0% 0% round 24px)' });
-  gsap.set(img, { scale: 1.25 });
-  gsap.set(lines, { y: 50, skewY: 4, opacity: 0 });
-  gsap.set(root.querySelector('.method__sub'), { y: 24, opacity: 0, filter: 'blur(10px)' });
-  gsap.set(items, { y: 40, opacity: 0 });
+  gsap.set(photo, { y: 40, opacity: 0 });
+  gsap.set(lines, { y: 24, opacity: 0 });
+  gsap.set(root.querySelector('.method__sub'), { y: 24, opacity: 0 });
+  gsap.set(items, { y: 30, opacity: 0 });
 
   gsap
     .timeline({
-      defaults: { ease: 'expo.out' },
+      defaults: { ease: 'power2.out' },
       scrollTrigger: { trigger: root, start: 'top 75%', once: true },
       onComplete: () => {
-        gsap.set([img, items], { clearProps: 'transform,opacity' });
+        gsap.set([photo, ...lines, root.querySelector('.method__sub'), ...items], { clearProps: 'transform,opacity' });
       },
     })
-    .to(photo, { clipPath: 'inset(0% 0% 0% 0% round 24px)', duration: 1.6 }, 0)
-    .to(img, { scale: 1, duration: 2.2 }, 0)
-    .to(lines, { y: 0, skewY: 0, opacity: 1, duration: 1.2, stagger: 0.15 }, 0.25)
-    .to(root.querySelector('.method__sub'), { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.3 }, 0.6)
-    .to(items, { y: 0, opacity: 1, duration: 1.1, stagger: 0.12 }, 0.4);
+    .to(photo, { y: 0, opacity: 1, duration: 1.3 }, 0)
+    .to(lines, { y: 0, opacity: 1, duration: 1.1, stagger: 0.15 }, 0.25)
+    .to(root.querySelector('.method__sub'), { y: 0, opacity: 1, duration: 1.2 }, 0.6)
+    .to(items, { y: 0, opacity: 1, duration: 1.2 }, 0.4);
 }
 
 /* 07 Відео: при скролі росте на весь екран (бічні відступи й радіус зникають, висота = екран).
@@ -214,36 +215,28 @@ function initVideoExpand(): void {
   });
 }
 
-/* 08 Результати: заголовок виїжджає по рядках, картки по черзі виринають знизу з легким масштабом;
-   усередині число й підпис з'являються з невеликою затримкою. Один раз, коли заголовок у екрані:
-   моє припущення, чекаю уточнень. */
+/* 08 Результати: м'яка поява: заголовок по рядках, картки по черзі піднімаються знизу з фейдом
+   (число й підпис разом із карткою). Один раз, коли секція в екрані. */
 function initResultsReveal(): void {
   const root = document.querySelector<HTMLElement>('.results');
   if (!root) return;
   const lines = root.querySelectorAll('.results__line');
   const cards = root.querySelectorAll<HTMLElement>('.results__card');
-  const nums = root.querySelectorAll('.results__num');
-  const labels = root.querySelectorAll('.results__label');
 
-  gsap.set(lines, { y: 50, skewY: 4, opacity: 0 });
-  gsap.set(cards, { y: 90, scale: 0.92, opacity: 0, transformOrigin: '50% 100%' });
-  gsap.set(nums, { y: 28, opacity: 0 });
-  gsap.set(labels, { y: 20, opacity: 0 });
+  gsap.set(lines, { y: 24, opacity: 0 });
+  gsap.set(cards, { y: 40, opacity: 0 });
 
   const tl = gsap.timeline({
-    defaults: { ease: 'expo.out' },
+    defaults: { ease: 'power2.out' },
     scrollTrigger: { trigger: root, start: 'top 65%', once: true },
-    onComplete: () => gsap.set([lines, cards, nums, labels], { clearProps: 'transform,opacity' }),
+    onComplete: () => gsap.set([...lines, ...cards], { clearProps: 'transform,opacity' }),
   });
-  tl.to(lines, { y: 0, skewY: 0, opacity: 1, duration: 1.3, stagger: 0.15 }, 0)
-    .to(cards, { y: 0, scale: 1, opacity: 1, duration: 1.5, stagger: { each: 0.14, from: 'start' } }, 0.3)
-    .to(nums, { y: 0, opacity: 1, duration: 1.1, stagger: 0.14 }, 0.65)
-    .to(labels, { y: 0, opacity: 1, duration: 1.1, stagger: 0.14 }, 0.8);
+  tl.to(lines, { y: 0, opacity: 1, duration: 1.1, stagger: 0.15 }, 0)
+    .to(cards, { y: 0, opacity: 1, duration: 1.2, stagger: 0.12 }, 0.35);
 }
 
-/* 09 Тренерки: поява при скролі (один раз). Заголовок виїжджає, фото відкривається знизу з масштабом,
-   лапка вистрибує, цитата проявляється з розмиттям, стрілки плавно проявляються, мініатюра в'їжджає справа,
-   напис по рядках, м'яч-тумблер з'являється разом із текстом свого рядка. Тривалості й ефекти: моє припущення, чекаю уточнень. */
+/* 09 Тренерки: м'яка поява при скролі (один раз). Усе проявляється фейдом з легким підйомом, лапка і стрілки лише фейдом,
+   напис по рядках, м'яч-тумблер з'являється разом із текстом свого рядка. */
 function initCoachesReveal(): void {
   const root = document.querySelector<HTMLElement>('.coaches');
   if (!root) return;
@@ -259,30 +252,30 @@ function initCoachesReveal(): void {
   const lines = q('.coaches__motto-line');
   const all = [...title, ...photo, ...mark, ...text, ...name, ...arrows, ...thumb, ...count, ...lines];
 
-  gsap.set(title, { y: 50, skewY: 4, opacity: 0 });
-  gsap.set(photo, { clipPath: 'inset(100% 0% 0% 0% round 30px)', scale: 1.08, transformOrigin: '50% 100%' });
-  gsap.set(mark, { scale: 0, rotate: -25, opacity: 0, transformOrigin: '50% 50%' });
-  gsap.set(text, { y: 36, opacity: 0, filter: 'blur(10px)' });
+  gsap.set(title, { y: 24, opacity: 0 });
+  gsap.set(photo, { y: 30, opacity: 0 });
+  gsap.set(mark, { opacity: 0 });
+  gsap.set(text, { y: 20, opacity: 0 });
   gsap.set(name, { y: 24, opacity: 0 });
   gsap.set(arrows, { opacity: 0 });
-  gsap.set(thumb, { clipPath: 'inset(0% 0% 0% 100% round 30px)', x: 50, opacity: 0 });
+  gsap.set(thumb, { y: 30, opacity: 0 });
   gsap.set(count, { y: 16, opacity: 0 });
-  gsap.set(lines, { y: 40, skewY: 3, opacity: 0 });
+  gsap.set(lines, { y: 24, opacity: 0 });
 
   const tl = gsap.timeline({
-    defaults: { ease: 'expo.out' },
+    defaults: { ease: 'power2.out' },
     scrollTrigger: { trigger: root, start: 'top 65%', once: true },
-    onComplete: () => gsap.set(all, { clearProps: 'transform,opacity,clipPath,filter' }),
+    onComplete: () => gsap.set(all, { clearProps: 'transform,opacity' }),
   });
-  tl.to(title, { y: 0, skewY: 0, opacity: 1, duration: 1.3 }, 0)
-    .to(photo, { clipPath: 'inset(0% 0% 0% 0% round 30px)', scale: 1, duration: 1.6 }, 0.2)
-    .to(mark, { scale: 1, rotate: 0, opacity: 1, duration: 1.1, ease: 'back.out(2.2)' }, 0.7)
-    .to(text, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.3 }, 0.85)
+  tl.to(title, { y: 0, opacity: 1, duration: 1.1 }, 0)
+    .to(photo, { y: 0, opacity: 1, duration: 1.3 }, 0.2)
+    .to(mark, { opacity: 1, duration: 1.1 }, 0.7)
+    .to(text, { y: 0, opacity: 1, duration: 1.2 }, 0.85)
     .to(name, { y: 0, opacity: 1, duration: 1.1 }, 1.1)
-    .to(arrows, { opacity: 1, duration: 1.2, ease: 'power2.out', stagger: 0.15 }, 1.3)
-    .to(thumb, { clipPath: 'inset(0% 0% 0% 0% round 30px)', x: 0, opacity: 1, duration: 1.4 }, 0.9)
+    .to(arrows, { opacity: 1, duration: 1.2, stagger: 0.15 }, 1.3)
+    .to(thumb, { y: 0, opacity: 1, duration: 1.3 }, 0.9)
     .to(count, { y: 0, opacity: 1, duration: 1 }, 1.4)
-    .to(lines, { y: 0, skewY: 0, opacity: 1, duration: 1.3, stagger: 0.15 }, 1.0);
+    .to(lines, { y: 0, opacity: 1, duration: 1.2, stagger: 0.15 }, 1.0);
 }
 
 /* 11 Три кроки: зелена частина лінії росте зі скролом, рожевий вузол їде по ній (варіант A, вибір користувачки) */
@@ -300,149 +293,204 @@ function initStepsTimeline(): void {
   });
 }
 
-/* 10 Випускниці: заголовок з'являється по словах (кожне виїжджає з-під маски зі скосом),
-   стрічка логотипів проявляється з розмиттям і легким масштабом. Один раз. Час і ефекти: моє припущення, чекаю уточнень. */
+/* 10 Випускниці: заголовок м'яко проявляється з легким підйомом. Стрічка логотипів без анімації появи. Один раз. */
 function initGraduatesReveal(): void {
   const root = document.querySelector<HTMLElement>('.graduates');
   const title = root?.querySelector<HTMLElement>('.graduates__title');
-  const marquee = root?.querySelector<HTMLElement>('.graduates__marquee');
-  if (!root || !title || !marquee) return;
+  if (!root || !title) return;
 
-  /* кожне слово (і всередині акцентного span) загортаємо в маску */
-  const inners: HTMLElement[] = [];
-  const split = (node: Node): void => {
-    Array.from(node.childNodes).forEach((child) => {
-      if (child.nodeType === Node.TEXT_NODE) {
-        const frag = document.createDocumentFragment();
-        (child.textContent ?? '').split(/(\s+)/).forEach((part) => {
-          if (!part) return;
-          if (/^\s+$/.test(part)) {
-            frag.append(' ');
-            return;
-          }
-          const mask = document.createElement('span');
-          mask.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.12em;margin-bottom:-0.12em';
-          const inner = document.createElement('span');
-          inner.style.display = 'inline-block';
-          inner.textContent = part;
-          mask.append(inner);
-          frag.append(mask);
-          inners.push(inner);
-        });
-        child.replaceWith(frag);
-      } else if (child.nodeType === Node.ELEMENT_NODE) {
-        split(child);
-      }
-    });
-  };
-  title.setAttribute('aria-label', (title.textContent ?? '').replace(/\s+/g, ' ').trim());
-  split(title);
-
-  gsap.set(inners, { yPercent: 120, skewY: 8, opacity: 0, transformOrigin: '0% 100%' });
-  gsap.set(marquee, { opacity: 0, y: 40, scale: 0.96, filter: 'blur(14px)' });
-
-  gsap
-    .timeline({
-      defaults: { ease: 'expo.out' },
-      scrollTrigger: { trigger: root, start: 'top 70%', once: true },
-      onComplete: () => gsap.set(marquee, { clearProps: 'transform,opacity,filter' }),
-    })
-    .to(inners, { yPercent: 0, skewY: 0, opacity: 1, duration: 1.4, stagger: 0.12 }, 0)
-    .to(marquee, { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 1.8 }, 0.45);
+  gsap.set(title, { y: 24, opacity: 0 });
+  gsap.to(title, {
+    y: 0,
+    opacity: 1,
+    duration: 1.1,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: root, start: 'top 70%', once: true },
+    onComplete: () => gsap.set(title, { clearProps: 'transform,opacity' }),
+  });
 }
 
-/* 11 Три кроки: заголовок виїжджає по рядках; кожен крок окремо при скролі до нього: фото відкривається з боку, де воно стоїть,
-   з розмиттям і наближенням, велике число піднімається, текст проявляється з розмиттям; кнопка вистрибує. Один раз.
-   Час і ефекти: моє припущення, чекаю уточнень. */
+/* 11 Три кроки: заголовок по рядках; кожен крок окремо при скролі до його фото: фото і текстовий блок (число + опис)
+   м'яко проявляються з підйомом; кнопка так само. Один раз. */
 function initStepsReveal(): void {
   const root = document.querySelector<HTMLElement>('.steps');
   if (!root) return;
   const lines = root.querySelectorAll('.steps__line');
   const cta = root.querySelector<HTMLElement>('.steps__cta');
   const steps = root.querySelectorAll<HTMLElement>('.step');
-  const r = 'round 24px';
 
-  gsap.set(lines, { y: 50, skewY: 4, opacity: 0 });
+  gsap.set(lines, { y: 24, opacity: 0 });
   gsap
-    .timeline({ defaults: { ease: 'expo.out' }, scrollTrigger: { trigger: root.querySelector('.steps__title'), start: 'top 80%', once: true } })
-    .to(lines, { y: 0, skewY: 0, opacity: 1, duration: 1.3, stagger: 0.15 });
+    .timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: root.querySelector('.steps__title'), start: 'top 80%', once: true } })
+    .to(lines, { y: 0, opacity: 1, duration: 1.1, stagger: 0.15, clearProps: 'transform,opacity' });
 
   steps.forEach((step) => {
     const photo = step.querySelector<HTMLElement>('.step__photo');
-    const num = step.querySelector<HTMLElement>('.step__num');
-    const desc = step.querySelector<HTMLElement>('.step__desc');
-    if (!photo || !num || !desc) return;
-    /* фото кроку 2 стоїть зліва: відкривається зліва направо; кроки 1 і 3: справа наліво */
-    const fromLeft = step.classList.contains('step--2');
-    gsap.set(photo, {
-      clipPath: fromLeft ? `inset(0% 100% 0% 0% ${r})` : `inset(0% 0% 0% 100% ${r})`,
-      filter: 'blur(14px)',
-      scale: 1.08,
-      transformOrigin: fromLeft ? '0% 50%' : '100% 50%',
-    });
-    gsap.set(num, { y: 40, opacity: 0 });
-    gsap.set(desc, { y: 28, opacity: 0, filter: 'blur(10px)' });
+    const text = step.querySelector<HTMLElement>('.step__text');
+    if (!photo || !text) return;
+    gsap.set(photo, { y: 40, opacity: 0 });
+    gsap.set(text, { y: 30, opacity: 0 });
 
+    /* .step не має висоти (фото й текст абсолютні), тож тригер стоїть на самому фото */
     gsap
       .timeline({
-        defaults: { ease: 'expo.out' },
-        scrollTrigger: { trigger: step, start: 'top 80%', once: true },
-        onComplete: () => gsap.set([photo, num, desc], { clearProps: 'clipPath,transform,opacity,filter' }),
+        defaults: { ease: 'power2.out' },
+        scrollTrigger: { trigger: photo, start: 'top 85%', once: true },
+        onComplete: () => gsap.set([photo, text], { clearProps: 'transform,opacity' }),
       })
-      .to(photo, { clipPath: `inset(0% 0% 0% 0% ${r})`, filter: 'blur(0px)', scale: 1, duration: 1.7 }, 0)
-      .to(num, { y: 0, opacity: 1, duration: 1.3 }, 0.2)
-      .to(desc, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.3 }, 0.4);
+      .to(photo, { y: 0, opacity: 1, duration: 1.3 }, 0)
+      .to(text, { y: 0, opacity: 1, duration: 1.2 }, 0.2);
   });
 
   if (cta) {
-    gsap.set(cta, { opacity: 0, y: 30, scale: 0.9 });
+    gsap.set(cta, { opacity: 0, y: 24 });
     gsap.to(cta, {
       opacity: 1,
       y: 0,
-      scale: 1,
-      duration: 1.3,
-      ease: 'expo.out',
+      duration: 1.1,
+      ease: 'power2.out',
       scrollTrigger: { trigger: cta, start: 'top 92%', once: true },
       onComplete: () => gsap.set(cta, { clearProps: 'transform,opacity' }),
     });
   }
 }
 
-/* 12 Безпека: заголовок виїжджає по рядках; кожен рядок-аркуш при скролі до нього: лінія виростає зліва направо,
-   назва піднімається по рядках, м'яч-тумблер вистрибує з обертом, опис проявляється з розмиттям по рядках,
-   фото відкриваються знизу вгору по черзі. Один раз. Час і ефекти: моє припущення, чекаю уточнень. */
+/* 12 Безпека: заголовок по рядках; кожен рядок-аркуш при скролі до нього: лінія виростає зліва направо,
+   увесь рядок (назва, м'яч-тумблер, опис, фото) м'яко проявляється одним блоком. Один раз. */
 function initSafetyReveal(): void {
   const root = document.querySelector<HTMLElement>('.safety');
   if (!root) return;
   const lines = root.querySelectorAll('.safety__line');
 
-  gsap.set(lines, { y: 50, skewY: 4, opacity: 0 });
+  gsap.set(lines, { y: 24, opacity: 0 });
   gsap
-    .timeline({ defaults: { ease: 'expo.out' }, scrollTrigger: { trigger: root.querySelector('.safety__title'), start: 'top 85%', once: true } })
-    .to(lines, { y: 0, skewY: 0, opacity: 1, duration: 1.3, stagger: 0.15 });
+    .timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: root.querySelector('.safety__title'), start: 'top 85%', once: true } })
+    .to(lines, { y: 0, opacity: 1, duration: 1.1, stagger: 0.15, clearProps: 'transform,opacity' });
 
   root.querySelectorAll<HTMLElement>('.safety__row').forEach((row) => {
-    const names = row.querySelectorAll('.safety__name-line');
-    const toggle = row.querySelector('.safety__toggle');
-    const desc = row.querySelectorAll('.safety__desc-line');
-    const photos = row.querySelectorAll('.safety__photos img');
-
-    gsap.set(row, { '--line': 0 });
-    gsap.set(names, { y: 40, skewY: 4, opacity: 0 });
-    gsap.set(toggle, { scale: 0, rotate: -25, opacity: 0, transformOrigin: '50% 50%' });
-    gsap.set(desc, { y: 18, opacity: 0, filter: 'blur(8px)' });
-    gsap.set(photos, { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.15, transformOrigin: '50% 100%' });
+    gsap.set(row, { '--line': 0, y: 30, opacity: 0 });
 
     gsap
       .timeline({
-        defaults: { ease: 'expo.out' },
+        defaults: { ease: 'power2.out' },
         scrollTrigger: { trigger: row, start: 'top 85%', once: true },
-        onComplete: () => gsap.set([names, toggle, desc, photos], { clearProps: 'clipPath,transform,opacity,filter' }),
+        onComplete: () => gsap.set(row, { clearProps: 'transform,opacity' }),
       })
-      .to(row, { '--line': 1, duration: 1.6 }, 0)
-      .to(names, { y: 0, skewY: 0, opacity: 1, duration: 1.2, stagger: 0.12 }, 0.15)
-      .to(toggle, { scale: 1, rotate: 0, opacity: 1, duration: 1.1, ease: 'back.out(1.8)' }, 0.55)
-      .to(desc, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.2, stagger: 0.1 }, 0.4)
-      .to(photos, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.5, stagger: 0.15 }, 0.3);
+      .to(row, { '--line': 1, duration: 1.4 }, 0)
+      .to(row, { y: 0, opacity: 1, duration: 1.2 }, 0);
   });
+}
+
+/* 15 Форма: проста поява, картка плавно проявляється один раз.
+   Лише прозорість (transform картки тримає центрування). Тривалість 1 с: моє припущення, чекаю уточнень. */
+function initContactReveal(): void {
+  const root = document.querySelector<HTMLElement>('.contact');
+  const card = root?.querySelector<HTMLElement>('.contact__card');
+  if (!root || !card) return;
+
+  gsap.set(card, { opacity: 0 });
+  gsap.to(card, {
+    opacity: 1,
+    duration: 1,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: root, start: 'top 60%', once: true },
+    onComplete: () => gsap.set(card, { clearProps: 'opacity' }),
+  });
+}
+
+/* 13 Кемпи: заголовок з підзаголовком проявляються разом; кожна картка проявляється цілим блоком (фейд + підйом).
+   Картки по черзі (на десктопі зі зсувом, на вузьких кожна по своєму скролу). */
+function initCampsReveal(): void {
+  const root = document.querySelector<HTMLElement>('.camps');
+  const list = root?.querySelector<HTMLElement>('.camps__list');
+  const cards = root?.querySelectorAll<HTMLElement>('.camp');
+  if (!root || !list || !cards?.length) return;
+  const head = [root.querySelector('.camps__title'), ...root.querySelectorAll('.camps__sub-line')];
+
+  gsap.set(head, { y: 24, opacity: 0 });
+  gsap.to(head, {
+    y: 0,
+    opacity: 1,
+    duration: 1.1,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: root.querySelector('.camps__head'), start: 'top 85%', once: true },
+    onComplete: () => gsap.set(head, { clearProps: 'transform,opacity' }),
+  });
+
+  const wide = window.matchMedia('(min-width: 1024px)').matches;
+  cards.forEach((card, i) => {
+    gsap.set(card, { y: 40, opacity: 0, transition: 'none' });
+    gsap.to(card, {
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: 'power2.out',
+      delay: wide ? i * 0.18 : 0,
+      scrollTrigger: { trigger: card, start: 'top 85%', once: true },
+      onComplete: () => gsap.set(card, { clearProps: 'transform,opacity,transition' }),
+    });
+  });
+}
+
+/* 14 FAQ: заголовок і рядки питань по черзі м'яко проявляються з легким підйомом. Один раз. */
+function initFaqReveal(): void {
+  const root = document.querySelector<HTMLElement>('.faq');
+  const title = root?.querySelector<HTMLElement>('.faq__title');
+  const items = root?.querySelectorAll<HTMLElement>('.faq__item');
+  if (!root || !title || !items?.length) return;
+
+  gsap.set(title, { opacity: 0, y: 24 });
+  gsap.set(items, { opacity: 0, y: 24 });
+
+  gsap
+    .timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: title, start: 'top 85%', once: true } })
+    .to(title, { opacity: 1, y: 0, duration: 1.1, clearProps: 'transform,opacity' }, 0)
+    .to(items, { opacity: 1, y: 0, duration: 1.1, stagger: 0.1, clearProps: 'transform,opacity' }, 0.3);
+}
+
+/* 16 Готова?: усе стоїть на місці й лише проявляється з розмиття (за референсом у project/sections/16-ready/анімація):
+   спершу логотип «girls XI Academy» (разом), потім «ГОТОВА?». Один раз. */
+function initReadyReveal(): void {
+  const root = document.querySelector<HTMLElement>('.ready');
+  const title = root?.querySelector<HTMLElement>('.ready__title');
+  const logo = root?.querySelector<SVGSVGElement>('.ready__logo');
+  if (!root || !title || !logo) return;
+
+  gsap.set([logo, title], { opacity: 0, filter: 'blur(14px)' });
+
+  gsap
+    .timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: root, start: 'top 65%', once: true } })
+    .to(logo, { opacity: 1, filter: 'blur(0px)', duration: 1.4, clearProps: 'filter,opacity' }, 0)
+    .to(title, { opacity: 1, filter: 'blur(0px)', duration: 1.4, clearProps: 'filter,opacity' }, 0.6);
+}
+
+/* 17 Футер: м'який каскад. Слоган (друга половина на 0,15 с пізніше) → дівчинка → таблетки, години, іконки → колонки → лінія розтягується, потім нижній рядок.
+   Один раз, без різких рухів. Час і ефекти: мої, погоджено в чаті. */
+function initFooterReveal(): void {
+  const root = document.querySelector<HTMLElement>('.footer');
+  if (!root) return;
+  const q = <T extends HTMLElement>(s: string) => root.querySelectorAll<T>(s);
+  const slogans = q('.footer__slogan');
+  const girl = q('.footer__girl');
+  const small = q('.footer__pill, .footer__hours, .footer__social li');
+  const cols = q('.footer__col, .footer__address');
+  const bottomText = q('.footer__bottom p');
+  const bottom = root.querySelector<HTMLElement>('.footer__bottom');
+  if (!bottom) return;
+
+  gsap.set(slogans, { opacity: 0, y: 24 });
+  gsap.set(girl, { opacity: 0, y: 16 });
+  gsap.set(small, { opacity: 0, y: 12 });
+  gsap.set(cols, { opacity: 0 });
+  gsap.set(bottomText, { opacity: 0 });
+  gsap.set(bottom, { '--line': 0 });
+
+  gsap
+    .timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: root, start: 'top 85%', once: true } })
+    .to(slogans, { opacity: 1, y: 0, duration: 0.9, stagger: 0.15, clearProps: 'transform,opacity' }, 0)
+    .to(girl, { opacity: 1, y: 0, duration: 0.8, clearProps: 'transform,opacity' }, 0.3)
+    .to(small, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, clearProps: 'transform,opacity' }, 0.5)
+    .to(cols, { opacity: 1, duration: 0.8, stagger: 0.08, clearProps: 'opacity' }, 0.9)
+    .to(bottom, { '--line': 1, duration: 0.8, ease: 'power1.inOut' }, 1.1)
+    .to(bottomText, { opacity: 1, duration: 0.6, clearProps: 'opacity' }, 1.6);
 }

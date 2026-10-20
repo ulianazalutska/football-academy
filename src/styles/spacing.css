@@ -1,0 +1,45 @@
+/* Відступ між секціями: десктоп 200 px видимої відстані між блоками (задано в CSS кожної секції через padding-top, 
+   padding-bottom 0, значення виміряно в браузері з урахуванням внутрішнього зсуву вмісту), планшет 96, мобільний 72.
+   Банер (45 px з боків) і секція «Готова?» (140 / 96 / 72) мають власні відступи. Файл підключено останнім, щоб перебивати правила секцій. */
+@media (max-width: 1023px) {
+  .programs,
+  .method,
+  .video,
+  .results,
+  .coaches,
+  .graduates,
+  .safety,
+  .camps {
+    padding-top: 96px;
+    padding-bottom: 0;
+  }
+
+  .faq {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+@media (max-width: 767px) {
+  .programs,
+  .method,
+  .video,
+  .results,
+  .coaches,
+  .graduates,
+  .steps,
+  .safety,
+  .camps {
+    padding-top: 72px;
+    padding-bottom: 0;
+  }
+
+  .faq {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .steps {
+    margin-top: 0;
+  }
+}

@@ -4,7 +4,8 @@
 .steps {
   --u: calc(100cqw / 1440);
   position: relative;
-  height: calc(var(--u) * 1835);
+  margin-top: calc(var(--u) * 18);
+  height: calc(var(--u) * 1600);
 }
 
 .steps__title {

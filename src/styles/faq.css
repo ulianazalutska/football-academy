@@ -3,7 +3,7 @@
    Одиниця «u» = 1/1440 ширини контейнера .page-wrap. */
 .faq {
   --u: calc(100cqw / 1440);
-  padding: calc(var(--u) * 190) calc(var(--u) * 250) calc(var(--u) * 160);
+  padding: calc(var(--u) * 200) calc(var(--u) * 250) calc(var(--u) * 200);
 }
 
 .faq__title {

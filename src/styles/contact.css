@@ -1,0 +1,436 @@
+/* 15 Форма: верстка за скриншотом макета (project/sections/15-contact-form/Zrzut ekranu 2026-10-20 115447.png).
+   Скриншот 1117 px → 1440 px, коефіцієнт ≈ 1,289; усі значення ≈, виміряні зі скриншота (Figma ще не дала).
+   Секція на всю ширину екрана і висоту 100vh (вказівка користувачки). Одиниця «u» = менше з 1/1440 ширини вікна і 1/796 висоти вікна,
+   щоб картка не вилазила й не ставала завеликою. */
+.contact {
+  --u: min(calc(var(--vw, 100vw) / 1440), calc(100svh / 796));
+  position: relative;
+  width: var(--vw, 100vw); /* ширина вікна без смуги прокрутки (задає graduates.ts) */
+  height: 100vh;
+  height: 100svh;
+  margin-left: calc(50% - var(--vw, 100vw) / 2);
+  overflow: hidden;
+}
+
+.contact__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% 50%;
+}
+
+.contact__card {
+  position: absolute;
+  top: 50%;
+  left: 47.8%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  width: calc(var(--u) * 470);
+  min-height: calc(var(--u) * 590);
+  padding: calc(var(--u) * 32) calc(var(--u) * 42);
+  border-radius: calc(var(--u) * 12);
+  background: var(--color-bg);
+}
+
+.contact__title {
+  margin-bottom: calc(var(--u) * 28);
+  font-size: calc(var(--u) * 26);
+  font-weight: var(--fw-regular);
+  line-height: calc(var(--u) * 32);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.contact__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: calc(var(--u) * 20);
+  row-gap: calc(var(--u) * 16);
+  flex: 1;
+  align-content: start;
+}
+
+.contact__field {
+  position: relative;
+  min-width: 0;
+}
+
+.contact__field--wide {
+  grid-column: 1 / -1;
+}
+
+.contact__field label {
+  display: block;
+  margin-bottom: calc(var(--u) * 6);
+  color: var(--color-primary);
+  font-size: calc(var(--u) * 15);
+  line-height: calc(var(--u) * 20);
+}
+
+/* обов'язкові поля: зірочка після підпису */
+.contact__field--req label::after {
+  content: " *";
+}
+
+.contact__field input,
+.contact__field select,
+.contact__field textarea {
+  display: block;
+  width: 100%;
+  height: calc(var(--u) * 38);
+  padding: 0 calc(var(--u) * 14);
+  border: 1px solid transparent;
+  border-radius: calc(var(--u) * 11);
+  background-color: var(--color-field);
+  color: var(--color-text);
+  font-size: calc(var(--u) * 13);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.contact__field textarea {
+  height: calc(var(--u) * 76);
+  padding-top: calc(var(--u) * 12);
+  resize: none;
+}
+
+.contact__field ::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+
+/* автозаповнення браузера: без блакитного фону, лишається колір поля */
+.contact__field input:-webkit-autofill,
+.contact__field input:-webkit-autofill:hover,
+.contact__field input:-webkit-autofill:focus,
+.contact__field textarea:-webkit-autofill,
+.contact__field select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-field) inset;
+  box-shadow: 0 0 0 1000px var(--color-field) inset;
+  -webkit-text-fill-color: var(--color-text);
+  caret-color: var(--color-text);
+  transition: background-color 9999s ease-in-out 0s, border-color 0.2s ease;
+}
+
+.contact__field select {
+  padding-right: calc(var(--u) * 30);
+  appearance: none;
+  background-image: url("/icons/chevron.svg");
+  background-repeat: no-repeat;
+  background-position: right calc(var(--u) * 12) center;
+  background-size: calc(var(--u) * 12) auto;
+  cursor: pointer;
+}
+
+/* Власний select (form.ts): нативний лишається прихованим для даних форми.
+   Список випадає плавно (прозорість + зсув + м'який розмір), шеврон повертається. */
+.contact__field .cselect__native {
+  display: none;
+}
+
+.cselect {
+  position: relative;
+}
+
+.cselect__btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: calc(var(--u) * 38);
+  padding: 0 calc(var(--u) * 34) 0 calc(var(--u) * 14);
+  border: 1px solid transparent;
+  border-radius: calc(var(--u) * 11);
+  background: var(--color-field);
+  color: var(--color-text);
+  font-size: calc(var(--u) * 13);
+  text-align: left;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.cselect__btn.is-placeholder {
+  color: var(--color-muted);
+}
+
+.cselect__btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc(var(--u) * 14);
+  width: calc(var(--u) * 12);
+  height: calc(var(--u) * 8);
+  margin-top: calc(var(--u) * -4);
+  background: url("/icons/chevron.svg") no-repeat center / contain;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cselect.is-open .cselect__btn::after {
+  transform: rotate(180deg);
+}
+
+.cselect.is-open .cselect__btn,
+.cselect__btn:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.cselect__list {
+  position: absolute;
+  top: calc(100% + var(--u) * 4);
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  margin: 0;
+  padding: calc(var(--u) * 4);
+  border-radius: calc(var(--u) * 10);
+  background: var(--color-bg);
+  box-shadow: 0 calc(var(--u) * 8) calc(var(--u) * 24) rgba(0, 0, 0, 0.14);
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(calc(var(--u) * -6)) scaleY(0.92);
+  transform-origin: top;
+  transition: opacity 0.22s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.3s;
+}
+
+.cselect.is-open .cselect__list {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.cselect__opt {
+  padding: calc(var(--u) * 8) calc(var(--u) * 12);
+  border-radius: calc(var(--u) * 8);
+  color: var(--color-text);
+  font-size: calc(var(--u) * 13);
+  line-height: calc(var(--u) * 17);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.cselect__opt.is-active {
+  background: var(--color-accent);
+}
+
+.cselect__opt[aria-selected="true"] {
+  color: var(--color-primary);
+  font-weight: var(--fw-bold);
+}
+
+/* focus / error: стани не дані користувачкою, тимчасово лише токенами (рожева / зелена обводка) */
+.contact__field input:focus-visible,
+.contact__field select:focus-visible,
+.contact__field textarea:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.contact__field.is-invalid input {
+  border-color: var(--color-primary);
+}
+
+.contact__error {
+  position: absolute;
+  top: 100%;
+  left: calc(var(--u) * 4);
+  margin-top: calc(var(--u) * 1);
+  color: var(--color-primary);
+  font-size: calc(var(--u) * 9);
+  line-height: calc(var(--u) * 11);
+  white-space: nowrap;
+}
+
+.contact__legal {
+  grid-column: 1 / -1;
+  margin-top: calc(var(--u) * -2);
+  font-size: max(10px, calc(var(--u) * 10));
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.contact__legal strong {
+  font-weight: var(--fw-bold);
+}
+
+.contact__submit {
+  grid-column: 1 / -1;
+  justify-self: center;
+  gap: calc(var(--u) * 12);
+  height: calc(var(--u) * 40);
+  margin-top: calc(var(--u) * 8);
+  padding: 0 calc(var(--u) * 6) 0 calc(var(--u) * 18);
+  border: 0;
+  font-size: calc(var(--u) * 15);
+  letter-spacing: 0.02em;
+}
+
+.contact__submit:disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.contact__submit-icon {
+  display: grid;
+  place-items: center;
+  width: calc(var(--u) * 28);
+  height: calc(var(--u) * 28);
+  border-radius: 50%;
+  background: var(--color-bg);
+  color: var(--color-primary);
+}
+
+.contact__submit-icon svg {
+  width: calc(var(--u) * 11);
+  height: calc(var(--u) * 11);
+}
+
+/* після відправки форма й заголовок замінюються повідомленням */
+.contact__done {
+  margin: auto;
+  color: var(--color-primary);
+  font-size: calc(var(--u) * 18);
+  line-height: calc(var(--u) * 28);
+  text-align: center;
+}
+
+.contact__card.is-sent .contact__title,
+.contact__card.is-sent .contact__form {
+  display: none;
+}
+
+/* планшет і мобільна: картка по центру в потоці, без масштабування від 1440 */
+@media (max-width: 1023px) {
+  .contact {
+    display: grid;
+    align-items: center;
+    height: auto;
+    min-height: 100svh;
+    padding: 64px var(--gutter);
+  }
+
+  .contact__card {
+    position: relative;
+    inset: auto;
+    transform: none;
+    width: 100%;
+    max-width: 480px;
+    min-height: 0;
+    height: auto;
+    margin-inline: auto;
+    padding: 32px;
+    border-radius: 16px;
+  }
+
+  .contact__title {
+    margin-bottom: 24px;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .contact__form {
+    column-gap: 16px;
+    row-gap: 24px;
+  }
+
+  .contact__field label {
+    margin-bottom: 6px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .contact__field input,
+  .contact__field select,
+  .contact__field textarea {
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+
+  .contact__field textarea {
+    height: 96px;
+    padding-top: 12px;
+  }
+
+  .contact__field select {
+    padding-right: 36px;
+    background-position: right 14px center;
+    background-size: 12px auto;
+  }
+
+  .cselect__btn {
+    height: 44px;
+    padding: 0 36px 0 14px;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+
+  .cselect__btn::after {
+    right: 14px;
+    width: 12px;
+    height: 8px;
+    margin-top: -4px;
+  }
+
+  .cselect__list {
+    top: calc(100% + 6px);
+    padding: 6px;
+    border-radius: 12px;
+  }
+
+  .cselect__opt {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .contact__error {
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 14px;
+    white-space: normal;
+  }
+
+  .contact__legal {
+    margin-top: 0;
+    font-size: 11px;
+  }
+
+  .contact__submit {
+    height: 44px;
+    margin-top: 8px;
+    padding: 0 6px 0 20px;
+    gap: 12px;
+    font-size: 16px;
+  }
+
+  .contact__submit-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .contact__submit-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .contact__done {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+@media (max-width: 479px) {
+  .contact__card {
+    padding: 24px 20px;
+  }
+
+  .contact__form {
+    grid-template-columns: 1fr;
+  }
+}

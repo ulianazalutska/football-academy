@@ -4,8 +4,8 @@
 .results {
   --u: calc(100cqw / 1440);
   --results-line: color-mix(in srgb, var(--color-primary) 13%, transparent); /* сітка: #334A38, 13% (рішення користувачки) */
-  padding-top: calc(var(--u) * 14);
-  padding-bottom: calc(var(--u) * 136);
+  padding-top: calc(var(--u) * 200);
+  padding-bottom: 0;
 }
 
 .results__title {

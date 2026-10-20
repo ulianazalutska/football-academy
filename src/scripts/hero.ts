@@ -16,9 +16,8 @@ function playIntro(): void {
   const paths = q<SVGPolylineElement>('.hero__line polyline');
   if (!header || !frame || !bg || !tab) return;
 
-  /* лінії-виноски малюються від фото до гравчині */
-  paths.forEach((p) => p.setAttribute('pathLength', '1'));
-  gsap.set(paths, { strokeDasharray: 1, strokeDashoffset: 1 });
+  /* лінії-виноски з'являються плавним фейдом */
+  gsap.set(paths, { opacity: 0 });
 
   const done = (): void => {
     root.classList.remove('has-intro');
@@ -44,7 +43,7 @@ function playIntro(): void {
     .to(titleLines, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, stagger: 0.16 }, 0.7)
     .to(textLines, { opacity: 1, y: 0, duration: 1, stagger: 0.1 }, 1.15)
     .to(thumbs, { opacity: 1, y: 0, scale: 1, duration: 1.1, stagger: 0.18, ease: 'back.out(1.3)' }, 1.5)
-    .to(paths, { strokeDashoffset: 0, duration: 1.1, stagger: 0.18, ease: 'power2.inOut' }, 1.9)
+    .to(paths, { opacity: 1, duration: 1.1, stagger: 0.18, ease: 'power2.inOut' }, 1.9)
     .to(tab, { opacity: 1, yPercent: 0, duration: 0.9 }, 2.1);
 }
 

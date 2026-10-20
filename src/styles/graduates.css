@@ -3,8 +3,8 @@
 .graduates {
   --u: calc(100cqw / 1440);
   --graduates-step: 7s; /* час проходу одного кроку (343 px), вибір Claude; було 4s, користувачка попросила повільніше */
-  padding-top: calc(var(--u) * 14);
-  padding-bottom: calc(var(--u) * 136);
+  padding-top: calc(var(--u) * 226);
+  padding-bottom: 0;
 }
 
 .graduates__title {
