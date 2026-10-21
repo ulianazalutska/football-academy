@@ -62,6 +62,12 @@
   line-height: calc(31.5 / 21.5);
 }
 
+/* акцентний рядок про безкоштовне тренування: рожевий і жирніший (вибір користувачки) */
+.hero__text-accent {
+  color: var(--color-accent);
+  font-weight: var(--fw-bold);
+}
+
 /* рядки як у макеті (на ≤1023 текст тече природно) */
 .hero__line-break { display: block; }
 
@@ -225,8 +231,19 @@
     border-radius: 40px;
   }
 
+  /* затемнення зверху, щоб текст читався поверх фото (вибір користувачки) */
+  .hero__frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(to bottom, rgb(0 0 0 / 0.7) 0%, rgb(0 0 0 / 0.45) 50%, rgb(0 0 0 / 0) 100%);
+    pointer-events: none;
+  }
+
   .hero__content {
     position: relative;
+    z-index: 1;
     top: auto;
     left: auto;
     padding: 56px 40px 0;

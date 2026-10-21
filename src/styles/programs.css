@@ -508,3 +508,90 @@
     display: none;
   }
 }
+
+/* Mobile: фіксована сітка макета замінена на гнучку (1 колонка, на ширших 2) */
+@media (max-width: 767px) {
+  .programs__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-inline: 24px;
+  }
+
+  .programs__title {
+    font-size: 30px;
+    line-height: 1.25;
+  }
+
+  .programs__sub {
+    max-width: none;
+    padding-left: 0;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .age-filter {
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .age-filter__label { font-size: 16px; }
+
+  .age-filter__list {
+    width: 100%;
+    justify-content: space-between;
+    gap: 4px;
+    padding-inline: 6px;
+  }
+
+  .age-filter__btn {
+    padding: 0 7px;
+    font-size: 15px;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .programs__grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-rows: none;
+    gap: 12px;
+    padding-inline: 24px;
+  }
+
+  .program {
+    grid-column: auto;
+    grid-row: auto;
+    width: auto;
+    min-height: 300px;
+  }
+
+  .program--start { grid-column: 1 / -1; min-height: 340px; }
+  .program--osnova { grid-column: 1 / -1; width: auto; min-height: 340px; }
+
+  .program__xi {
+    left: auto;
+    right: -60px;
+  }
+
+  .program__perks {
+    left: 16px;
+    right: 16px;
+    gap: 8px;
+  }
+
+  .program__perk {
+    flex: 1;
+    width: auto;
+    padding-left: 10px;
+    white-space: normal;
+  }
+
+  .programs__notes {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+    padding-inline: 24px;
+    font-size: 14px;
+  }
+}
