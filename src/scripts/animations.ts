@@ -195,23 +195,26 @@ function initVideoExpand(): void {
   const box = section?.querySelector<HTMLElement>('.video__box');
   if (!section || !box) return;
 
-  gsap.fromTo(
-    section,
-    { paddingLeft: () => parseFloat(getComputedStyle(section).paddingLeft), paddingRight: () => parseFloat(getComputedStyle(section).paddingRight) },
-    {
-      paddingLeft: 0,
-      paddingRight: 0,
+  /* ≤1068: без ефекту скролу, відео одразу на весь екран (стилі в video.css) */
+  gsap.matchMedia().add('(min-width: 1069px)', () => {
+    gsap.fromTo(
+      section,
+      { paddingLeft: () => parseFloat(getComputedStyle(section).paddingLeft), paddingRight: () => parseFloat(getComputedStyle(section).paddingRight) },
+      {
+        paddingLeft: 0,
+        paddingRight: 0,
+        ease: 'none',
+        immediateRender: false,
+        scrollTrigger: { trigger: section, start: 'top 40%', end: 'top top', scrub: true, invalidateOnRefresh: true },
+      },
+    );
+    gsap.to(box, {
+      height: () => window.innerHeight,
+      borderRadius: 0,
       ease: 'none',
       immediateRender: false,
       scrollTrigger: { trigger: section, start: 'top 40%', end: 'top top', scrub: true, invalidateOnRefresh: true },
-    },
-  );
-  gsap.to(box, {
-    height: () => window.innerHeight,
-    borderRadius: 0,
-    ease: 'none',
-    immediateRender: false,
-    scrollTrigger: { trigger: section, start: 'top 40%', end: 'top top', scrub: true, invalidateOnRefresh: true },
+    });
   });
 }
 

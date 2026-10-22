@@ -8,7 +8,7 @@
 
 .safety__title {
   margin: 0 0 calc(var(--u) * 20);
-  font-size: calc(var(--u) * 56);
+  font-size: calc(var(--u) * 55);
   font-weight: var(--fw-regular);
   line-height: calc(var(--u) * 76);
   letter-spacing: 0.04em;
@@ -123,10 +123,17 @@
     padding: 64px var(--gutter) 80px;
   }
 
+  /* заголовок: два рядки по реченню, розмір підібраний так, щоб кожен рядок вміщався без «осиротілих» слів */
   .safety__title {
     margin-bottom: 32px;
-    font-size: clamp(28px, 8vw, 40px);
-    line-height: 1.25;
+    font-size: clamp(22px, 6.6vw, 38px);
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+
+  .safety__line {
+    display: block;
+    white-space: nowrap;
   }
 
   .safety__row,

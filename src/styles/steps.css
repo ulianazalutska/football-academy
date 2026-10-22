@@ -12,7 +12,7 @@
   position: absolute;
   top: calc(var(--u) * 182);
   left: calc(var(--u) * 55);
-  font-size: calc(var(--u) * 56);
+  font-size: calc(var(--u) * 55);
   font-weight: var(--fw-regular);
   line-height: calc(var(--u) * 76);
   letter-spacing: 0.04em;

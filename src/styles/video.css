@@ -60,3 +60,17 @@
   .video__box { aspect-ratio: 4 / 3; border-radius: 20px; }
   .video__play { left: 16px; bottom: 16px; width: 44px; height: 44px; }
 }
+
+/* ≤1068: без ефекту скролу, відео одразу на весь екран, без відступів і заокруглень */
+@media (max-width: 1068px) {
+  .video {
+    padding-inline: 0;
+  }
+
+  .video__box {
+    aspect-ratio: auto;
+    height: 100vh;
+    height: 100svh;
+    border-radius: 0;
+  }
+}

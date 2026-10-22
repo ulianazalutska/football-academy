@@ -21,13 +21,34 @@
         <a class="header__logo" href="#top" aria-label="GIRLS XI Football Academy: на початок сторінки">
           <img src="/images/logo-header.svg" width="171" height="39" alt="GIRLS XI Football Academy" />
         </a>
-        <nav class="header__nav" aria-label="Головне меню">
+        <nav class="header__nav" id="header-nav" aria-label="Головне меню">
           <ul class="header__list">
             <li><a class="header__link" href="#programs">Програми</a></li>
+            <li><a class="header__link" href="#method">Метод</a></li>
             <li><a class="header__link" href="#coaches">Тренерки</a></li>
             <li><a class="header__link" href="#safety">Батькам</a></li>
             <li><a class="header__link" href="#camps">Кемпи</a></li>
+            <li><a class="header__link" href="#faq">Питання</a></li>
           </ul>
+          <div class="header__aside">
+            <img class="header__girl" src="/images/footer-girl.svg" width="130" height="198" alt="" aria-hidden="true" />
+            <a class="header__contact" href="tel:+380441234567">+380 44 123 45 67</a>
+            <ul class="header__social">
+              <li><a href="https://www.instagram.com/girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI в Instagram"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.3" cy="6.7" r=".6" fill="currentColor" /></svg></a></li>
+              <li><a href="https://www.facebook.com/girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI у Facebook"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><path d="M13.2 21.5v-7.600h2.500l.4-3h-2.900V9.100c0-.9.3-1.500 1.500-1.500h1.500V5c-.3 0-1.200-.1-2.200-.1-2.200 0-3.700 1.300-3.700 3.800v2.100H8v3h2.100v7.700z" fill="currentColor" stroke="none" /></svg></a></li>
+              <li><a href="https://www.youtube.com/@girlsxi" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI на YouTube"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><path d="M10 8.500v7l5.500-3.500z" fill="currentColor" /></svg></a></li>
+              <li><a href="https://www.tiktok.com/@girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI в TikTok"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><path d="M13.500 6.500v8.200a2.700 2.700 0 1 1-2.700-2.700" /><path d="M13.500 6.500c.3 2 1.600 3.200 3.500 3.400" /></svg></a></li>
+            </ul>
+            <div class="lang-switch header__lang" role="group" aria-label="Мова сайту">
+              <button class="lang-switch__btn" type="button" lang="uk">UA</button><span class="lang-switch__sep" aria-hidden="true">/</span><button class="lang-switch__btn lang-switch__btn--green" type="button" lang="en">EN</button>
+            </div>
+          </div>
+          <a class="btn btn--primary header__menu-cta" href="#contact-form">
+            <span>ЗВ'ЯЗАТИСЯ</span>
+            <svg class="btn__icon" width="16.19" height="16.19" viewBox="0 0 16.19 16.19" fill="none" aria-hidden="true">
+              <path d="M1 15.19L15.19 1M5.5 1H15.19V10.69" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
         </nav>
         <a class="btn btn--primary header__cta" href="#contact-form">
           <span>ЗВ'ЯЗАТИСЯ</span>
@@ -35,6 +56,9 @@
             <path d="M1 15.19L15.19 1M5.5 1H15.19V10.69" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </a>
+        <button class="header__burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="header-nav">
+          <span></span><span></span>
+        </button>
       </div>
     </header>
     <main>
@@ -434,7 +458,7 @@
                 <li>10-16 років</li>
                 <li>6 500 грн</li>
                 <li>Залишилося 9 місць</li>
-              </ul>
+            </ul>
               <a class="camp__tip-btn" href="#contact-form" data-camp="Осінній інтенсив">ЗАБРОНЮВАТИ МІСЦЕ</a>
             </div>
           </div>
@@ -453,7 +477,7 @@
                 <li>10-16 років</li>
                 <li>6 500 грн</li>
                 <li>Залишилося 9 місць</li>
-              </ul>
+            </ul>
               <a class="camp__tip-btn" href="#contact-form" data-camp="Літній виїзд у Карпати">ЗАБРОНЮВАТИ МІСЦЕ</a>
             </div>
           </div>
@@ -472,7 +496,7 @@
                 <li>14-18 років</li>
                 <li>38 000 грн</li>
                 <li>Залишилося 3 місця</li>
-              </ul>
+            </ul>
               <a class="camp__tip-btn" href="#contact-form" data-camp="Зимовий тур до Варшави">ЗАБРОНЮВАТИ МІСЦЕ</a>
             </div>
           </div>
@@ -621,11 +645,11 @@
             <div class="footer__meta">
               <p class="footer__hours">Пн-Сб 9:00-19:00</p>
               <ul class="footer__social">
-                <li><a href="https://www.instagram.com/girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI в Instagram"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.3" cy="6.7" r=".6" fill="currentColor" /></svg></a></li>
-                <li><a href="https://www.facebook.com/girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI у Facebook"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><path d="M13.2 21.5v-7.600h2.500l.4-3h-2.900V9.100c0-.9.3-1.500 1.500-1.500h1.500V5c-.3 0-1.200-.1-2.200-.1-2.200 0-3.700 1.300-3.700 3.800v2.100H8v3h2.100v7.700z" fill="currentColor" stroke="none" /></svg></a></li>
-                <li><a href="https://www.youtube.com/@girlsxi" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI на YouTube"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><path d="M10 8.500v7l5.500-3.500z" fill="currentColor" /></svg></a></li>
-                <li><a href="https://www.tiktok.com/@girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI в TikTok"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><path d="M13.500 6.500v8.200a2.700 2.700 0 1 1-2.700-2.700" /><path d="M13.500 6.500c.3 2 1.600 3.200 3.500 3.400" /></svg></a></li>
-              </ul>
+              <li><a href="https://www.instagram.com/girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI в Instagram"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.3" cy="6.7" r=".6" fill="currentColor" /></svg></a></li>
+              <li><a href="https://www.facebook.com/girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI у Facebook"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><path d="M13.2 21.5v-7.600h2.500l.4-3h-2.900V9.100c0-.9.3-1.500 1.500-1.500h1.500V5c-.3 0-1.200-.1-2.200-.1-2.200 0-3.700 1.300-3.700 3.800v2.100H8v3h2.100v7.700z" fill="currentColor" stroke="none" /></svg></a></li>
+              <li><a href="https://www.youtube.com/@girlsxi" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI на YouTube"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><path d="M10 8.500v7l5.500-3.500z" fill="currentColor" /></svg></a></li>
+              <li><a href="https://www.tiktok.com/@girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI в TikTok"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><path d="M13.500 6.500v8.200a2.700 2.700 0 1 1-2.700-2.700" /><path d="M13.500 6.500c.3 2 1.600 3.200 3.500 3.400" /></svg></a></li>
+            </ul>
             </div>
           </div>
           <img class="footer__girl" src="/images/footer-girl.svg" width="130" height="198" alt="Усміхнена дівчинка з футбольним м'ячем: символ академії GIRLS XI" loading="lazy" />
@@ -657,7 +681,7 @@
         </nav>
         <div class="footer__bottom">
           <p>© 2026 GIRLS XI</p>
-          <p><a href="https://www.instagram.com/uliana_zalutska" target="_blank" rel="noopener noreferrer">WEBSITE DESIGN BY UZALUTSKA</a></p>
+          <p><a href="https://www.instagram.com/uliana_zalutska" target="_blank" rel="noopener noreferrer">WEBSITE DESIGN BY ZALUTSKA</a></p>
         </div>
       </div>
     </footer>

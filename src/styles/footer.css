@@ -94,6 +94,11 @@
 .footer__bottom p { margin: 0; }
 .footer__bottom a { transition: color .2s; }
 
+/* 1280-1439: слоган плавно зменшується, щоб «ХАРАКТЕРОМ» не виходив за край (96px при 1440) */
+@media (max-width: 1439px) {
+  .footer__slogan { font-size: calc((100vw - 450px) * 0.095); }
+}
+
 @media (max-width: 1279px) {
   .footer__top { padding: 0 48px; column-gap: 40px; }
   .footer__slogan { font-size: 72px; }
@@ -124,4 +129,170 @@
   .footer__pill { font-size: 18px; padding: 8px 16px; }
   .footer__nav { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; font-size: 14px; }
+}
+
+/* 600-1023: планшетна розкладка (за макетом користувачки): зверху «ГРАЙ ІЗ» + графік і соцмережі, дівчинка посередині,
+   праворуч пошта, телефон і «ХАРАКТЕРОМ»; нижче дві колонки: навігація, і документи з адресою */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .footer__top {
+    grid-template-columns: 250px 208px auto;
+    column-gap: 16px;
+    row-gap: 0;
+    padding: 0 40px;
+  }
+
+  .footer__slogan { font-size: clamp(36px, 5.5vw, 62px); }
+
+  .footer__girl {
+    grid-column: auto;
+    grid-row: auto;
+    justify-self: center;
+    width: 92px;
+    margin-top: 28px;
+  }
+
+  .footer__left { padding-top: 12px; }
+  .footer__meta { margin-top: 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer__social a svg { width: 28px; height: 28px; }
+
+  .footer__right { align-items: flex-end; }
+  .footer__contacts { gap: 8px; margin-bottom: 16px; }
+  .footer__pill { padding: 6px 22px; font-size: clamp(18px, 2.7vw, 24px); }
+  .footer__pill--mail { order: -1; align-self: flex-start; }
+  .footer__pill--phone { align-self: flex-end; }
+
+  .footer__nav {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 24px;
+    row-gap: 32px;
+    padding: 56px 40px 0;
+  }
+
+  .footer__address { max-width: 280px; }
+
+  .footer__bottom { margin: 48px 40px 0; }
+}
+
+/* 768-1023: навігація в 4 колонки, як на десктопі (по 3 пункти в кожній) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .footer__nav {
+    grid-template-columns: repeat(4, auto);
+    justify-content: space-between;
+    row-gap: 0;
+  }
+
+  .footer__address { max-width: 200px; }
+}
+
+/* 800-899: у колонці з дівчинкою менше місця */
+@media (min-width: 800px) and (max-width: 899px) {
+  .footer__top {
+    grid-template-columns: 215px 128px auto;
+  }
+}
+
+/* 600-799: верх футера у 2 колонки (раніше, ніж 3 колонки перестають вміщатися); дівчинка зверху по центру */
+@media (min-width: 600px) and (max-width: 799px) {
+  .footer__top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 16px;
+    row-gap: 0;
+  }
+
+  .footer__girl {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: center;
+    margin: 0 0 24px;
+  }
+}
+
+/* ≤801: розкладка у 2 колонки за макетом користувачки: ліворуч «ГРАЙ ІЗ», графік, соцмережі й навігація,
+   праворуч пошта, телефон, «ХАРАКТЕРОМ», документи й адреса. Дівчинка на цій ширині прихована. */
+@media (max-width: 801px) {
+  .footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+    column-gap: 16px;
+    row-gap: 24px;
+    align-items: start;
+    padding: 56px 40px 28px;
+  }
+
+  .footer__top,
+  .footer__nav {
+    display: contents;
+  }
+
+  .footer__girl { display: none; }
+
+  .footer__slogan { font-size: clamp(24px, 6.9vw, 52px); }
+
+  .footer__left { grid-column: 1; grid-row: 1; padding-top: 12px; }
+  .footer__meta { margin-top: 16px; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer__social { gap: 22px; }
+
+  .footer__right { grid-column: 2; grid-row: 1; align-items: flex-start; }
+  .footer__contacts { align-self: stretch; margin-bottom: 8px; }
+  .footer__pill { padding: 6px 20px; font-size: clamp(16px, 2.6vw, 22px); }
+  .footer__pill--mail { order: -1; align-self: flex-start; }
+  .footer__pill--phone { align-self: flex-end; }
+
+  .footer__nav > :nth-child(2) { grid-column: 1; grid-row: 2; }
+  .footer__nav > :nth-child(1) { grid-column: 1; grid-row: 3; }
+  .footer__nav > :nth-child(4) { grid-column: 2; grid-row: 2; }
+  .footer__nav > :nth-child(3) { grid-column: 2; grid-row: 3; }
+  .footer__address { max-width: none; }
+
+  .footer__bottom { grid-column: 1 / -1; grid-row: 4; margin: 24px 0 0; }
+}
+
+@media (max-width: 479px) {
+  .footer__inner { padding: 48px 24px 24px; column-gap: 12px; }
+  .footer__pill { font-size: 15px; padding: 6px 14px; }
+}
+
+/* ≤649: одна колонка (за макетом користувачки): «ГРАЙ ІЗ / ХАРАКТЕРОМ», телефон, пошта, графік, соцмережі,
+   навігація, адреса, документи; дівчинка вгорі праворуч, частково за краєм екрана */
+@media (max-width: 649px) {
+  .footer { position: relative; overflow: hidden; }
+
+  .footer__inner {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 40px 24px 24px;
+    row-gap: 14px;
+  }
+
+  .footer__left,
+  .footer__right,
+  .footer__meta,
+  .footer__contacts {
+    display: contents;
+  }
+
+  .footer__girl {
+    display: block;
+    position: absolute;
+    top: 24px;
+    right: -16px;
+    width: clamp(70px, 24vw, 110px);
+    margin: 0;
+  }
+
+  .footer__slogan { font-size: clamp(26px, 10vw, 56px); }
+  .footer__left .footer__slogan { grid-column: 1; grid-row: auto; order: 1; }
+  .footer__right .footer__slogan { grid-column: 1; grid-row: auto; order: 2; }
+
+  .footer__pill { justify-self: start; align-self: start; font-size: 16px; padding: 6px 16px; }
+  .footer__pill--phone { grid-column: 1; grid-row: auto; order: 3; }
+  .footer__pill--mail { grid-column: 1; grid-row: auto; order: 4; }
+  .footer__hours { grid-column: 1; order: 5; }
+  .footer__social { grid-column: 1; grid-row: auto; order: 6; gap: 18px; }
+
+  .footer__nav > :nth-child(2) { grid-column: 1; grid-row: auto; order: 7; }
+  .footer__nav > :nth-child(1) { grid-column: 1; grid-row: auto; order: 8; }
+  .footer__nav > :nth-child(3) { grid-column: 1; grid-row: auto; order: 9; }
+  .footer__nav > :nth-child(4) { grid-column: 1; grid-row: auto; order: 10; }
+
+  .footer__bottom { grid-column: 1; grid-row: auto; order: 11; margin-top: 16px; flex-direction: column; gap: 8px; font-size: 14px; }
 }

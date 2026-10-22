@@ -114,11 +114,11 @@ body {
   }
 
   .header__list {
-    gap: var(--space-6);
+    gap: 24px;
   }
 
   .header__link {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -132,9 +132,383 @@ body {
   }
 }
 
-/* мобільне меню (бургер) поки не робимо: ховаємо пункти */
-@media (max-width: 767px) {
+/* меню відкрите: сторінку не гортати (scrollbar-gutter не дає сторінці «стрибнути» через зникнення смуги) */
+html.is-menu-open {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.header__burger,
+.header__lang,
+.header__menu-cta,
+.header__aside {
+  display: none;
+}
+
+/* ≤1068: меню в бургері, пункти випадають білою панеллю під шапкою */
+@media (max-width: 1068px) {
+  .header__cta {
+    margin-left: auto;
+  }
+
+  .header__burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    width: 44px;
+    height: 44px;
+    margin-left: 12px;
+    padding: 0 6px;
+    background: none;
+    border: 0;
+  }
+
+  .header__burger span {
+    display: block;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 999px;
+  }
+
+  /* анімація бургера: лінії зводяться в «+», «+» робить півтора оберти до «×» (225°); закриття — у зворотний бік */
+  .header__burger span {
+    transition: transform 0.55s cubic-bezier(0.7, 0, 0.2, 1);
+  }
+
+  .header__burger {
+    transition: transform 0.75s cubic-bezier(0.34, 1.3, 0.5, 1);
+  }
+
+  .header--menu-open .header__burger {
+    transform: rotate(225deg);
+    transition-delay: 0.1s;
+  }
+
+  .header--menu-open .header__burger span:nth-child(1) {
+    transform: translateY(4.5px);
+  }
+
+  .header--menu-open .header__burger span:nth-child(2) {
+    transform: translateY(-4.5px) rotate(90deg);
+  }
+
+  /* панель: розкривається колом із кута, де бургер (праворуч угорі); пункти з'являються по черзі */
   .header__nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: max(50%, 440px);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 24px;
+    align-items: start;
+    padding: 16px var(--gutter) 32px 40px;
+    border-radius: 0 0 24px 24px;
+    background: var(--color-bg);
+    visibility: hidden;
+    clip-path: circle(0 at calc(100% - var(--gutter) - 22px) -44px);
+    transition: clip-path 0.7s cubic-bezier(0.65, 0, 0.35, 1), visibility 0s linear 0.7s;
+  }
+
+  /* лінія вгорі панелі: виїжджає з правого краю, з сірого стає рожевою */
+  .header__nav::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-muted);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1), background-color 0.6s ease;
+  }
+
+  .header--menu-open .header__nav::before {
+    background: var(--color-accent);
+    transform: scaleX(1);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, background-color 0.8s ease 0.5s;
+  }
+
+  .header--menu-open .header__nav {
+    visibility: visible;
+    /* радіус = відстань до найдальшого кута панелі, щоб коло не «летіло» зайвим і зупинялось м'яко */
+    clip-path: circle(hypot(50vw, 440px) at calc(100% - var(--gutter) - 22px) -44px);
+    transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+  }
+
+  .header__list li {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .header--menu-open .header__list li {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s ease calc(0.3s + var(--i, 0) * 0.06s), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) calc(0.3s + var(--i, 0) * 0.06s);
+  }
+
+  .header__list li:nth-child(1) { --i: 0; }
+  .header__list li:nth-child(2) { --i: 1; }
+  .header__list li:nth-child(3) { --i: 2; }
+  .header__list li:nth-child(4) { --i: 3; }
+  .header__list li:nth-child(5) { --i: 4; }
+  .header__list li:nth-child(6) { --i: 5; }
+
+  /* контакти, графік і соцмережі внизу панелі */
+  /* права колонка: дівчинка з футера, під нею номер телефону й соцмережі */
+  .header__aside {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .header--menu-open .header__aside {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s ease 0.36s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.36s;
+  }
+
+  .header__girl {
+    display: block;
+    width: 110px;
+    height: auto;
+  }
+
+  .header__contact {
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    color: var(--color-text);
+  }
+
+  .header__contact:hover {
+    color: var(--color-accent);
+  }
+
+  /* UA/EN з hero переїздить у бургер на цій ширині */
+  .header__lang {
+    display: flex;
+    font-size: 22px;
+  }
+
+  .header__social {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .header__social a {
+    display: block;
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+  }
+
+  .header__social a:hover {
+    color: var(--color-accent);
+  }
+
+  .header__list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .header__list li {
+    width: 100%;
+  }
+
+  .header__link {
+    display: block;
+    padding: 14px 0;
+    font-size: 20px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header__burger,
+    .header__burger span,
+    .header__nav,
+    .header__nav::before,
+    .header__aside,
+    .header__list li {
+      transition: none;
+    }
+  }
+}
+
+/* ≤547: кнопка «ЗВ'ЯЗАТИСЯ» з шапки переїздить у меню, панель на всю ширину екрана */
+@media (max-width: 547px) {
+  .header__cta {
     display: none;
   }
+
+  .header__burger {
+    margin-left: auto;
+  }
+
+  .header__nav {
+    width: 100%;
+    border-radius: 0 0 24px 24px;
+  }
+
+  .header__menu-cta {
+    display: inline-flex;
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 24px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.45s ease, color 0.2s ease;
+  }
+
+  .header--menu-open .header__menu-cta {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s ease 0.5s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s, background-color 0.45s ease, color 0.2s ease;
+  }
+}
+
+/* ≤635: меню на весь екран (по ширині й висоті). Зверху великі пункти ліворуч і дівчинка праворуч,
+   внизу контакти: телефон, соцмережі + UA/EN, на ≤547 ще кнопка «ЗВ'ЯЗАТИСЯ» на всю ширину.
+   Якщо вміст не вміщається, панель прокручується всередині. */
+@media (max-width: 635px) {
+  .header__burger {
+    border-radius: 50%; /* кільце фокуса кругле й не «крутиться» квадратом разом з хрестиком */
+  }
+
+  .header__burger:focus-visible {
+    outline: 2px solid var(--color-accent);
+  }
+
+  .header__nav {
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    height: calc(100svh - var(--header-height));
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto 1fr auto auto auto;
+    column-gap: 16px;
+    row-gap: 0;
+    align-content: stretch;
+    overflow-y: auto;
+    padding: 28px var(--gutter) 32px;
+    border-radius: 0;
+  }
+
+  .header--menu-open .header__nav {
+    clip-path: circle(hypot(100vw, 100svh) at calc(100% - var(--gutter) - 22px) -44px);
+  }
+
+  .header__list {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .header__list li {
+    width: auto;
+  }
+
+  .header__link {
+    padding: 10px 0;
+    font-size: clamp(26px, 8vw, 40px);
+    line-height: 1.15;
+  }
+
+  /* права колонка розбирається на окремі блоки сітки */
+  .header__aside {
+    display: contents;
+  }
+
+  .header__girl {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    justify-self: end;
+    align-self: start;
+    width: clamp(110px, 30vw, 160px);
+    margin-top: 8px;
+  }
+
+  .header__contact {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: end;
+    margin-top: 28px;
+    font-size: clamp(17px, 5.4vw, 22px);
+    color: var(--color-primary);
+  }
+
+  /* соцмережі в меню на цій ширині не показуємо, лишається тільки номер */
+  .header__social {
+    display: none;
+  }
+
+  /* UA/EN як зелена кнопка-таблетка: UA світлий, EN рожевий */
+  .header__lang {
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: end;
+    align-self: end;
+    align-items: center;
+    margin-top: 28px;
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .header__lang .lang-switch__btn,
+  .header__lang .lang-switch__sep {
+    color: var(--color-text-light);
+  }
+
+  .header__lang .lang-switch__btn--green {
+    color: var(--color-accent);
+  }
+
+  .header__menu-cta {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    justify-self: stretch;
+    justify-content: center;
+    height: 52px;
+    margin-top: 24px;
+  }
+
+  /* блоки нижньої частини й дівчинка з'являються по черзі після пунктів */
+  .header__girl,
+  .header__contact,
+  .header__lang {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .header--menu-open .header__girl,
+  .header--menu-open .header__contact,
+  .header--menu-open .header__lang {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s ease var(--d, 0.4s), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0.4s);
+  }
+
+  .header__girl { --d: 0.3s; }
+  .header__contact { --d: 0.45s; }
+  .header__lang { --d: 0.59s; }
+}
+
+/* ≤360: ще вужчий екран, менші відступи, щоб права колонка вміщалась */
+@media (max-width: 360px) {
+  .header__nav {
+    padding-inline: 20px;
+  }
+
 }

@@ -164,6 +164,7 @@
 .program__more {
   display: grid;
   place-items: center;
+  flex-shrink: 0; /* кнопка «i» не стискається у вузьких плашках */
   width: 30px;
   height: 30px;
   padding: 0;
@@ -182,35 +183,35 @@
 .program__xi {
   position: absolute;
   top: 0;
-  left: 241px;
-  width: 378px;
+  left: calc(var(--u) * 241);
+  width: calc(var(--u) * 378);
   max-width: none;
-  height: 275px;
+  height: calc(var(--u) * 275);
 }
 
 .program__kicker {
   position: absolute;
-  top: 20px;
-  left: 22px;
-  font-size: 14px;
+  top: calc(var(--u) * 20);
+  left: calc(var(--u) * 22);
+  font-size: calc(var(--u) * 14);
   letter-spacing: 0.04em;
   color: var(--color-accent);
 }
 
 .program__zero {
   position: absolute;
-  top: 54px;
-  left: 22px;
-  font-size: 64px;
+  top: calc(var(--u) * 54);
+  left: calc(var(--u) * 22);
+  font-size: calc(var(--u) * 64);
   font-weight: var(--fw-bold);
   line-height: 1.1;
 }
 
 .program__first {
   position: absolute;
-  top: 141px;
-  left: 22px;
-  font-size: 22px;
+  top: calc(var(--u) * 141);
+  left: calc(var(--u) * 22);
+  font-size: calc(var(--u) * 22);
   font-weight: var(--fw-medium);
   line-height: 1.2;
   letter-spacing: 0.04em;
@@ -218,17 +219,17 @@
 
 .program__cta {
   position: absolute;
-  top: 181px;
-  left: 22px;
+  top: calc(var(--u) * 181);
+  left: calc(var(--u) * 22);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 213px;
-  height: 42px;
-  padding: 0 5px 0 8px;
+  width: calc(var(--u) * 213);
+  height: calc(var(--u) * 42);
+  padding: 0 calc(var(--u) * 5) 0 calc(var(--u) * 8);
   border-radius: var(--radius-pill);
   background: var(--color-bg);
-  font-size: 14px;
+  font-size: calc(var(--u) * 14);
   letter-spacing: 0.04em;
   color: var(--color-text);
 }
@@ -236,48 +237,48 @@
 .program__cta-icon {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: calc(var(--u) * 32);
+  height: calc(var(--u) * 32);
   border-radius: 50%;
   background: var(--color-primary);
   color: var(--color-text-light);
 }
 
 .program__cta-icon svg {
-  width: 16px;
-  height: 16px;
+  width: calc(var(--u) * 16);
+  height: calc(var(--u) * 16);
 }
 
 .program__perks {
   position: absolute;
-  top: 239px;
-  left: 32px;
+  top: calc(var(--u) * 239);
+  left: calc(var(--u) * 32);
   display: flex;
-  gap: 25px;
+  gap: calc(var(--u) * 25);
 }
 
 .program__perk {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2px;
-  width: 119px;
-  height: 70px;
-  padding-left: 14px;
+  gap: calc(var(--u) * 2);
+  width: calc(var(--u) * 119);
+  height: calc(var(--u) * 70);
+  padding-left: calc(var(--u) * 14);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  font-size: 13px;
+  border-radius: calc(var(--u) * 12);
+  font-size: calc(var(--u) * 13);
   line-height: 1.2;
   white-space: nowrap;
 }
 
 .program__perk:last-child {
-  padding-left: 6px;
-  font-size: 12px;
+  padding-left: calc(var(--u) * 6);
+  font-size: calc(var(--u) * 12);
 }
 
 .program__perk strong {
-  font-size: 16px;
+  font-size: calc(var(--u) * 16);
   font-weight: var(--fw-bold);
   color: var(--color-accent);
 }
@@ -509,8 +510,60 @@
   }
 }
 
+/* 1024-1279: у вузьких плашках (вік, ціна, кнопка «i») менший шрифт і відступи, щоб усе вміщалося */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .program__bar {
+    gap: 6px;
+    padding-inline: 14px 10px;
+    font-size: 14px;
+  }
+
+  .program__price {
+    margin-right: 6px;
+  }
+}
+
+/* 1024-1439: шапка секції (заголовок, підзаголовок, фільтр) масштабується разом із сіткою, з мінімальними розмірами для читабельності */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .programs__title {
+    font-size: max(26px, calc(var(--u) * 42));
+    line-height: 1.36;
+  }
+
+  .programs__sub {
+    max-width: calc(var(--u) * 520);
+    margin-top: calc(var(--u) * -4);
+    padding-left: calc(var(--u) * 4);
+    font-size: max(15px, calc(var(--u) * 24));
+    line-height: 1.6;
+  }
+
+  .age-filter {
+    gap: calc(var(--u) * 13);
+    margin-bottom: calc(var(--u) * 12);
+  }
+
+  .age-filter__label {
+    font-size: max(14px, calc(var(--u) * 18));
+  }
+
+  .age-filter__list {
+    gap: max(6px, calc(var(--u) * 16));
+    height: max(34px, calc(var(--u) * 41));
+    padding-inline: max(8px, calc(var(--u) * 13));
+  }
+
+  .age-filter__btn {
+    height: max(26px, calc(var(--u) * 32));
+    padding: 0 max(6px, calc(var(--u) * 9));
+    font-size: max(13px, calc(var(--u) * 20));
+    line-height: max(26px, calc(var(--u) * 32));
+    white-space: nowrap;
+  }
+}
+
 /* Mobile: фіксована сітка макета замінена на гнучку (1 колонка, на ширших 2) */
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .programs__head {
     flex-direction: column;
     align-items: flex-start;
@@ -566,7 +619,12 @@
     min-height: 300px;
   }
 
-  .program--start { grid-column: 1 / -1; min-height: 340px; }
+  .program--start { grid-column: 1 / -1; min-height: 340px; --u: 1px; }
+
+  /* вибрана картка не підіймається й не закриває сусідні (відступ між картками лише 12 px) */
+  .programs__grid.is-filtered .program[data-age].is-match {
+    transform: scale(1.01);
+  }
   .program--osnova { grid-column: 1 / -1; width: auto; min-height: 340px; }
 
   .program__xi {

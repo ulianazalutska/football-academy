@@ -1,5 +1,5 @@
 /* 05 Фільтр за віком: вибраний сегмент стає рожевим, відповідна картка світиться, решта затемнюється.
-   Початково вибрано «10-12»; вицвітання решти вмикається, коли сітка потрапляє в екран. */
+   Початково вибрано «10-12»; по кліку на вік сторінка плавно прокручується до картки; вицвітання решти вмикається, коли сітка потрапляє в екран. */
 export function initPrograms(): void {
   const buttons = document.querySelectorAll<HTMLButtonElement>('.age-filter__btn');
   const grid = document.querySelector<HTMLElement>('.programs__grid');
@@ -45,6 +45,10 @@ export function initPrograms(): void {
       });
       grid.classList.add('is-filtered');
       cards.forEach((card) => card.classList.toggle('is-match', card.dataset.age === age));
+      /* плавно веде до відповідної картки (по центру екрана) */
+      const target = Array.from(cards).find((card) => card.dataset.age === age);
+      const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      target?.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'center' });
     });
   });
 }

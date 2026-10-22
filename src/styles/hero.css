@@ -54,9 +54,9 @@
 }
 
 .hero__text {
-  max-width: calc(600 * var(--u));
+  max-width: max(calc(600 * var(--u)), 460px);
   margin-top: calc(28 * var(--u));
-  font-size: calc(21.5 * var(--u));
+  font-size: max(16px, calc(21.5 * var(--u))); /* не менше 16px на низьких екранах */
   font-weight: var(--fw-regular);
   letter-spacing: 0.05em;
   line-height: calc(31.5 / 21.5);
@@ -92,6 +92,13 @@
 .hero__thumb--1 { right: calc(170 * var(--u)); top: calc(235 * var(--u)); }
 .hero__thumb--2 { left: calc(290 * var(--u)); bottom: calc(185 * var(--u)); }
 .hero__thumb--3 { right: calc(320 * var(--u)); bottom: calc(105.5 * var(--u)); }
+
+/* 1024-1439: малі фото ближче до країв, відступ плавно зменшується разом із шириною (1440+ без змін) */
+@media (max-width: 1439px) {
+  .hero__thumb--1 { right: max(20px, calc(19.5cqw - 188px)); }
+  .hero__thumb--2 { left: max(30px, calc(24.8cqw - 199px)); }
+  .hero__thumb--3 { right: max(30px, calc(29.5cqw - 248px)); }
+}
 
 /* кнопка ▶ на відео: коло 30 × 30, заливка #334A38 на 46%, рожевий заокруглений трикутник */
 .hero__video {
@@ -231,16 +238,6 @@
     border-radius: 40px;
   }
 
-  /* затемнення зверху, щоб текст читався поверх фото (вибір користувачки) */
-  .hero__frame::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: linear-gradient(to bottom, rgb(0 0 0 / 0.7) 0%, rgb(0 0 0 / 0.45) 50%, rgb(0 0 0 / 0) 100%);
-    pointer-events: none;
-  }
-
   .hero__content {
     position: relative;
     z-index: 1;
@@ -264,8 +261,22 @@
 
   .hero__line-break { display: inline; }
 
+  /* розмір боксів як на 1062 (u ≈ 0.73): 260 × 143 → 189 × 104 */
   .hero__thumb {
-    display: none;
+    width: 189px;
+    height: 104px;
+    border-width: 1px;
+    border-radius: 17px;
+  }
+
+  .hero__play {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hero__play svg {
+    width: 9px;
+    height: 11px;
   }
 
   .hero__tab {
@@ -287,6 +298,33 @@
   .hero__content { padding: 40px 24px 0; }
   .hero__title { font-size: clamp(26px, 7vw, 34px); }
   .hero__text { font-size: 16px; }
+}
+
+/* ≤1068: hero на всю ширину, без бічних відступів, без заокруглень і без ліній-виносок (вибір користувачки) */
+@media (max-width: 1068px) {
+  .hero {
+    padding-inline: 0;
+  }
+
+  .hero__frame {
+    border-radius: 0;
+  }
+
+  .hero__line {
+    display: none;
+  }
+
+  /* перемикач мови переїхав у бургер */
+  .hero__tab {
+    display: none;
+  }
+}
+
+/* ≤845: малі фото (бокси) зникають */
+@media (max-width: 845px) {
+  .hero__thumb {
+    display: none;
+  }
 }
 
 /* Інтро-анімація: до старту GSAP ховаємо елементи (клас has-intro ставить скрипт у <head>).

@@ -8,13 +8,13 @@
 
 .camps__head {
   position: relative;
-  height: calc(var(--u) * 135);
+  height: calc(var(--u) * 120);
   padding-left: calc(var(--u) * 15);
 }
 
 .camps__title {
   margin: 0;
-  font-size: calc(var(--u) * 64);
+  font-size: calc(var(--u) * 55);
   font-weight: var(--fw-regular);
   line-height: calc(var(--u) * 87);
   letter-spacing: 0.04em;
@@ -291,7 +291,7 @@
 }
 
 /* Mobile: макета немає, стандартна адаптація: картки в колонку, підзаголовок під заголовком */
-@media (max-width: 767px) {
+@media (max-width: 899px) {
   .camps {
     padding: 64px var(--gutter) 80px;
   }
@@ -349,4 +349,18 @@
 
   .camp--autumn .camp__tip::after,
   .camp--winter .camp__tip::after { left: auto; right: -34px; width: 34px; }
+}
+
+/* 600-899: картки в 2 колонки, третя внизу ліворуч (на вужчих екранах одна колонка) */
+@media (min-width: 600px) and (max-width: 899px) {
+  .camps__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .camp--winter {
+    grid-column: 1 / -1;
+    justify-self: start;
+    width: calc(50% - 12px);
+  }
 }

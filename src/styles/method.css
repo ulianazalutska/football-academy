@@ -33,9 +33,9 @@
 .method__title {
   margin-top: 30px;
   padding-left: 6px;
-  font-size: 64px;
+  font-size: 55px;
   font-weight: var(--fw-regular);
-  line-height: 87px;
+  line-height: 73px;
   letter-spacing: 0.04em;
 }
 
@@ -181,6 +181,22 @@
   }
 }
 
+/* ≤1439: менший текст списку */
+@media (max-width: 1439px) {
+  .method__name { font-size: 35px; }
+  .method__desc { font-size: 17px; }
+}
+
+/* ≤1279: тексти ще менші */
+@media (max-width: 1279px) {
+  .method__title { font-size: 44px; line-height: 60px; }
+  .method__sub { font-size: 26px; line-height: 37px; }
+  .method__toggle { width: 84px; height: 53px; }
+  .method__num { font-size: 22px; }
+  .method__name { font-size: 30px; }
+  .method__desc { font-size: 16px; }
+}
+
 @media (max-width: 1023px) {
   .method__inner {
     grid-template-columns: 1fr;
@@ -188,15 +204,45 @@
     padding-inline: var(--gutter);
   }
 
+  /* текст зверху, фото під ним */
+  .method__left {
+    display: flex;
+    flex-direction: column;
+  }
+
   .method__photo {
+    order: 3;
     width: 100%;
     height: auto;
     aspect-ratio: 530 / 365;
+    margin-top: 32px;
   }
 
   .method__item {
     height: auto;
     padding-block: 20px;
+  }
+}
+
+/* 825-1023: заголовок ліворуч, підпис праворуч, фото під ними на всю ширину */
+@media (min-width: 825px) and (max-width: 1023px) {
+  .method__left {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 32px;
+    align-items: end;
+  }
+
+  .method__sub {
+    justify-self: end;
+    margin-top: 0;
+    padding-left: 0;
+    text-align: right;
+  }
+
+  .method__photo {
+    grid-column: 1 / -1;
+    grid-row: 2;
   }
 }
 

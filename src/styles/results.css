@@ -10,9 +10,9 @@
 
 .results__title {
   padding-left: calc(var(--u) * 652);
-  font-size: calc(var(--u) * 64);
+  font-size: calc(var(--u) * 55);
   font-weight: var(--fw-regular);
-  line-height: calc(var(--u) * 87);
+  line-height: calc(var(--u) * 73);
   letter-spacing: 0.04em;
 }
 
@@ -28,7 +28,7 @@
   display: grid;
   grid-template-columns: 499fr 436fr 417fr;
   gap: calc(var(--u) * 10);
-  margin: calc(var(--u) * 86) calc(var(--u) * 30) 0 calc(var(--u) * 40);
+  margin: calc(var(--u) * 55) calc(var(--u) * 30) 0 calc(var(--u) * 40);
   padding: 0;
   list-style: none;
 }

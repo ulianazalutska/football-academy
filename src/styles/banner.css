@@ -52,11 +52,11 @@
 .banner__line--2 { padding-left: 24.79%; color: var(--color-accent); } /* ≈ 357 px; було 16.7% (241 px) зі скриншота, зсунуто за проханням */
 .banner__line--3 { padding-left: 52.6%; } /* ≈ 757 px */
 
-/* Mobile: рядки менші й зсунуті менше, щоб «ФУТБОЛЬНА АКАДЕМІЯ» не обрізалась */
+/* Mobile: рядки по центру екрана */
 @media (max-width: 767px) {
-  .banner__title { font-size: clamp(20px, 5.6vw, 28px); }
-  .banner__line { min-height: 64px; }
-  .banner__line--1 { padding-left: 18%; }
-  .banner__line--2 { padding-left: 6%; }
-  .banner__line--3 { padding-left: 38%; }
+  .banner__title { font-size: clamp(22px, 7.2vw, 44px); }
+  .banner__line { min-height: clamp(68px, 16vw, 104px); justify-content: center; }
+  .banner__line--1,
+  .banner__line--2,
+  .banner__line--3 { padding-left: 0; }
 }

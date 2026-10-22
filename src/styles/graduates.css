@@ -8,7 +8,7 @@
 }
 
 .graduates__title {
-  font-size: calc(var(--u) * 40);
+  font-size: calc(var(--u) * 42);
   font-weight: var(--fw-regular);
   letter-spacing: 0.04em;
   line-height: 1.2;
@@ -94,4 +94,5 @@
   .graduates__title { padding-inline: var(--gutter); font-size: 32px; }
   .graduates__marquee { margin-top: 40px; }
   .graduates__item { width: 80px; margin-right: 80px; }
+  .graduates__blur { width: 5vw; }
 }

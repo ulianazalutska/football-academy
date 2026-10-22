@@ -160,12 +160,44 @@
   .coaches__photo { grid-column: 1 / -1; width: 100%; height: auto; aspect-ratio: 455 / 475; border-radius: 24px; }
   .coaches__thumb { width: 120px; height: 126px; border-radius: 20px; }
   .coaches__quote-mark { grid-column: 1 / -1; width: 32px; margin-bottom: -12px; }
-  .coaches__text { grid-column: 1 / -1; }
   .coaches__quote { font-size: 20px; line-height: 1.6; }
   .coaches__name { margin-top: 12px; font-size: 16px; }
-  .coaches__nav { gap: 16px; }
+  /* ліворуч цитата, ім'я; праворуч мала фото й «1/5»; нижче стрілки ліворуч, «Тренують ті, хто грав…» праворуч */
+  .coaches__stage { grid-template-columns: auto 1fr auto; }
+  .coaches__quote-mark { grid-column: 1 / 3; grid-row: 2; }
+  .coaches__text { grid-column: 1 / 3; grid-row: 3 / span 2; align-self: start; }
+  .coaches__thumb { grid-column: 3; grid-row: 3; align-self: start; justify-self: end; }
+  .coaches__count { grid-column: 3; grid-row: 4; align-self: start; justify-self: end; }
+  .coaches__nav { grid-column: 1; grid-row: 5; gap: 16px; }
+  .coaches__motto { grid-column: 2 / -1; grid-row: 5; justify-self: end; text-align: right; }
   .coaches__arrow { width: 44px; height: 44px; }
-  .coaches__count { font-size: 18px; text-align: left; }
-  .coaches__motto { grid-column: 1 / -1; font-size: 28px; line-height: 1.5; text-align: left; }
+  .coaches__count { font-size: 18px; text-align: right; }
+  .coaches__motto { font-size: 28px; line-height: 1.5; }
   .coaches__toggle { width: 64px; margin-block: -6px; }
+}
+
+/* 600-1023: фото ширше за висоту, щоб не займало весь екран */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .coaches__photo { aspect-ratio: 16 / 10; max-height: 560px; }
+}
+
+/* ≤623: розкладка для телефонів: фото, лапка, цитата з малою фото праворуч, стрілки й «1/5» в один ряд, напис унизу ліворуч */
+@media (max-width: 623px) {
+  .coaches__stage {
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 16px;
+    row-gap: 16px;
+  }
+
+  .coaches__photo { grid-column: 1 / -1; grid-row: 1; aspect-ratio: 4 / 4.2; max-height: none; }
+  .coaches__quote-mark { grid-column: 1 / -1; grid-row: 2; margin-bottom: -4px; }
+  .coaches__text { grid-column: 1; grid-row: 3; }
+  .coaches__thumb { grid-column: 2; grid-row: 3; width: 88px; height: 110px; border-radius: 16px; align-self: start; justify-self: end; }
+  .coaches__quote { font-size: 18px; line-height: 1.5; }
+  .coaches__name { font-size: 14px; }
+  .coaches__nav { grid-column: 1; grid-row: 4; }
+  .coaches__count { grid-column: 2; grid-row: 4; align-self: center; justify-self: end; font-size: 16px; }
+  .coaches__arrow { width: 40px; height: 40px; }
+  .coaches__motto { grid-column: 1 / -1; grid-row: 5; justify-self: start; text-align: left; margin-top: 8px; font-size: clamp(22px, 6.4vw, 28px); }
+  .coaches__toggle { width: 56px; }
 }

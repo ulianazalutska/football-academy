@@ -84,6 +84,32 @@
   object-fit: cover;
 }
 
+/* 768-1279: числа менші, щоб не переважали над підписами */
+@media (max-width: 1279px) {
+  .about__inner { column-gap: 32px; }
+  .about__num { font-size: 32px; }
+  .about__text { font-size: 22px; line-height: 35px; }
+  .about__toggle { width: 80px; height: 51px; }
+  .about__label { max-width: 240px; font-size: 20px; line-height: 32px; }
+  .about__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+}
+
+/* 768-1023: два ряди: текст зверху, фото під ним на всю ширину (у колонці воно було замале) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about__inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+    padding-inline: 40px;
+  }
+
+  .about__content { max-width: none; }
+
+  .about__photo {
+    aspect-ratio: 16 / 10;
+    max-height: 520px;
+  }
+}
+
 /* Mobile: одна колонка, текст над фото */
 @media (max-width: 767px) {
   .about__inner {
