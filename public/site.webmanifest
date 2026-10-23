@@ -1,0 +1,13 @@
+{
+  "name": "GIRLS XI Football Academy",
+  "short_name": "GIRLS XI",
+  "lang": "uk",
+  "start_url": "/",
+  "display": "browser",
+  "theme_color": "#334A38",
+  "background_color": "#FFFFFF",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

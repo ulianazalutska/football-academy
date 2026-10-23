@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://girls-football-academy.netlify.app/sitemap.xml
