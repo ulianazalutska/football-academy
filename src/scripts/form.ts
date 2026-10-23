@@ -1,7 +1,12 @@
-/* 15 Форма «ЗВ'ЯЖІТЬСЯ З НАМИ»: верстка і валідація, без бекенду (рішення 6).
+/* 15 Форма «ЗВ'ЯЖІТЬСЯ З НАМИ»: валідація і відправка в Google Apps Script (project/apps-script/Code.gs),
+   адреса веб-застосунку лежить у VITE_FORM_ENDPOINT (.env). Без неї форма імітує успіх.
    Обов'язкові: ваше ім'я, ім'я гравчині, телефон (моє рішення). Телефон: маска +380 XX XXX XX XX.
    «Що цікавить» заповнюється кнопкою в картці: «Записатися» в програмі ставить її назву, «ЗАБРОНЮВАТИ МІСЦЕ» ставить «Кемп» і підставляє назву кемпу в повідомлення. */
 const MSG_NAME = "Будь ласка, вкажіть ім'я";
+import { gsap } from 'gsap';
+
+const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
+const MSG_EMAIL = 'Вкажіть email у форматі name@example.com';
 const MSG_PHONE = 'Вкажіть номер у форматі +380 XX XXX XX XX';
 
 function formatPhone(raw: string): string {
@@ -126,6 +131,12 @@ export function initForm(): void {
   const submit = form.querySelector<HTMLButtonElement>('.contact__submit')!;
   const submitText = submit.querySelector<HTMLElement>('.contact__submit-text')!;
   const done = card.querySelector<HTMLElement>('.contact__done')!;
+  const fail = form.querySelector<HTMLElement>('.contact__fail')!;
+  const title = card.querySelector<HTMLElement>('.contact__title')!;
+  const back = card.querySelector<HTMLButtonElement>('.contact__back')!;
+  const burst = card.querySelector<HTMLElement>('.contact__done-burst')!;
+  const calm = (): boolean => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const submitLabel = submitText.textContent;
   form.querySelectorAll<HTMLSelectElement>('select').forEach(enhanceSelect);
   const phone = form.elements.namedItem('phone') as HTMLInputElement;
 
@@ -143,6 +154,8 @@ export function initForm(): void {
     let msg = '';
     if (input.name === 'phone') {
       if (input.value.replace(/\D/g, '').length !== 12) msg = MSG_PHONE;
+    } else if (input.name === 'email') {
+      if (input.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(input.value.trim())) msg = MSG_EMAIL;
     } else if (!input.value.trim()) {
       msg = MSG_NAME;
     }
@@ -150,7 +163,7 @@ export function initForm(): void {
     return !msg;
   };
 
-  const required = ['name', 'player', 'phone'].map((n) => form.elements.namedItem(n) as HTMLInputElement);
+  const required = ['name', 'player', 'phone', 'email'].map((n) => form.elements.namedItem(n) as HTMLInputElement);
 
   phone.addEventListener('input', () => {
     phone.value = formatPhone(phone.value);
@@ -171,20 +184,129 @@ export function initForm(): void {
     });
   });
 
-  form.addEventListener('submit', (e) => {
+  const send = async (): Promise<void> => {
+    if (!ENDPOINT) {
+      console.warn('VITE_FORM_ENDPOINT не задано: відправку імітовано');
+      await new Promise((r) => window.setTimeout(r, 900));
+      return;
+    }
+    const data = Object.fromEntries(new FormData(form).entries());
+    /* text/plain не викликає CORS preflight, який Apps Script не обробляє */
+    const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
+    const body = (await res.json()) as { ok: boolean };
+    if (!body.ok) throw new Error('rejected');
+  };
+
+  /* екран подяки: форма виїжджає вгору, галочка малюється, навколо розлітаються цятки, текст і кнопка з'являються по черзі */
+  const showDone = (): void => {
+    const swap = (): void => {
+      card.classList.add('is-sent');
+      done.hidden = false;
+    };
+    if (calm()) return swap();
+    const items = Array.from(done.querySelectorAll<HTMLElement>('.contact__done-title, .contact__done-text, .contact__back'));
+    gsap
+      .timeline()
+      .to([title, form], { y: -14, opacity: 0, duration: 0.4, ease: 'power2.in' })
+      .add(() => {
+        swap();
+        gsap.set([title, form], { clearProps: 'transform,opacity' });
+        gsap.set('.contact__done-ring', { strokeDashoffset: 1 });
+        gsap.set('.contact__done-tick', { strokeDashoffset: 1 });
+        gsap.set('.contact__done-disc', { scale: 0 });
+        gsap.set(items, { y: 18, opacity: 0 });
+        burst.replaceChildren(
+          ...Array.from({ length: 16 }, () => Object.assign(document.createElement('span'), { className: 'contact__dot' })),
+        );
+      })
+      .to('.contact__done-ring', { strokeDashoffset: 0, duration: 0.8, ease: 'power2.inOut' })
+      .to('.contact__done-disc', { scale: 1, duration: 0.6, ease: 'back.out(1.8)' }, '<0.15')
+      .to('.contact__done-tick', { strokeDashoffset: 0, duration: 0.45, ease: 'power2.out' }, '>-0.15')
+      .add(() => {
+        const dist = Math.min(window.innerWidth, 1440) * 0.075;
+        burst.querySelectorAll<HTMLElement>('.contact__dot').forEach((dot, i, all) => {
+          const a = (i / all.length) * Math.PI * 2 + Math.random() * 0.3;
+          const r = dist * (0.8 + Math.random() * 0.6);
+          gsap.fromTo(
+            dot,
+            { x: 0, y: 0, scale: 0.4, opacity: 1 },
+            { x: Math.cos(a) * r, y: Math.sin(a) * r, scale: 1, opacity: 0, duration: 1.1, ease: 'power3.out' },
+          );
+        });
+      }, '<-0.1')
+      .to(items, { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out', stagger: 0.12 }, '<0.1');
+  };
+
+  /* «Повернутись до форми»: очищає поля й повертає форму плавно, по рядках */
+  const resetForm = (): void => {
+    form.reset();
+    form.querySelectorAll('select').forEach((sel) => sel.dispatchEvent(new Event('change')));
+    form.querySelectorAll<HTMLInputElement>('input').forEach((i) => {
+      i.closest('.contact__field')?.classList.remove('is-invalid');
+      i.removeAttribute('aria-invalid');
+      i.removeAttribute('aria-describedby');
+    });
+    form.querySelectorAll('.contact__error').forEach((el) => (el.textContent = ''));
+    fail.hidden = true;
+    submit.disabled = false;
+    submitText.textContent = submitLabel;
+  };
+
+  back.addEventListener('click', () => {
+    const open = (): void => {
+      resetForm();
+      done.hidden = true;
+      card.classList.remove('is-sent');
+    };
+    if (calm()) {
+      open();
+      required[0].focus();
+      return;
+    }
+    gsap.to(done, {
+      y: -10,
+      opacity: 0,
+      duration: 0.35,
+      ease: 'power2.in',
+      onComplete: () => {
+        open();
+        gsap.set(done, { clearProps: 'transform,opacity' });
+        gsap.fromTo(
+          [title, ...Array.from(form.children)],
+          { y: 16, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            stagger: 0.05,
+            clearProps: 'transform,opacity',
+            onComplete: () => required[0].focus({ preventScroll: true }),
+          },
+        );
+      },
+    });
+  });
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (submit.disabled) return;
     const ok = required.map(check).every(Boolean);
     if (!ok) {
       required.find((i) => i.closest('.is-invalid'))?.focus();
       return;
     }
+    fail.hidden = true;
     submit.disabled = true;
     submitText.textContent = 'Надсилаємо…';
-    /* відправку на сервер підключимо пізніше; поки імітуємо успіх */
-    window.setTimeout(() => {
-      card.classList.add('is-sent');
-      done.hidden = false;
-    }, 900);
+    try {
+      await send();
+      showDone();
+    } catch {
+      fail.hidden = false;
+      submit.disabled = false;
+      submitText.textContent = submitLabel;
+    }
   });
 
   /* вибір кемпу на секції 13 */
