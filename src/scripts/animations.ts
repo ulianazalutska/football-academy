@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { getLang, t, toUk } from '../i18n';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,10 +71,9 @@ function initStatsCounter(): void {
   const stats = document.querySelector<HTMLElement>('.about__stats');
   const nums = document.querySelectorAll<HTMLElement>('.about__num[data-count]');
   if (!stats || !nums.length) return;
-  const fmt = new Intl.NumberFormat('uk-UA');
 
   const items = Array.from(nums).map((el) => {
-    const final = el.textContent ?? '';
+    const final = toUk(el.textContent ?? '');
     el.textContent = '0' + final.replace(/[\d\s ]/g, '');
     return { el, final, target: Number(el.dataset.count), suffix: final.replace(/[\d\s ]/g, ''), v: 0 };
   });
@@ -88,10 +88,10 @@ function initStatsCounter(): void {
         duration: 2,
         ease: 'power2.out',
         onUpdate: () => {
-          it.el.textContent = fmt.format(Math.round(it.v)).replace(/ /g, ' ') + it.suffix;
+          it.el.textContent = new Intl.NumberFormat(getLang() === 'en' ? 'en-US' : 'uk-UA').format(Math.round(it.v)).replace(/ /g, ' ') + it.suffix;
         },
         onComplete: () => {
-          it.el.textContent = it.final;
+          it.el.textContent = t(it.final);
         },
       },
       0.6,

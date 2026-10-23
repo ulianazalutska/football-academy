@@ -1,4 +1,5 @@
 import './styles/main.css';
+import { initI18n } from './i18n';
 import { initAnimations } from './scripts/animations';
 import { initHeader } from './scripts/header';
 import { initForm } from './scripts/form';
@@ -10,6 +11,7 @@ import { initGraduates } from './scripts/graduates';
 import { initCamps } from './scripts/camps';
 import { initFaq } from './scripts/faq';
 
+initI18n();
 initHeader();
 initHero();
 initPrograms();

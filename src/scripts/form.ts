@@ -4,6 +4,7 @@
    «Що цікавить» заповнюється кнопкою в картці: «Записатися» в програмі ставить її назву, «ЗАБРОНЮВАТИ МІСЦЕ» ставить «Кемп» і підставляє назву кемпу в повідомлення. */
 const MSG_NAME = "Будь ласка, вкажіть ім'я";
 import { gsap } from 'gsap';
+import { t, toUk } from '../i18n';
 
 const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
 const MSG_EMAIL = 'Вкажіть email у форматі name@example.com';
@@ -119,6 +120,10 @@ function enhanceSelect(select: HTMLSelectElement): void {
     if ((e as CustomEvent<HTMLElement>).detail !== wrap) close();
   });
   select.addEventListener('change', sync);
+  document.addEventListener('langchange', () => {
+    options.forEach((o, n) => (items[n].textContent = o.textContent));
+    sync();
+  });
   sync();
 }
 
@@ -136,7 +141,7 @@ export function initForm(): void {
   const back = card.querySelector<HTMLButtonElement>('.contact__back')!;
   const burst = card.querySelector<HTMLElement>('.contact__done-burst')!;
   const calm = (): boolean => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const submitLabel = submitText.textContent;
+  const submitLabel = (): string => t('Надіслати заявку');
   form.querySelectorAll<HTMLSelectElement>('select').forEach(enhanceSelect);
   const phone = form.elements.namedItem('phone') as HTMLInputElement;
 
@@ -153,11 +158,11 @@ export function initForm(): void {
   const check = (input: HTMLInputElement): boolean => {
     let msg = '';
     if (input.name === 'phone') {
-      if (input.value.replace(/\D/g, '').length !== 12) msg = MSG_PHONE;
+      if (input.value.replace(/\D/g, '').length !== 12) msg = t(MSG_PHONE);
     } else if (input.name === 'email') {
-      if (input.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(input.value.trim())) msg = MSG_EMAIL;
+      if (input.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(input.value.trim())) msg = t(MSG_EMAIL);
     } else if (!input.value.trim()) {
-      msg = MSG_NAME;
+      msg = t(MSG_NAME);
     }
     setError(input, msg);
     return !msg;
@@ -175,6 +180,8 @@ export function initForm(): void {
   phone.addEventListener('blur', () => {
     if (phone.value.replace(/\D/g, '').length <= 3) phone.value = '';
   });
+  /* при зміні мови оновлюємо тексти помилок, які вже показані */
+  document.addEventListener('langchange', () => required.forEach((input) => input.closest('.is-invalid') && check(input)));
   required.forEach((input) => {
     let touched = false;
     input.addEventListener('blur', () => touched && check(input));
@@ -249,7 +256,7 @@ export function initForm(): void {
     form.querySelectorAll('.contact__error').forEach((el) => (el.textContent = ''));
     fail.hidden = true;
     submit.disabled = false;
-    submitText.textContent = submitLabel;
+    submitText.textContent = submitLabel();
   };
 
   back.addEventListener('click', () => {
@@ -298,14 +305,14 @@ export function initForm(): void {
     }
     fail.hidden = true;
     submit.disabled = true;
-    submitText.textContent = 'Надсилаємо…';
+    submitText.textContent = t('Надсилаємо…');
     try {
       await send();
       showDone();
     } catch {
       fail.hidden = false;
       submit.disabled = false;
-      submitText.textContent = submitLabel;
+      submitText.textContent = submitLabel();
     }
   });
 
@@ -328,7 +335,8 @@ export function initForm(): void {
     link.addEventListener('click', () => {
       const name = link.closest('.program')?.querySelector('.program__name')?.textContent?.trim();
       if (!name) return;
-      interest.value = name;
+      /* у форму йде українська назва (значення option), навіть коли сайт англійською */
+      interest.value = toUk(name);
       interest.dispatchEvent(new Event('change'));
     });
   });

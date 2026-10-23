@@ -1,3 +1,5 @@
+import { t } from '../i18n';
+
 /* 01 Шапка: ховання при скролі вниз, показ при скролі вгору, активний пункт меню */
 export function initHeader(): void {
   const header = document.getElementById('header');
@@ -21,7 +23,7 @@ export function initHeader(): void {
     header.classList.toggle('header--menu-open', open);
     document.documentElement.classList.toggle('is-menu-open', open);
     burger?.setAttribute('aria-expanded', String(open));
-    burger?.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+    burger?.setAttribute('aria-label', t(open ? 'Закрити меню' : 'Відкрити меню'));
   };
   burger?.addEventListener('click', () => setMenu(!header.classList.contains('header--menu-open')));
   header.querySelectorAll('.header__link, .header__cta, .header__menu-cta').forEach((el) => el.addEventListener('click', () => setMenu(false)));

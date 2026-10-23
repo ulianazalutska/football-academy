@@ -1,6 +1,7 @@
 /* 09 Тренерки: слайдер на 5 слайдів, стрілки без циклу (ліва неактивна на 1-му, права на 5-му),
    мініатюра показує наступну тренерку. Перехід: плавне згасання з легким зсувом, потім поява нової тренерки (моє припущення). Без автопрокрутки. */
 import { gsap } from 'gsap';
+import { t } from '../i18n';
 
 const COACHES = [
   { name: 'Олена Коваль', role: 'засновниця, головна тренерка', quote: 'У тринадцять я була єдиною дівчиною в команді хлопців. Тепер я хочу, щоб жодна дівчина не мусила доводити все сама', alt: 'Олена Коваль, засновниця й головна тренерка GIRLS XI, з планшетом під час тренування' },
@@ -30,11 +31,11 @@ export function initCoaches(): void {
     const c = COACHES[i];
     const n = COACHES[(i + 1) % COACHES.length];
     photo.src = `/images/coach-${i + 1}.webp`;
-    photo.alt = c.alt;
-    quote.textContent = c.quote;
-    name.textContent = `${c.name} / ${c.role}`;
+    photo.alt = t(c.alt);
+    quote.textContent = t(c.quote);
+    name.textContent = `${t(c.name)} / ${t(c.role)}`;
     thumb.src = `/images/coach-${((i + 1) % COACHES.length) + 1}-thumb.webp`;
-    thumb.alt = `${n.name}, ${n.role}`;
+    thumb.alt = `${t(n.name)}, ${t(n.role)}`;
     cur.textContent = String(i + 1);
     prev.disabled = i === 0;
     next.disabled = i === COACHES.length - 1;
@@ -58,6 +59,7 @@ export function initCoaches(): void {
       .to(textEls, { opacity: 1, x: 0, duration: 0.55, ease: 'power2.out' }, '<');
   };
 
+  document.addEventListener('langchange', render);
   prev.addEventListener('click', () => go(-1));
   next.addEventListener('click', () => go(1));
 }
