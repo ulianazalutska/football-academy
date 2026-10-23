@@ -78,7 +78,7 @@
             <li><a class="header__link" href="#faq">Питання</a></li>
           </ul>
           <div class="header__aside">
-            <img class="header__girl" src="/images/footer-girl.svg" width="130" height="198" alt="" aria-hidden="true" />
+            <img class="header__girl" src="/images/footer-girl.svg" width="130" height="198" alt="" aria-hidden="true" loading="lazy" />
             <a class="header__contact" href="tel:+380441234567">+380 44 123 45 67</a>
             <ul class="header__social">
               <li><a href="https://www.instagram.com/girlsxi.ua" target="_blank" rel="noopener noreferrer" aria-label="GIRLS XI в Instagram"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="6" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.3" cy="6.7" r=".6" fill="currentColor" /></svg></a></li>
@@ -112,14 +112,17 @@
     <!-- 02 hero -->
     <section class="hero" id="hero" aria-labelledby="hero-title">
       <div class="hero__frame">
-        <img
-          class="hero__bg"
-          src="/images/hero-bg.webp"
-          width="2880"
-          height="1607"
-          alt="Футболістка академії GIRLS XI у зеленій формі з рожевими смугами ковзає по мокрій траві під час тренування"
-          fetchpriority="high"
-        />
+        <picture>
+          <source media="(max-width: 480px)" srcset="/images/hero-bg-mobile.webp" width="1412" height="1607" />
+          <img
+            class="hero__bg"
+            src="/images/hero-bg.webp"
+            width="2880"
+            height="1607"
+            alt="Футболістка академії GIRLS XI у зеленій формі з рожевими смугами ковзає по мокрій траві під час тренування"
+            fetchpriority="high"
+          />
+        </picture>
 
         <div class="hero__content">
           <h1 class="hero__title" id="hero-title">
