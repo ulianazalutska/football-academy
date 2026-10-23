@@ -119,3 +119,37 @@
 .legal-footer a:focus-visible {
   color: var(--color-accent);
 }
+
+.legal-header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.lang-switch__btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.lang-switch__btn--green {
+  color: var(--color-primary);
+  transition: color 0.2s ease;
+}
+
+.lang-switch__btn--green:hover,
+.lang-switch__btn--green:focus-visible {
+  color: var(--color-accent);
+}

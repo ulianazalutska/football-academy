@@ -10,6 +10,7 @@ import { initPrograms } from './scripts/programs';
 import { initGraduates } from './scripts/graduates';
 import { initCamps } from './scripts/camps';
 import { initFaq } from './scripts/faq';
+import { initScrollRestore } from './scripts/scroll-restore';
 
 initI18n();
 initHeader();
@@ -22,3 +23,4 @@ initCamps();
 initFaq();
 initForm();
 initAnimations();
+initScrollRestore();

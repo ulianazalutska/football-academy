@@ -156,7 +156,11 @@ export function setLang(next: Lang): void {
   }, 1800);
 }
 
-export function initI18n(): void {
+export function initI18n(extra: Record<string, string> = {}): void {
+  Object.entries(extra).forEach(([k, v]) => {
+    dict.set(norm(k), v);
+    reverse.has(v) || reverse.set(v, norm(k));
+  });
   let saved: string | null = null;
   try {
     saved = localStorage.getItem(STORAGE_KEY);
