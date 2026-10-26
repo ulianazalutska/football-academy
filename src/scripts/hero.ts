@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import { bindVideoToggle } from './video-toggle';
 
 /* 02 Hero: вступна поява (спокійна, ~2,5 с). Без анімації, якщо користувач просить менше руху. */
 function playIntro(): void {
@@ -54,23 +55,5 @@ export function initHero(): void {
   const box = document.querySelector<HTMLElement>('.hero__video');
   const video = box?.querySelector<HTMLVideoElement>('.hero__video-el');
   if (!box || !video) return;
-
-  const play = (): void => {
-    void video.play().catch(() => undefined);
-  };
-  const toggle = (): void => {
-    if (video.paused) play();
-    else video.pause();
-  };
-
-  video.addEventListener('play', () => box.classList.add('is-playing'));
-  video.addEventListener('pause', () => box.classList.remove('is-playing'));
-
-  box.addEventListener('click', toggle);
-  box.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggle();
-    }
-  });
+  bindVideoToggle(box, video);
 }
