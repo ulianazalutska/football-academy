@@ -156,19 +156,16 @@
 }
 
 /* кружечок стиснувся в крапку: кільця зникають, щоб не висіли лінії навколо крапки */
-.camp__spot:hover .camp__ring,
 .camp__spot.is-open .camp__ring {
   animation: none;
   opacity: 0;
 }
 
-.camp__spot:hover .camp__plus-core,
 .camp__spot.is-open .camp__plus-core,
 .camp__plus:focus-visible .camp__plus-core {
   transform: scale(0.3); /* 33 px → ≈10 px */
 }
 
-.camp__spot:hover .camp__plus-core svg,
 .camp__spot.is-open .camp__plus-core svg {
   opacity: 0;
 }
@@ -213,11 +210,32 @@
   width: calc(var(--u) * 34);
 }
 
-.camp__spot:hover .camp__tip,
 .camp__spot.is-open .camp__tip {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.2s ease, visibility 0s;
+}
+
+/* hover лише для миші: на телефоні він «залипає» після дотику і картка не закривалась би повторним дотиком */
+@media (hover: hover) {
+  .camp__spot:hover .camp__ring {
+    animation: none;
+    opacity: 0;
+  }
+
+  .camp__spot:hover .camp__plus-core {
+    transform: scale(0.3);
+  }
+
+  .camp__spot:hover .camp__plus-core svg {
+    opacity: 0;
+  }
+
+  .camp__spot:hover .camp__tip {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease, visibility 0s;
+  }
 }
 
 /* картки крайніх карток відкриваються вліво від крапки, щоб не виходити за межі сторінки */

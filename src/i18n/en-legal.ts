@@ -3,6 +3,9 @@
 export const enLegal: Record<string, string> = {
   "Політика конфіденційності | GIRLS XI Football Academy": "Privacy Policy | GIRLS XI Football Academy",
   "← На головну": "← Back to home",
+  "Сторінку не знайдено | GIRLS XI Football Academy": "Page not found | GIRLS XI Football Academy",
+  "Сторінку не знайдено": "Page not found",
+  "Можливо, адресу введено з помилкою або сторінку видалено. Поверніться на головну.": "The address may be mistyped or the page may have been removed. Please return to the home page.",
   "Остання редакція: 1 вересня 2026 року": "Last updated: 1 September 2026",
   "Ця політика пояснює, які персональні дані збирає GIRLS XI Football Academy (далі: «Академія», «ми») через сайт, навіщо вони потрібні і які права ви маєте. Ми діємо відповідно до Закону України «Про захист персональних даних».": "This policy explains what personal data GIRLS XI Football Academy (the “Academy”, “we”) collects through the website, why we need it and what rights you have. We act in accordance with the Law of Ukraine “On Personal Data Protection”.",
   "1. Хто відповідає за дані": "1. Who is responsible for the data",

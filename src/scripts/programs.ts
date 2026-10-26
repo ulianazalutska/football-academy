@@ -35,6 +35,21 @@ export function initPrograms(): void {
     { threshold: 0.35 },
   ).observe(grid);
 
+  /* radiogroup за стандартом: у табі лише вибраний пункт, між пунктами ходять стрілки, Home і End */
+  const list = Array.from(buttons);
+  const syncTab = (): void => list.forEach((b) => (b.tabIndex = b.classList.contains('is-active') ? 0 : -1));
+  syncTab();
+  list.forEach((btn, i) => {
+    btn.addEventListener('keydown', (e) => {
+      const to = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? i + 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? list.length - 1 : null;
+      if (to === null) return;
+      e.preventDefault();
+      const next = list[(to + list.length) % list.length];
+      next.focus();
+      next.click();
+    });
+  });
+
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const age = btn.dataset.age;
@@ -43,6 +58,7 @@ export function initPrograms(): void {
         b.classList.toggle('is-active', on);
         b.setAttribute('aria-checked', String(on));
       });
+      syncTab();
       grid.classList.add('is-filtered');
       cards.forEach((card) => card.classList.toggle('is-match', card.dataset.age === age));
       /* плавно веде до відповідної картки (по центру екрана) */
