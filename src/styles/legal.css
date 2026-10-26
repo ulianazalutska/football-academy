@@ -1,5 +1,6 @@
 /* Юридичні сторінки: токени з project/tokens.css, без нових кольорів */
 @import "../../project/tokens.css";
+@import "./fonts.css";
 @import "./base.css";
 
 .legal-header {

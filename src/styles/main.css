@@ -1,5 +1,6 @@
 /* Джерела правди лежать у project/: токени й брейкпоінти редагуємо там */
 @import "../../project/tokens.css";
+@import "./fonts.css";
 @import "./base.css";
 @import "../../project/breakpoints.css";
 @import "./header.css";
