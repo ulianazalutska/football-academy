@@ -598,12 +598,12 @@
           <input class="visually-hidden" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="contact__field contact__field--req">
             <label for="cf-name">Ваше ім'я</label>
-            <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="Андрій Мельник" required />
+            <input id="cf-name" name="name" type="text" maxlength="100" autocomplete="name" placeholder="Андрій Мельник" required />
             <p class="contact__error" id="cf-name-err" role="alert"></p>
           </div>
           <div class="contact__field contact__field--req">
             <label for="cf-player">Ім'я гравчині</label>
-            <input id="cf-player" name="player" type="text" placeholder="Марія Мельник" required />
+            <input id="cf-player" name="player" type="text" maxlength="100" placeholder="Марія Мельник" required />
             <p class="contact__error" id="cf-player-err" role="alert"></p>
           </div>
           <div class="contact__field">
@@ -633,21 +633,21 @@
           </div>
           <div class="contact__field contact__field--req">
             <label for="cf-phone">Телефон</label>
-            <input id="cf-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380688580048" required />
+            <input id="cf-phone" name="phone" type="tel" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="+380688580048" required />
             <p class="contact__error" id="cf-phone-err" role="alert"></p>
           </div>
           <div class="contact__field">
             <label for="cf-contact">Як зручніше зв'язатися</label>
-            <input id="cf-contact" name="contact" type="text" placeholder="Дзвінок / Telegram / Viber" />
+            <input id="cf-contact" name="contact" type="text" maxlength="100" placeholder="Дзвінок / Telegram / Viber" />
           </div>
           <div class="contact__field contact__field--wide">
             <label for="cf-email">Email</label>
-            <input id="cf-email" name="email" type="email" autocomplete="email" placeholder="andriymel@gmail.com" />
+            <input id="cf-email" name="email" type="email" maxlength="120" autocomplete="email" placeholder="andriymel@gmail.com" />
             <p class="contact__error" id="cf-email-err" role="alert"></p>
           </div>
           <div class="contact__field contact__field--wide">
             <label for="cf-message">Повідомлення</label>
-            <textarea id="cf-message" name="message" rows="3" placeholder="Пишіть тут"></textarea>
+            <textarea id="cf-message" name="message" rows="3" maxlength="1000" placeholder="Пишіть тут"></textarea>
           </div>
           <p class="contact__legal">BY SUBMITTING, YOU AGREE TO OUR <strong>TERMS</strong> AND PRIVACY POLICY</p>
           <button class="btn btn--primary contact__submit" type="submit">

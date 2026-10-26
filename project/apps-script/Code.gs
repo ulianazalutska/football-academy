@@ -11,6 +11,14 @@ var C = { primary: '#334A38', accent: '#F6C2D0', muted: '#CAC4BF', field: '#F6F6
 var WIDTHS = [140, 170, 170, 70, 130, 150, 150, 210, 300, 150, 180, 170];
 var ROWS = 1000;
 
+/* Допустимі значення полів-списків (збігаються з option у index.html) */
+var AGES = ['10-12', '12-14', '14-16', '16-18', '18-23'];
+var INTERESTS = ['Основа', 'Розвиток', 'Результат', 'Еліт', 'Профі', 'Кемп', 'Індивідуальні', 'Ще не знаю'];
+
+/* Ліміт частоти: не більше LIMIT_PER_MIN заявок за хвилину і LIMIT_PER_HOUR за годину на весь сайт */
+var LIMIT_PER_MIN = 5;
+var LIMIT_PER_HOUR = 40;
+
 /* Запустіть вручну: створить аркуш, шапку, випадаючий список «Статус» і оформлення. Можна запускати повторно. */
 function setup() {
   var sheet = getSheet_();
@@ -68,16 +76,38 @@ function doPost(e) {
     if (d.website) return json_({ ok: true }); /* пастка для ботів: приховане поле заповнене */
 
     var name = clean_(d.name), player = clean_(d.player), phone = clean_(d.phone);
-    if (!name || !player || phone.replace(/\D/g, '').length !== 12) return json_({ ok: false, error: 'invalid' });
+    var age = clean_(d.age), interest = clean_(d.interest), email = clean_(d.email);
+    var okPhone = /^\+380[\d ]*$/.test(phone) && phone.replace(/\D/g, '').length === 12;
+    var okEmail = !email || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    if (!name || !player || !okPhone || !okEmail) return json_({ ok: false, error: 'invalid' });
+    if ((age && AGES.indexOf(age) < 0) || (interest && INTERESTS.indexOf(interest) < 0)) return json_({ ok: false, error: 'invalid' });
+    if (!allow_()) return json_({ ok: false, error: 'busy' });
 
     var source = clean_(d.camp) ? 'Кемп: ' + clean_(d.camp) : 'Сайт';
-    var row = [new Date(), name, player, clean_(d.age), clean_(d.interest), "'" + phone, clean_(d.contact), clean_(d.email), clean_(d.message), source, 'Нова', ''];
-    getSheet_().appendRow(row);
-    row[5] = phone;
+    var row = [new Date(), name, player, age, interest, phone, clean_(d.contact), email, clean_(d.message), source, 'Нова', ''];
+    /* усі текстові значення (крім дати, статусу, відповідальної) пишемо як текст, щоб Sheets не виконав їх як формулу */
+    var safe = row.map(function (v, i) { return i === 0 || i === 10 || i === 11 ? v : "'" + v; });
+    getSheet_().appendRow(safe);
     notify_(row);
     return json_({ ok: true });
   } catch (err) {
     return json_({ ok: false, error: 'server' });
+  }
+}
+
+/* глобальний ліміт заявок: лічильники в CacheService (хвилина і година) під блокуванням */
+function allow_() {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(5000);
+  try {
+    var cache = CacheService.getScriptCache();
+    var min = Number(cache.get('rate_min') || 0), hour = Number(cache.get('rate_hour') || 0);
+    if (min >= LIMIT_PER_MIN || hour >= LIMIT_PER_HOUR) return false;
+    cache.put('rate_min', String(min + 1), 60);
+    cache.put('rate_hour', String(hour + 1), 3600);
+    return true;
+  } finally {
+    lock.releaseLock();
   }
 }
 
