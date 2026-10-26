@@ -29,7 +29,9 @@ function playIntro(): void {
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: done });
 
   /* показуємо елементи вже у стартовому стані, тож блимання немає */
-  gsap.set(frame, { opacity: 0, y: 48, scale: 0.97 });
+  /* фейд і підйом рамки лише на ≥768 px, узгоджено з media у hero.css */
+  const fadeFrame = window.matchMedia('(min-width: 768px)').matches;
+  if (fadeFrame) gsap.set(frame, { opacity: 0, y: 48, scale: 0.97 });
   gsap.set(bg, { scale: 1.18 });
   gsap.set(titleLines, { opacity: 0, y: 36, filter: 'blur(8px)' });
   gsap.set(textLines, { opacity: 0, y: 24 });
@@ -38,8 +40,8 @@ function playIntro(): void {
   gsap.set(header, { opacity: 0, y: -24, transition: 'none' });
   root.classList.remove('has-intro');
 
-  tl.to(frame, { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: 'power3.out' }, 0)
-    .to(bg, { scale: 1, duration: 2.8, ease: 'power2.out' }, 0)
+  if (fadeFrame) tl.to(frame, { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: 'power3.out' }, 0);
+  tl.to(bg, { scale: 1, duration: 2.8, ease: 'power2.out' }, 0)
     .to(header, { opacity: 1, y: 0, duration: 1, clearProps: 'transform' }, 0.5)
     .to(titleLines, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, stagger: 0.16 }, 0.7)
     .to(textLines, { opacity: 1, y: 0, duration: 1, stagger: 0.1 }, 1.15)

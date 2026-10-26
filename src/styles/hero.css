@@ -330,12 +330,19 @@
 /* Інтро-анімація: до старту GSAP ховаємо елементи (клас has-intro ставить скрипт у <head>).
    Страховка: якщо скрипт не спрацював, через 3 с усе показується. */
 .has-intro .header,
-.has-intro .hero__frame,
 .has-intro .hero__line-break,
 .has-intro .hero__thumb,
 .has-intro .hero__tab {
   opacity: 0;
   animation: intro-failsafe 0s 3s forwards;
+}
+
+/* рамка з фото з'являється фейдом лише на ≥768 px; на телефоні фото видно одразу (швидший LCP) */
+@media (min-width: 768px) {
+  .has-intro .hero__frame {
+    opacity: 0;
+    animation: intro-failsafe 0s 3s forwards;
+  }
 }
 
 @keyframes intro-failsafe {
