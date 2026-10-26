@@ -22,10 +22,16 @@ export function initCoaches(): void {
   const prev = root.querySelector<HTMLButtonElement>('.coaches__arrow--prev')!;
   const next = root.querySelector<HTMLButtonElement>('.coaches__arrow--next')!;
   let i = 0;
-  COACHES.forEach((_, k) => {
-    new Image().src = `/images/coach-${k + 1}.webp`;
-    new Image().src = `/images/coach-${k + 1}-thumb.webp`;
-  });
+  /* решту фото підвантажуємо, коли браузер вільний, щоб не конкурувати з hero */
+  const preload = (): void => {
+    COACHES.forEach((_, k) => {
+      new Image().src = `/images/coach-${k + 1}.webp`;
+      new Image().src = `/images/coach-${k + 1}-thumb.webp`;
+    });
+  };
+  const idle = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+  if (idle) idle.call(window, preload, { timeout: 4000 });
+  else window.setTimeout(preload, 2000);
 
   const render = (): void => {
     const c = COACHES[i];
