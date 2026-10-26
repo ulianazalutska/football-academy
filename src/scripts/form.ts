@@ -200,7 +200,7 @@ export function initForm(): void {
     }
     const data = Object.fromEntries(new FormData(form).entries());
     /* text/plain не викликає CORS preflight, який Apps Script не обробляє */
-    const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
+    const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data), signal: AbortSignal.timeout(15000) });
     const body = (await res.json()) as { ok: boolean };
     if (!body.ok) throw new Error('rejected');
   };
@@ -210,6 +210,10 @@ export function initForm(): void {
     const swap = (): void => {
       card.classList.add('is-sent');
       done.hidden = false;
+      /* форма зникла разом із фокусом: переносимо його на подяку */
+      const doneTitle = done.querySelector<HTMLElement>('.contact__done-title');
+      doneTitle?.setAttribute('tabindex', '-1');
+      doneTitle?.focus({ preventScroll: true });
     };
     if (calm()) return swap();
     const items = Array.from(done.querySelectorAll<HTMLElement>('.contact__done-title, .contact__done-text, .contact__back'));

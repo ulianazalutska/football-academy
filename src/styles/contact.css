@@ -576,3 +576,9 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* посилання в тексті згоди виглядають як звичайний текст, підкреслення лише при наведенні й фокусі */
+.contact__legal a:hover,
+.contact__legal a:focus-visible {
+  text-decoration: underline;
+}
