@@ -41,16 +41,16 @@
 .hero__content {
   position: absolute;
   top: calc(68 * var(--u));
-  left: calc(70 * var(--u));
+  left: calc(90 * var(--u));
   color: var(--color-text-light);
 }
 
 .hero__title {
   max-width: calc(900 * var(--u));
-  font-size: calc(54 * var(--u));
+  font-size: calc(60 * var(--u));
   font-weight: var(--fw-light);
   letter-spacing: 0.045em;
-  line-height: calc(74 / 54);
+  line-height: calc(80 / 60);
 }
 
 .hero__text {
