@@ -193,6 +193,7 @@ export function initForm(): void {
 
   const send = async (): Promise<void> => {
     if (!ENDPOINT) {
+      if (import.meta.env.PROD) throw new Error('VITE_FORM_ENDPOINT не задано');
       console.warn('VITE_FORM_ENDPOINT не задано: відправку імітовано');
       await new Promise((r) => window.setTimeout(r, 900));
       return;
@@ -247,6 +248,8 @@ export function initForm(): void {
   /* «Повернутись до форми»: очищає поля й повертає форму плавно, по рядках */
   const resetForm = (): void => {
     form.reset();
+    /* hidden-поле form.reset() не очищає, бо його value лежить в атрибуті */
+    (form.elements.namedItem('camp') as HTMLInputElement).value = '';
     form.querySelectorAll('select').forEach((sel) => sel.dispatchEvent(new Event('change')));
     form.querySelectorAll<HTMLInputElement>('input').forEach((i) => {
       i.closest('.contact__field')?.classList.remove('is-invalid');
@@ -320,6 +323,10 @@ export function initForm(): void {
   const interest = form.elements.namedItem('interest') as HTMLSelectElement;
   const message = form.elements.namedItem('message') as HTMLTextAreaElement;
   const camp = form.elements.namedItem('camp') as HTMLInputElement;
+  /* якщо вибір змінено на не-кемп, мітка кемпу більше не потрібна */
+  interest.addEventListener('change', () => {
+    if (interest.value !== 'Кемп') camp.value = '';
+  });
   document.querySelectorAll<HTMLElement>('[data-camp]').forEach((link) => {
     link.addEventListener('click', () => {
       const name = link.dataset.camp ?? '';
@@ -335,6 +342,9 @@ export function initForm(): void {
     link.addEventListener('click', () => {
       const name = link.closest('.program')?.querySelector('.program__name')?.textContent?.trim();
       if (!name) return;
+      /* програма замінює раніше обраний кемп */
+      if (message.value.startsWith('Кемп: ')) message.value = '';
+      camp.value = '';
       /* у форму йде українська назва (значення option), навіть коли сайт англійською */
       interest.value = toUk(name);
       interest.dispatchEvent(new Event('change'));
