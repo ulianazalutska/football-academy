@@ -43,8 +43,11 @@ export function initCoaches(): void {
     thumb.src = `/images/coach-${((i + 1) % COACHES.length) + 1}-thumb.webp`;
     thumb.alt = `${t(n.name)}, ${t(n.role)}`;
     cur.textContent = String(i + 1);
+    /* disabled-кнопка втрачає фокус: передаємо його протилежній стрілці */
+    const lost = (i === 0 && document.activeElement === prev) ? next : (i === COACHES.length - 1 && document.activeElement === next) ? prev : null;
     prev.disabled = i === 0;
     next.disabled = i === COACHES.length - 1;
+    lost?.focus({ preventScroll: true });
   };
 
   const photoEls = [photo, thumb];

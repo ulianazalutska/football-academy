@@ -18,6 +18,9 @@ export function initHeader(): void {
     { passive: true },
   );
 
+  /* шапка ховається при скролі вниз: фокус клавіатури повертає її на екран */
+  header.addEventListener('focusin', () => header.classList.remove('header--hidden'));
+
   const burger = header.querySelector<HTMLButtonElement>('.header__burger');
   const setMenu = (open: boolean): void => {
     header.classList.toggle('header--menu-open', open);

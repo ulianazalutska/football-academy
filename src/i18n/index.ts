@@ -6,7 +6,7 @@ import { en } from './en';
 export type Lang = 'uk' | 'en';
 
 const STORAGE_KEY = 'lang';
-const ATTRS = ['alt', 'aria-label', 'placeholder', 'title', 'content'];
+const ATTRS = ['alt', 'aria-label', 'aria-roledescription', 'placeholder', 'title', 'content'];
 const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA']);
 const CYRILLIC = /[А-Яа-яІіЇїЄєҐґ]/;
 
@@ -94,7 +94,7 @@ function applyAll(): void {
   const nodes: Text[] = [];
   for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n as Text);
   nodes.forEach(applyText);
-  document.querySelectorAll('[alt], [aria-label], [placeholder], [title], meta[content]').forEach(applyAttrs);
+  document.querySelectorAll('[alt], [aria-label], [aria-roledescription], [placeholder], [title], meta[content]').forEach(applyAttrs);
 }
 
 function applyLang(next: Lang): void {

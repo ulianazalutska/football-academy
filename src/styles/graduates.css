@@ -96,3 +96,14 @@
   .graduates__item { width: 80px; margin-right: 80px; }
   .graduates__blur { width: 5vw; }
 }
+
+/* зупинка руху: при наведенні, а за prefers-reduced-motion стрічка нерухома */
+.graduates__marquee:hover .graduates__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .graduates__track {
+    animation: none;
+  }
+}

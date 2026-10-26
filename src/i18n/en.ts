@@ -243,6 +243,7 @@ export const en: Record<string, string> = {
   "Пишіть тут": "Write here",
   "Усміхнена дівчинка з футбольним м'ячем: символ академії GIRLS XI": "A smiling girl with a football: the symbol of the GIRLS XI academy",
   "Навігація у футері": "Footer navigation",
+  "слайдер": "slider",
 
   /* рядки з TS-скриптів: форма, шапка, слайдер тренерок, лічильник */
   "Будь ласка, вкажіть ім'я": "Please enter a name",
