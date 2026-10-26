@@ -2,10 +2,10 @@
    адреса веб-застосунку лежить у VITE_FORM_ENDPOINT (.env). Без неї форма імітує успіх.
    Обов'язкові: ваше ім'я, ім'я гравчині, телефон (моє рішення). Телефон: маска +380 XX XXX XX XX.
    «Що цікавить» заповнюється кнопкою в картці: «Записатися» в програмі ставить її назву, «ЗАБРОНЮВАТИ МІСЦЕ» ставить «Кемп» і підставляє назву кемпу в повідомлення. */
-const MSG_NAME = "Будь ласка, вкажіть ім'я";
 import { gsap } from 'gsap';
 import { t, toUk } from '../i18n';
 
+const MSG_NAME = "Будь ласка, вкажіть ім'я";
 const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined;
 const MSG_EMAIL = 'Вкажіть email у форматі name@example.com';
 const MSG_PHONE = 'Вкажіть номер у форматі +380 XX XXX XX XX';
